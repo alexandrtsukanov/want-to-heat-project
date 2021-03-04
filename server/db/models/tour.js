@@ -6,16 +6,19 @@ const tourSchema = new Schema({
   country: String,
   dateDeparture: String,
   tourDuration: String,
-  location: String,
-  hotelName: String,
+  city: String,
+  hotel: String,
+  stars: Number,
   price: Number,
   tags: Array,
-  rate: Number,
+  rating: Number,
   reviewsUrl: String,
   photoUrl: String,
   url: String,
   temperature: Number,
   source: String,
+  toSeaDistance: String,
+  persons: String,
 });
 
-module.exports = model('users', tourSchema);
+module.exports = model('tours', tourSchema);

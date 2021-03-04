@@ -1,3 +1,4 @@
+const dotenv = require('dotenv').config();
 const express = require('express');
 const { connect } = require('mongoose');
 const logger = require('morgan');
@@ -6,7 +7,6 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const dotenv = require('dotenv').config();
 
 // Создаем приложение express.
 const app = express();
