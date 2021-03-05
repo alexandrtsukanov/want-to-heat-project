@@ -1,42 +1,12 @@
-const dotenv = require('dotenv').config();
 const puppeteer = require('puppeteer');
 const fetch = require('node-fetch');
 const Bluebird = require('bluebird');
-const { connect, connection } = require('mongoose');
-const Tour = require('../db/models/tour');
+const addLonLat = require('../helpers/addLonLat');
+const addTemperture = require('../helpers/addTemperture');
 
 fetch.Promise = Bluebird;
 
-const addLonlat = async (allTurs) => {
-  const hashLonLat = {};
-  for (let i = 0; i < allTurs.length; i++) {
-    const turCity = allTurs[i].city;
-    const newTurCity = turCity.replace(/\s/gi, '+');
-    let lonLat;
-    if (hashLonLat[turCity]) {
-      lonLat = hashLonLat[turCity];
-      allTurs[i].lonLat = lonLat
-    } else {
-        try {
-          const encodedURIToGeokoder = encodeURI(`https://geocode-maps.yandex.ru/1.x/?apikey=81c6641d-539a-486c-bbb1-e5e7f2e17001&format=json&geocode=${newTurCity}`);
-          const response = await fetch(encodedURIToGeokoder);
-          const result = await response.json();
-          lonLat = result.featureMember.GeoObject.Point.pos;
-          hashLonLat[turCity] = lonLat.split(' ');
-          allTurs[i].lonLat = lonLat
-        } catch (error) {
-          console.log(error);
-        }
-    }
-  }
-}
 const scrapTravelata = async () => {
-  await connect('mongodb+srv://admin:uM6TPL7-S4pWJYs@cluster0.7pf5g.mongodb.net/teplo?retryWrites=true&w=majority', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    });
   // Запустим браузер
   const browser = await puppeteer.launch({
     headless: true,
@@ -77,7 +47,8 @@ const scrapTravelata = async () => {
       console.log('Не удалось открыть страницу: ', postUrl);
     }
     const locationSelector = '.serpHotelCard__stars';
-    await page.waitForSelector(locationSelector, { timeout: 0 });
+    // await page.waitForSelector(locationSelector, { timeout: 0 });
+    await page.waitFor(5000);//сделали 5 сек тк не подгружались данные
     // позволяет работать с Dom деревом страницы
     const result = await page.evaluate(() => {
       const data = [];
@@ -104,7 +75,8 @@ const scrapTravelata = async () => {
         const toSeaDistance = toSeaDistances[i]?.innerText;
         const price = +(priceChildNodes[1].innerText).replace(/\s/gi, '');
         const starsForHotel = starsForHotels[i]?.childElementCount;
-        const photoUrl = `https:${images[i].children[0]?.firstElementChild.dataset.src}`;
+        let photoUrl = `https:${images[i].children[0]?.firstElementChild.dataset.src}`;
+        if (photoUrl.split(':')[1] === 'undefined') photoUrl = 'https://sitecore-cd-imgr.shangri-la.com/MediaFiles/E/0/1/%7BE0144276-6A01-4CAE-8E4E-A68A099A5E98%7D200724_SLJ_Banner_ShangriLa_Hotel_Jakarta.jpg?width=750&height=752&mode=crop&quality=100&scale=both';
         const url = images[i].children[0]?.firstElementChild.baseURI;
         const city = location[0].trim();
         data.push(new Object({
@@ -113,42 +85,14 @@ const scrapTravelata = async () => {
       }
       return data;
     });
-    console.log('result', result);
     allTurs = [...allTurs, ...result];
   }
-  addLonlat(allTurs);
-  // return allTurs
-  await Tour.insertMany(allTurs);
-  await connection.close();
+  allTurs = await addLonLat(allTurs);
+  allTurs = await addTemperture(allTurs);
   // Всё сделано, закроем браузер
   await browser.close();
-  process.exit();
+  // process.exit();
+  return allTurs;
 };
-scrapTravelata();
 
-// async function main() {
-//   await connect('mongodb+srv://admin:uM6TPL7-S4pWJYs@cluster0.7pf5g.mongodb.net/teplo?retryWrites=true&w=majority', {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useCreateIndex: true,
-//     useFindAndModify: false,
-//   });
-//   const test = {
-//     country: 'Россия',
-//     city: 'Большой Сочи: Лазаревское',
-//     hotel: 'Ширак (Shirak)',
-//     price: 20309,
-//     rating: 3.7,
-//     stars: 1,
-//     persons: '2 взрослых',
-//     dateDeparture: '12 марта',
-//     tourDuration: '5',
-//     photoUrl: 'https:undefined',
-//   };
-//   console.log(test);
-//   await Tour.create(test);
-// //   await connection.close();
-// // }
-// // main();
-// await Tour.insertMany(mainResult);
-//   await connection.close();
+module.exports = scrapTravelata;

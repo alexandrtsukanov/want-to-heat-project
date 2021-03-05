@@ -9,6 +9,7 @@ import Login from './Components/Login';
 import Logout from './Components/Logout';
 import Register from './Components/Register';
 import Profile from './Components/Profile';
+import Filter from './Components/Filter';
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
         <Switch>
           <Route exact path='/'>
             {user._id ?
-              (<div>Content</div>)
+              (<Filter/>)
               :
               (<h2>Please login or register first</h2>)
             }

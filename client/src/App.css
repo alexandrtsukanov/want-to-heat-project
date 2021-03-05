@@ -4,7 +4,7 @@ body {
 }
 
 #root {
-  font-size: 25px;
+  font-size: 15px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -13,5 +13,27 @@ body {
 
 a {
   text-decoration: none;
+  color: black;
 }
 
+.flex {
+  width: 1200px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.navbar {
+  width: 400px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.tour {
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  max-width: 330px;
+  min-width: 330px;
+}

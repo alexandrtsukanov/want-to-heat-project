@@ -62,7 +62,7 @@ const tourSchema = new Schema({
     type: String,
     default: 'No data',
   },
-  lonlat: Array,
+  lonLat: [String],
 });
 
 module.exports = model('tours', tourSchema);

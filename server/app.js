@@ -13,6 +13,7 @@ const app = express();
 // Импортируем созданный в отдельный файлах рутеры.
 const mainRouter = require('./routes/main');
 const userRouter = require('./routes/user');
+const toursRouter = require('./routes/tours');
 
 const port = (process.env.PORT ?? 3001);
 
@@ -44,6 +45,7 @@ app.use(session({
 // Переход на ручки.
 app.use('/', mainRouter);
 app.use('/user', userRouter);
+app.use('/tours', toursRouter);
 
 // Запуск сервера и подключение к бд.
 app.listen(port, async () => {
