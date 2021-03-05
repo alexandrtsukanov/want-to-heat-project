@@ -3,22 +3,66 @@ const { Schema, model, pluralize } = require('mongoose');
 pluralize(null);
 
 const tourSchema = new Schema({
-  country: String,
-  dateDeparture: String,
-  tourDuration: String,
-  city: String,
-  hotel: String,
-  stars: Number,
-  price: Number,
-  tags: Array,
-  rating: Number,
-  reviewsUrl: String,
-  photoUrl: String,
-  url: String,
+  country: {
+    type: String,
+    default: 'No data',
+  },
+  dateDeparture: {
+    type: String,
+    default: 'No data',
+  },
+  tourDuration: {
+    type: String,
+    default: 'No data',
+  },
+  city: {
+    type: String,
+    default: 'No data',
+  },
+  hotel: {
+    type: String,
+    default: 'No data',
+  },
+  stars: {
+    type: Number,
+    default: 100500,
+  },
+  price: {
+    type: Number,
+    default: 100500,
+  },
+  // tags: Array,
+  rating: {
+    type: Number,
+    default: 100500,
+  },
+  reviewsUrl: {
+    type: String,
+    default: 'No data',
+  },
+  reviewsCount: Number,
+  photoUrl: {
+    type: String,
+    default: 'No data',
+  },
+  url: {
+    type: String,
+    default: 'No data',
+  },
   temperature: Number,
-  source: String,
-  toSeaDistance: String,
-  persons: String,
+  source: {
+    type: String,
+    default: 'No data',
+  },
+  toSeaDistance: {
+    type: String,
+    default: 'No data',
+  },
+  persons: {
+    type: String,
+    default: 'No data',
+  },
+  lonlat: Array,
 });
 
 module.exports = model('tours', tourSchema);
