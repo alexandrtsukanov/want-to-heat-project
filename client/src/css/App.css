@@ -1,7 +1,7 @@
-body {
+/* body {
   margin: 0;
   padding: 0;
-}
+} */
 
 #root {
   font-size: 25px;
@@ -11,7 +11,7 @@ body {
   align-items: center;
 }
 
-a {
+/* a {
   text-decoration: none;
-}
+} */
 
