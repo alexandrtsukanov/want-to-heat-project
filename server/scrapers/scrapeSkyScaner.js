@@ -8,6 +8,10 @@ const Bluebird = require('bluebird');
 const addLonLat = require('../helpers/addLonLat');
 const addTemperture = require('../helpers/addTemperture');
 
+const dateMonth = new Date().toLocaleString('ru', { month: '2-digit' });
+const dateYear = new Date().toLocaleString('ru', { year: '2-digit' });
+console.log(dateMonth, dateYear);
+
 fetch.Promise = Bluebird;
 
 const scrapOnline = async () => {
@@ -15,13 +19,12 @@ const scrapOnline = async () => {
   const browser = await puppeteer.launch({
     headless: false,
     args: [
-      '--window-size=1920,1080',
       '--no-sandbox',
     ],
   });
   // Откроем новую страницу
   const page = await browser.newPage();
-  const pageURL = 'https://openborders.onlinetours.ru/';
+  const pageURL = `https://www.skyscanner.ru/transport/flights-from/mosc?adults=1&children=0&adultsv2=1&childrenv2=&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&oym=${dateYear}${dateMonth}&iym=${dateYear}${dateMonth}`;
   try {
     // Попробуем перейти по URL
     await page.goto(pageURL);
@@ -100,7 +103,7 @@ const scrapOnline = async () => {
         console.log('price', price);
         const starsForHotel = starsForHotels[i]?.childElementCount;
         console.log('starsForHotel', starsForHotel);
-        let photoUrl = (images[i].style.backgroundImage.replace(/url\("/gi, '')).replace(/"\);/gi, '');
+        let photoUrl = (images[i].style.backgroundImage.replace(/[url(", ")]/gi, ''));
         console.log('photoUrl', photoUrl);
         if (photoUrl.split(':')[1] === 'undefined') photoUrl = 'https://sitecore-cd-imgr.shangri-la.com/MediaFiles/E/0/1/%7BE0144276-6A01-4CAE-8E4E-A68A099A5E98%7D200724_SLJ_Banner_ShangriLa_Hotel_Jakarta.jpg?width=750&height=752&mode=crop&quality=100&scale=both';
         const url = urls[i].href;
@@ -122,9 +125,9 @@ const scrapOnline = async () => {
   allTurs = await addLonLat(allTurs);
   allTurs = await addTemperture(allTurs);
   // Всё сделано, закроем браузер
-  // await browser.close();
+  await browser.close();
   // // process.exit();
-  // return allTurs;
+  return allTurs;
 };
 scrapOnline();
 

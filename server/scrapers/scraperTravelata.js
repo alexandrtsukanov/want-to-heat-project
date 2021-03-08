@@ -87,6 +87,7 @@ const scrapTravelata = async () => {
     });
     allTurs = [...allTurs, ...result];
   }
+  console.log('собрали травелату');
   allTurs = await addLonLat(allTurs);
   allTurs = await addTemperture(allTurs);
   // Всё сделано, закроем браузер
