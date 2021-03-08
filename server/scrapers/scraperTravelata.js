@@ -33,8 +33,10 @@ const scrapTravelata = async () => {
     }),
   );
   /// удалить!!!
-  postUrls = [postUrls[0], postUrls[1]];
-  /// удалить!!!
+  // postUrls = [postUrls[0], postUrls[1]];
+
+
+
   let allTurs = [];
   // Перейдём по каждой из них
   for (const postUrl of postUrls) {
