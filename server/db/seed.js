@@ -3,6 +3,7 @@ const { connect, connection } = require('mongoose');
 const Tour = require('./models/tour');
 const scrapTravelata = require('../scrapers/scraperTravelata');
 
+
 async function seedFromTravelata() {
   await connect(process.env.DB, {
     useNewUrlParser: true,
