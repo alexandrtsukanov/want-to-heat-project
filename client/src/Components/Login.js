@@ -12,8 +12,6 @@ function Login() {
     const login = event.target.login.value
     const password = event.target.password.value
     dispatch(loginUser(login, password))
-    event.target.login.value = ''
-    event.target.password.value = ''
     history.push('/filter');
   };
 

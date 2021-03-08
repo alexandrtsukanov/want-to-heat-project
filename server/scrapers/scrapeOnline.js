@@ -122,9 +122,9 @@ const scrapOnline = async () => {
   allTurs = await addLonLat(allTurs);
   allTurs = await addTemperture(allTurs);
   // Всё сделано, закроем браузер
-  // await browser.close();
+  await browser.close();
   // // process.exit();
-  // return allTurs;
+  return allTurs;
 };
 scrapOnline();
 
