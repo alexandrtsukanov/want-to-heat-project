@@ -1,21 +1,30 @@
 require('dotenv').config();
 const { connect, connection } = require('mongoose');
-const Tour = require('./models/tour');
-const scrapTravelata = require('../scrapers/scraperTravelata');
+const Tour = require('./models/tourAnton');
+const scraperTravelata = require('../scrapers/scraperTravelata');
+const scrapOnline = require('../scrapers/scrapeOnline');
 
-
-async function seedFromTravelata() {
+async function seed() {
   await connect(process.env.DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
     useFindAndModify: false,
   });
-  const allTurs = await scrapTravelata();
-  if (allTurs[0].city && allTurs[1].city) {
-    Tour.collection.drop();
+  const allTursFromTravelata = await scraperTravelata();
+  if (allTursFromTravelata[0].city && allTursFromTravelata[1].city) {
+    Tour.deleteMany({ sourse: 'travelata' });
   }
-  await Tour.insertMany(allTurs);
+  const allTursFromOnline = await scrapOnline();
+  if (allTursFromOnline[0].city && allTursFromOnline[1].city) {
+    Tour.deleteMany({ source: 'online-tours' });
+  }
+
+  const alltours = [...allTursFromTravelata, ...allTursFromOnline];
+
+  await Tour.insertMany(alltours);
   await connection.close();
 }
-seedFromTravelata();
+seed();
+
+module.exports = seed;

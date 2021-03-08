@@ -1,14 +1,9 @@
-const { Schema, model, pluralize, connect, connection } = require('mongoose');
+const { Schema, model, pluralize } = require('mongoose');
 
 const mongoose = require('mongoose');
 
-const connectionAddress = 'mongodb://localhost:27017/heat';
 mongoose.pluralize(null);
 
-mongoose.connect(connectionAddress, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
 
 const tourSchema = new mongoose.Schema({
   country: {
@@ -73,4 +68,4 @@ const tourSchema = new mongoose.Schema({
   lonLat: [String],
 });
 
-// module.exports = model('tours', tourSchema);
+module.exports = model('tours', tourSchema);
