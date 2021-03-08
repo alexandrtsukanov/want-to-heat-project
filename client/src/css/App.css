@@ -1,6 +1,10 @@
 body {
   margin: 0;
   padding: 0;
+  /* height: 100%;
+  background: url("https://static9.depositphotos.com/1554103/1168/i/600/depositphotos_11688413-stock-photo-yellow-orange-circle-gradient-background.jpg");
+  background-size: cover; */
+  /* background-color: yellow; */
 }
 
 #root {
@@ -11,10 +15,9 @@ body {
   align-items: center;
 }
 
-a {
+/* a {
   text-decoration: none;
-  color: black;
-}
+} */
 
 .flex {
   width: 1200px;
@@ -23,11 +26,11 @@ a {
   flex-wrap: wrap;
 }
 
-.navbar {
+/* .navbar {
   width: 400px;
   display: flex;
   justify-content: space-around;
-}
+} */
 
 .tour {
   border: 2px solid black;
@@ -36,4 +39,11 @@ a {
   margin: 10px;
   max-width: 330px;
   min-width: 330px;
+  background-color: rgb(255, 255, 255, 0.5);
 }
+
+#my_container {
+  margin: 0px;
+  padding: 0px;
+}
+

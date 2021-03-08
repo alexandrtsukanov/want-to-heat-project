@@ -11,7 +11,7 @@ export function checkUser(data) {
 
 const checkUserSession = () => (dispatch) => {
   fetch('/login', {credentials: 'include'})
-    .then(res => res.status === 200 ? res.json() : {})
+    .then(res => res.status === 200 ? res.json() : null)
     .then(data => {
       dispatch(checkUser(data));
     })
@@ -25,14 +25,14 @@ export function signInUser(data) {
   }
 }
 
-const loginUser = (email, password) => (dispatch) => {
+const loginUser = (login, password) => (dispatch) => {
   fetch('/login', {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      email,
+      login,
       password,
     })
   })
@@ -45,6 +45,7 @@ const loginUser = (email, password) => (dispatch) => {
 export function removeUser() {
   return {
     type: TYPES.VERIFY_USER,
+    data: null
   }
 }
 
@@ -62,7 +63,7 @@ export function signUpUser(data) {
   }
 }
 
-const registerUser = (login, email, password) => (dispatch) => {
+const registerUser = ({ email, login, password }) => (dispatch) => {
   fetch('/register', {
     method: "POST",
     headers: {
@@ -74,7 +75,7 @@ const registerUser = (login, email, password) => (dispatch) => {
       password,
     })
   })
-    .then(res => res.status === 200 ? res.json() : null)
+    .then(res => res.status === 200 ? res.json() : {})
     .then(data => {
       dispatch(signUpUser(data));
     })
@@ -82,10 +83,53 @@ const registerUser = (login, email, password) => (dispatch) => {
 
 //===============================
 
+const showProfileThunk = () => {
+  return async (dispatch) => {
+    const response = await fetch('/user/tours');
+    const result = await response.json();
+    console.log(result)
+    dispatch ({
+      type: TYPES.SET_USERS_TOURS,
+      data: result
+    })
+  }
+}
+
+const addTourThunk = (paramUser, paramTour) => async (dispatch) => {
+  const response = await fetch(`/user/${paramUser}/addtour`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ _id: paramTour })
+  });
+  const result = await response.json();
+  dispatch ({
+    type: TYPES.ADD_TOUR,
+    data: result
+  })
+}
+
+const deleteTourThunk = (paramUser, paramTour) => async (dispatch) => {
+  const response = await fetch(`/user/${paramUser}/deletetour`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ _id: paramTour })
+  });
+  dispatch ({
+    type: TYPES.DELETE_TOUR,
+    data: paramTour
+  })
+}
 
 export {
   checkUserSession,
   loginUser,
   logoutUser,
   registerUser,
+  showProfileThunk,
+  addTourThunk,
+  deleteTourThunk,
 }

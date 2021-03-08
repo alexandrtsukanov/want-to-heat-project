@@ -16,10 +16,10 @@ router.get('/login', async (req, res) => {
 
 // ==================login=======================
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  const { login, password } = req.body;
   let user;
   try {
-    user = await User.findOne({ email });
+    user = await User.findOne({ login });
     if (!user || !(await bcrypt.compare(password, user?.password))) {
       return res.sendStatus(501);
     }
@@ -36,16 +36,15 @@ router.post('/register', async (req, res) => {
   const { login, password, email } = req.body;
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash(password, saltRounds);
+
   let user;
   try {
     user = await User.create({ login, password: hashedPassword, email });
   } catch (error) {
     return res.sendStatus(501);
   }
-
   req.session.UserID = user._id;
   req.session.UserLogin = user.login;
-
   return res.status(200).json(user);
 });
 // ==================logout=======================

@@ -15,9 +15,7 @@ function ToursLits() {
             tour={tour}
             key={tour._id}
           />
-        )
-        )
-        }
+        ))}
       </div>
     </>
   )

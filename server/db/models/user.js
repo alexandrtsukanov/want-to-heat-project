@@ -2,7 +2,7 @@ const { Schema, model, pluralize } = require('mongoose');
 
 pluralize(null);
 
-const userSchema = new Schema({
+const userSchema = Schema({
   login: {
     type: String,
     unique: true,
@@ -11,6 +11,14 @@ const userSchema = new Schema({
   email: {
     type: String,
     unique: true,
+  },
+  searchTours: {
+    type: Array,
+    default: [],
+  },
+  usersTours: {
+    type: Array,
+    default: [],
   },
 });
 

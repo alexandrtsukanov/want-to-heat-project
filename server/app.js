@@ -53,12 +53,12 @@ app.use('/tours', toursRouter);
 
 // Запуск сервера и подключение к бд.
 app.listen(port, async () => {
-  console.log('Server online!');
+  console.log(`Server online on port ${port}!`);
   await connect(process.env.DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    // useCreateIndex: true,
-    // useFindAndModify: false,
+    useCreateIndex: true,
+    useFindAndModify: false,
   });
   console.log('Database online!');
 });
