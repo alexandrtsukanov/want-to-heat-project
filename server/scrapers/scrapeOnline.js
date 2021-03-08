@@ -34,16 +34,15 @@ const scrapOnline = async () => {
 
   const postsSelector = ' #rec224802417 div.t396__elem a.tn-atom';
   await page.waitForSelector(postsSelector, { timeout: 0 });
-  let postUrls = await page.$$eval(
+  const postUrls = await page.$$eval(
     postsSelector, (postLinks) => postLinks.map((link) => {
       console.log('popali v map');
       return link.href;
     }),
-    );
-    console.log(postUrls);
+  );
+  console.log(postUrls);
   /// удалить!!!
   // postUrls = [postUrls[0]];
-
 
   let allTurs = [];
   // Перейдём по каждой из них
@@ -103,8 +102,8 @@ const scrapOnline = async () => {
         console.log('price', price);
         const starsForHotel = starsForHotels[i]?.childElementCount;
         console.log('starsForHotel', starsForHotel);
-        console.log(images[i])
-        let photoUrl = (images[i]?.style?.backgroundImage?.replace(/url\("/gi, ''))
+        console.log(images[i]);
+        let photoUrl = (images[i]?.style?.backgroundImage?.replace(/url\("/gi, ''));
         photoUrl = photoUrl?.replace(/"\)/gi, '');
         console.log('photoUrl', photoUrl);
         if (photoUrl?.split(':')[1] === 'undefined') photoUrl = 'https://sitecore-cd-imgr.shangri-la.com/MediaFiles/E/0/1/%7BE0144276-6A01-4CAE-8E4E-A68A099A5E98%7D200724_SLJ_Banner_ShangriLa_Hotel_Jakarta.jpg?width=750&height=752&mode=crop&quality=100&scale=both';
