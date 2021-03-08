@@ -5,6 +5,7 @@ const User = require('../db/models/userTsukanov');
 // ================getTours==============
 router.post('/', async (req, res) => {
   currentUser = await User.findById(req.session.userID);
+  console.log(currentUser)
   // let currentUser = await User.findOne({ login: 'a' })
   let { minTemp, maxTemp } = req.body
   // if ((minTemp !== '' && minTemp !== '0' && !Number(minTemp)) || (Number(maxTemp) !== '' && maxTemp !== '0' && !Number(maxTemp))) {
