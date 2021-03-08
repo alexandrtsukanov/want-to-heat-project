@@ -6,6 +6,8 @@ function tourReducer(allTours = [], action) {
       return action.data
     case TYPES.SET_SORTED_TOURS:
       return action.data
+    case TYPES.SORTED_PRICE_TOURS:
+      return action.data
     default:
       return allTours;
   }

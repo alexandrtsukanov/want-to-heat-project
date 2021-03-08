@@ -19,7 +19,6 @@ function Register() {
     history.push('/filter');
   };
 
-
   return (
 
   <form onSubmit={handlerSubmit} id="registration-form">

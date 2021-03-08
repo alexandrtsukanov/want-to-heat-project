@@ -6,24 +6,26 @@ const User = require('../db/models/userTsukanov');
 router.post('/', async (req, res) => {
   // currentUser = await User.findById(req.session.userID);
   let currentUser = await User.findOne({ login: 'a' })
-  let { minTemp, maxTemp } = req.body
-  // if ((minTemp !== '' && minTemp !== '0' && !Number(minTemp)) || (Number(maxTemp) !== '' && maxTemp !== '0' && !Number(maxTemp))) {
-  //   return res.status(204).send('You have entered incorrect values');
-  // }
+  const { minTemp, maxTemp } = req.body
+  if ((minTemp !== '' && minTemp !== '0' && !Number(minTemp)) || (maxTemp !== '' && maxTemp !== '0' && !Number(maxTemp))) {
+    return res.status(204).send('You have entered incorrect values');
+  }
   if (!minTemp) {
-    minTemp = - Infinity
+    minTemp = -Infinity
   }
   if (!maxTemp) {
     maxTemp = Infinity
   }
+  if (maxTemp < minTemp) {
+    return res.sendStatus(204).send('You have entered incorrect values')
+  }
   let tours;
   try {
-    tours = await (await Tour.find()).filter((tour) => tour.temperature >= minTemp && tour.temperature <= maxTemp);
+    tours = await (await Tour.find()).filter((tour) => tour.temperature >= Number(minTemp) && tour.temperature <= Number(maxTemp));
     if (!tours.length) { 
       return res.status(204).send('No tours found');
     } else {
-      let toursCopy = [...tours];
-      let toursSortedByRating = toursCopy.sort((a, b) => b.rating - a.rating);
+      let toursSortedByRating = tours.sort((a, b) => b.rating - a.rating);
       currentUser.searchTours = toursSortedByRating;
       await currentUser.save();
       return res.status(200).json(toursSortedByRating)
@@ -62,6 +64,45 @@ router.post('/sortation', async (req, res) => {
   } catch (error) {
     return res.sendStatus(501)
   }
+})
+
+router.post('/sortationprice', async (req, res) => {
+  try {
+    let currentUser = await User.findOne({ login: 'a' });
+    const { minPrice, maxPrice } = req.body;
+    if ((minPrice !== '' && minPrice !== '0' && !Number(minPrice)) || (maxPrice !== '' && maxPrice !== '0' && !Number(maxPrice))) {
+      return res.status(204).send('You have entered incorrect values');
+    }
+    if (!minPrice) {
+      minPrice = -Infinity
+    }
+    if (!maxPrice) {
+      maxPrice = Infinity
+    }
+    // if (maxPrice < minPrice) {
+    //   return res.sendStatus(204).send('You have entered incorrect values')
+    // }
+    const tours = currentUser.searchTours;
+    const priceTours = tours.filter(el => el.price >= Number(minPrice) && el.price <= Number(maxPrice));
+    if (!priceTours.length) { 
+      return res.status(204).send('No tours found');
+    } else {
+      const toursSortedByRating = priceTours.sort((a, b) => b.rating - a.rating);
+      currentUser.searchTours = toursSortedByRating;
+      await currentUser.save();
+      return res.status(200).json(toursSortedByRating)
+    }
+  } catch (error) {
+    return res.sendStatus(501)
+  }
+})
+
+router.post('/sortationrate', async (req, res) => {
+  
+})
+
+router.post('/sortationstars', async (req, res) => {
+  
 })
 
 module.exports = router;
