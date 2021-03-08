@@ -1,2 +1,2 @@
 PORT = 3001
-DB = 
+DB = mongodb+srv://admin:uM6TPL7-S4pWJYs@cluster0.7pf5g.mongodb.net/teplo?retryWrites=true&w=majority

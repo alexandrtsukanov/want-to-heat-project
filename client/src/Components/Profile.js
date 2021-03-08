@@ -1,28 +1,33 @@
-import React from 'react';
-import { useHistory } from "react-router-dom";
-import { useDispatch } from 'react-redux';
-import { registerUser } from '../redux/actions/actions';
+import React, { useEffect } from 'react';
+import { useHistory, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { showProfileThunk } from '../redux/actions/userAction'
+import TourInProfile from './TourInProfile'
 
 function Profile() {
-  const history = useHistory();
-  const dispatch = useDispatch();
 
-  const handlerSubmit = async (event) => {
-    event.preventDefault();
-    const login = event.target.login.value
-    const email = event.target.email.value
-    const password = event.target.password.value
-    dispatch(registerUser(login, email, password))
-    history.push('/');
-  };
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+
+  useEffect(() => {
+    dispatch(showProfileThunk())
+  }, [])
 
   return (
-    <form type='submit' onSubmit={handlerSubmit}>
-      <input type='text' name='login' placeholder='Login'/>
-      <input type='email' name='email' placeholder='Email' />
-      <input type='password' name='password' placeholder='Password' />
-      <button type='submit'>Register</button>
-    </form>
+    <>
+    <h1>Profile</h1>
+    <hr />
+
+    Name: {user.login}
+    <div className='flex'>
+    {Boolean(user.usersTours.length) && user.usersTours.map((tour) =>
+        (
+          <TourInProfile
+            tour={tour}
+            key={tour._id}
+          />
+        ))}</div>
+    </>
   )
 }
 

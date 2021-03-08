@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { checkUserSession } from '../src/redux/actions/actions';
+import { checkUserSession } from './redux/actions/userAction';
 
 import Navbar from './Components/Navbar';
 import Home from './Components/Home';
@@ -9,32 +9,37 @@ import Login from './Components/Login';
 import Logout from './Components/Logout';
 import Register from './Components/Register';
 import Profile from './Components/Profile';
-import Search from './Components/Search';
+import Filter from './Components/Filter';
+import Team from './Components/Team';
+import About from './Components/About';
+import Footer from './Components/Footer';
 
 function App() {
 
-  const dispatch = useDispatch();
   const user = useSelector(state => state.user);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     (dispatch(checkUserSession()))
   }, [])
 
+  console.log(user)
 
   return (
     <>
+    {Boolean(user) &&
+      <>
+        On site now: {user.login}
+      </>
+    }
       <Router>
         <Navbar />
-        <Home />
         <Switch>
           <Route exact path='/'>
-            {user._id ?
-              <Search /> :
-              <h2>Please login or register first</h2>
-              // (<div>Content</div>)
-              // :
-              // (<h2>Please login or register first</h2>)
-            }
+            <Home />
+          </Route>
+          <Route path='/about'>
+            <About />
           </Route>
           <Route path='/logout'>
             <Logout />
@@ -45,11 +50,18 @@ function App() {
           <Route path='/register'>
             <Register />
           </Route>
-          <Route path='/user/:id'>
+          <Route path='/filter'>
+            <Filter />
+          </Route>
+          <Route path='/profile'>
             <Profile />
+          </Route>
+          <Route path='/team'>
+            <Team />
           </Route>
           <Redirect to='/' />
         </Switch>
+        <Footer />
       </Router>
     </>
   );

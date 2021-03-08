@@ -1,7 +1,7 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../redux/actions/actions';
+import { loginUser } from '../redux/actions/userAction';
 
 function Home () {
   const history = useHistory();
@@ -32,9 +32,18 @@ function Home () {
       {/* <!-- Slide 2 --> */}
       <div class="carousel-item active">
         <div class="carousel-container">
-          <h2 class="animate__animated animate__fadeInDown">I want to heat</h2>
-          <p class="animate__animated animate__fadeInUp">I want to heat - the coolest app ever developed. Lorem ipsum dolorem. Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. </p>
-          <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+          <h2 style={{fontSize: '48px'}} class="animate__animated animate__fadeInDown">I want to heat</h2>
+          <p style={{fontSize: '24px'}} class="animate__animated animate__fadeInUp">I want to heat - the coolest app ever developed. Lorem ipsum dolorem. Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam.</p>
+          <div>
+
+          <span id="btn-get-started-left">
+          <Link to="/register" class="btn-get-started animate__animated animate__fadeInUp scrollto">Sign Up</Link>
+          </span>
+          <span id="btn-get-started-right">
+          <Link to="/login" class="btn-get-started animate__animated animate__fadeInUp scrollto">Log In</Link>
+          </span>
+          </div>
+
         </div>
       </div>
 
@@ -47,13 +56,13 @@ function Home () {
         </div>
       </div>
 
-      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+      {/* <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
-      </a>
+      </a> */}
 
-      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+      {/* <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
         <span class="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
-      </a>
+      </a> */}
 
     </div>
 
@@ -68,7 +77,7 @@ function Home () {
         <use href="#wave-path" x="50" y="0" fill="rgba(255,255,255, .2)"/>
       </g>
       <g class="wave3">
-        <use href="#wave-path" x="50" y="9" fill="#fff"/>
+        <use href="#wave-path" x="50" y="9" fill="yellow"/>
       </g>
     </svg>
 

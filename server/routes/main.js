@@ -1,12 +1,13 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
-const User = require('../db/models/user');
+const User = require('../db/models/userTsukanov');
 
 // ================check session==============
 router.get('/login', async (req, res) => {
   let user;
   try {
-    user = await User.findById(req.session.userID);
+    // user = await User.findById(req.session.userID);
+    user = await User.findOne({ login: 'a' })
     if (!user) return res.sendStatus(204);
   } catch (error) {
     return res.sendStatus(501);
@@ -16,10 +17,10 @@ router.get('/login', async (req, res) => {
 
 // ==================login=======================
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  const { login, password } = req.body;
   let user;
   try {
-    user = await User.findOne({ email });
+    user = await User.findOne({ login });
     if (!user || !(await bcrypt.compare(password, user?.password))) {
       return res.sendStatus(501);
     }
@@ -36,17 +37,25 @@ router.post('/register', async (req, res) => {
   const { login, password, email } = req.body;
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash(password, saltRounds);
-  let user;
-  try {
-    user = await User.create({ login, password: hashedPassword, email });
-  } catch (error) {
-    return res.sendStatus(501);
+  let userCheckEmail = await User.findOne({ email });
+  if (!userCheckEmail) {
+    let userCheckLogin = await User.findOne({ login });
+    if (!userCheckLogin) {
+      let user;
+      try {
+        user = await User.create({ login, password: hashedPassword, email });
+      } catch (error) {
+        return res.sendStatus(501);
+      }
+      req.session.UserID = user._id;
+      req.session.UserLogin = user.login;
+      return res.status(200).json(user);
+    } else {
+      return res.status(204).send('Such login is already in use');
+    }
+  } else {
+    return res.status(204).send('User with such email address is registerd');
   }
-
-  req.session.UserID = user._id;
-  req.session.UserLogin = user.login;
-
-  return res.status(200).json(user);
 });
 // ==================logout=======================
 router.get('/logout', (req, res) => {
