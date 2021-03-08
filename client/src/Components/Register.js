@@ -9,7 +9,6 @@ function Register() {
 
   const handlerSubmit = async (event) => {
     event.preventDefault();
-    console.log('AU')
     const email = event.target.email.value
     const login = event.target.login.value
     const password = event.target.password.value

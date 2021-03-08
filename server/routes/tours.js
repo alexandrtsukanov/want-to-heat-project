@@ -4,8 +4,8 @@ const User = require('../db/models/userTsukanov');
 
 // ================getTours==============
 router.post('/', async (req, res) => {
-  currentUser = await User.findById(req.session.userID);
-  // let currentUser = await User.findOne({ login: 'a' })
+  // currentUser = await User.findById(req.session.userID);
+  let currentUser = await User.findOne({ login: 'a' })
   let { minTemp, maxTemp } = req.body
   // if ((minTemp !== '' && minTemp !== '0' && !Number(minTemp)) || (Number(maxTemp) !== '' && maxTemp !== '0' && !Number(maxTemp))) {
   //   return res.status(204).send('You have entered incorrect values');
@@ -34,8 +34,8 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/sortation', async (req, res) => {
-  currentUser = await User.findById(req.session.userID);
-  // let currentUser = await User.findOne({ login: 'a' })
+  // currentUser = await User.findById(req.session.userID);
+  let currentUser = await User.findOne({ login: 'a' })
   let { criteria } = req.body;
   let tours = currentUser.searchTours;
   console.log(tours.length)
