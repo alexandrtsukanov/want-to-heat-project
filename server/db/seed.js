@@ -25,6 +25,6 @@ async function seed() {
   await Tour.insertMany(alltours);
   await connection.close();
 }
-seed();
+// seed();
 
 module.exports = seed;

@@ -126,6 +126,6 @@ const scrapOnline = async () => {
   // // process.exit();
   return allTurs;
 };
-scrapOnline();
+// scrapOnline();
 
 module.exports = scrapOnline;

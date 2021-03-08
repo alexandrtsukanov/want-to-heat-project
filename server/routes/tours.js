@@ -6,6 +6,7 @@ const { authenticated } = require('./middleware');
 // ================getTours==============
 router.post('/', authenticated, async (req, res) => {
   const currentUser = await User.findById(req.session.userID);
+  console.log('CURR USER', currentUser)
   let { minTemp, maxTemp } = req.body;
   if (!minTemp) minTemp = -Infinity;
   if (!maxTemp) maxTemp = Infinity;
