@@ -22,7 +22,7 @@ useEffect(() => {
 return [ref, hovered]
 }
 
-function Tour({ tour }) {
+function Tour1({ tour }) {
 
   const dispatch = useDispatch();
   const user = useSelector(state => state.user)
@@ -30,6 +30,7 @@ function Tour({ tour }) {
 
   return (
     <>
+    <h1>Hover</h1>
       <div onClick={() => console.log('hover')}  className='tour'>
         <div ref={ref}>
         <div><strong>Температура: </strong> {tour.temperature}</div>
@@ -54,45 +55,4 @@ function Tour({ tour }) {
   )
 }
 
-export default Tour;
-
-
-import { React, useState, useRef, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { addTourThunk } from '../redux/actions/userAction'
-
-const useHover = () => {
-  const ref = useRef()
-
-// Hover state management
-const [hovered, setHovered] = useState(false)
-
-// Event handlers
-const enter = () => setHovered(true)
-const leave = () => setHovered(false)
-useEffect(() => {
-  ref.current.addEventListener("mouseenter", enter)
-  ref.current.addEventListener("mouseleave", leave)
-  return () => {
-    ref.current.removeEventListener("mouseenter", enter)
-    ref.current.removeEventListener("mouseleave", leave)
-  }
-}, [ref])
-return [ref, hovered]
-}
-
-function Tour({ tour }) {
-
-  const dispatch = useDispatch();
-  const user = useSelector(state => state.user)
-  const [hovered, ref] = useHover()
-
-  return (
-    <>
-      <div ref={ref} className="tour">Delete</div>
-      {hovered && <div>Huy</div>}
-    </>
-  )
-}
-
-export default Tour;
+export default Tour1;
