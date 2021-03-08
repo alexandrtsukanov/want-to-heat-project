@@ -69,4 +69,4 @@ let Tour = mongoose.model('tours', {
   lonLat: [String],
 });
 
-module.exports = Tour
+module.exports = Tour;

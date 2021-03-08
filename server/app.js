@@ -1,14 +1,14 @@
-// const dotenv = require('dotenv').config();
+const dotenv = require('dotenv').config();
 const express = require('express');
-// const { connect } = require('mongoose');
+const { connect } = require('mongoose');
 const logger = require('morgan');
 const path = require('path');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-// const mongoose = require('mongoose');
-
+const schedule = require('node-schedule');
+const seed = require('./db/seed');
 
 // Создаем приложение express.
 const app = express();
@@ -17,7 +17,9 @@ const mainRouter = require('./routes/main');
 const userRouter = require('./routes/user');
 const toursRouter = require('./routes/tours');
 
-// const port = (process.env.PORT ?? 3001);
+const port = (process.env.PORT ?? 3001);
+
+schedule.scheduleJob('37 23 * * *', () => seed());
 
 /* Подключаем middleware morgan с режимом логирования "dev",
 чтобы для каждого HTTP-запроса на сервер в консоль выводилась информация об этом запросе. */
@@ -50,15 +52,13 @@ app.use('/user', userRouter);
 app.use('/tours', toursRouter);
 
 // Запуск сервера и подключение к бд.
-app.listen(8080, 
-  // async
-   () => {
-  console.log('Server online!');
-  // await connect(process.env.DB, {
-  //   useNewUrlParser: true,
-  //   useUnifiedTopology: true,
-    // useCreateIndex: true,
-    // useFindAndModify: false,
-  // });
-  // console.log('Database online!');
+app.listen(port, async () => {
+  console.log(`Server online on port ${port}!`);
+  await connect(process.env.DB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  });
+  console.log('Database online!');
 });

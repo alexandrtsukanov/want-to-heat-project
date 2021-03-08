@@ -14,9 +14,6 @@ function Register() {
     const login = event.target.login.value
     const password = event.target.password.value
     dispatch(registerUser({ login, email, password }))
-    event.target.email.value = ''
-    event.target.login.value = ''
-    event.target.password.value = ''
     history.push('/filter');
   };
 

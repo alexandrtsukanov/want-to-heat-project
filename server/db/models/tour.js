@@ -1,11 +1,8 @@
 const { Schema, model, pluralize } = require('mongoose');
 
-const mongoose = require('mongoose');
+pluralize(null);
 
-mongoose.pluralize(null);
-
-
-const tourSchema = new mongoose.Schema({
+const tourSchema = new Schema({
   country: {
     type: String,
     default: 'No data',

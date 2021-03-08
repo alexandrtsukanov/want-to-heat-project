@@ -51,7 +51,7 @@ function Filter() {
       <option value="tempMinToMax">temperature, min to max</option>
       <option value="tempMaxToMin">temperature, max to min</option>
       <option value="price">Price</option>
-      <option value="rating">Rating</option>
+      <option value="rating" selected >Rating</option>
       <option value="toSeaDistance">Distance to sea</option>
       <option value="reviewsCount">Reviews amount</option>
       <option value="tourDuration">Duration</option>

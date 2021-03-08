@@ -10,9 +10,7 @@ export function checkUser(data) {
 }
 
 const checkUserSession = () => (dispatch) => {
-  fetch('http://localhost:8080/login', 
-  // {credentials: 'include'}
-  )
+  fetch('/login', {credentials: 'include'})
     .then(res => res.status === 200 ? res.json() : null)
     .then(data => {
       dispatch(checkUser(data));
@@ -28,7 +26,7 @@ export function signInUser(data) {
 }
 
 const loginUser = (login, password) => (dispatch) => {
-  fetch('http://localhost:8080/login', {
+  fetch('/login', {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -52,7 +50,7 @@ export function removeUser() {
 }
 
 const logoutUser = () => (dispatch) => {
-  fetch('http://localhost:8080/logout')
+  fetch('/logout')
     .then(res => res.status === 200 ? dispatch(removeUser()) : null)
 }
 
@@ -66,7 +64,7 @@ export function signUpUser(data) {
 }
 
 const registerUser = ({ email, login, password }) => (dispatch) => {
-  fetch('http://localhost:8080/register', {
+  fetch('/register', {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -87,7 +85,7 @@ const registerUser = ({ email, login, password }) => (dispatch) => {
 
 const showProfileThunk = () => {
   return async (dispatch) => {
-    const response = await fetch('http://localhost:8080/user/tours');
+    const response = await fetch('/user/tours');
     const result = await response.json();
     console.log(result)
     dispatch ({
@@ -98,7 +96,7 @@ const showProfileThunk = () => {
 }
 
 const addTourThunk = (paramUser, paramTour) => async (dispatch) => {
-  const response = await fetch(`http://localhost:8080/user/${paramUser}/addtour`, {
+  const response = await fetch(`/user/${paramUser}/addtour`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -113,7 +111,7 @@ const addTourThunk = (paramUser, paramTour) => async (dispatch) => {
 }
 
 const deleteTourThunk = (paramUser, paramTour) => async (dispatch) => {
-  const response = await fetch(`http://localhost:8080/user/${paramUser}/deletetour`, {
+  const response = await fetch(`/user/${paramUser}/deletetour`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'

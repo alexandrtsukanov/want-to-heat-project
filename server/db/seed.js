@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { connect, connection } = require('mongoose');
-const Tour = require('./models/tourAnton');
+const Tour = require('./models/tour');
 const scraperTravelata = require('../scrapers/scraperTravelata');
 const scrapOnline = require('../scrapers/scrapeOnline');
 
