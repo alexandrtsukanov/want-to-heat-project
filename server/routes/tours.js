@@ -6,9 +6,9 @@ const { authenticated } = require('./middleware');
 
 // ================getTours==============
 router.post('/', authenticated, async (req, res) => {
-    // let currentUser = await User.findById(req.session.userID);
-    let currentUser = await User.findOne({ login: 'Admin' });
-    let { minTemp, maxTemp } = req.body;
+  // let currentUser = await User.findById(req.session.userID);
+  let currentUser = await User.findOne({ login: 'Admin' });
+  let { minTemp, maxTemp } = req.body;
   if (!minTemp) minTemp = -Infinity;
   if (!maxTemp) maxTemp = Infinity;
   let tours;
@@ -27,11 +27,11 @@ router.post('/', authenticated, async (req, res) => {
 });
 
 router.post('/sortation', authenticated, async (req, res) => {
-    // let currentUser = await User.findById(req.session.userID);
+  try {
+  // let currentUser = await User.findById(req.session.userID);
     let currentUser = await User.findOne({ login: 'Admin' });
     const { criteria } = req.body;
-  const tours = currentUser.searchTours;
-  try {
+    const tours = currentUser.searchTours;
     switch (criteria) {
       case 'tempMinToMax':
         return res.status(200).json(tours.sort((a, b) => a.temperature - b.temperature));
@@ -59,36 +59,27 @@ router.post('/sortation', authenticated, async (req, res) => {
 router.post('/sortationprice', async (req, res) => {
   try {
     // let currentUser = await User.findById(req.session.userID);
-        let currentUser = await User.findOne({ login: 'Admin' });
-
-    console.log(req.session)
+    let currentUser = await User.findOne({ login: 'Admin' });
     const { minPrice, maxPrice } = req.body;
     if ((minPrice !== '' && minPrice !== '0' && !Number(minPrice)) || (maxPrice !== '' && maxPrice !== '0' && !Number(maxPrice))) {
-      console.log('111')
       return res.status(204).send('You have entered incorrect values');
-    } else {
-      if (!minPrice) {
-        console.log('222')
-        minPrice = -Infinity
-      }
-      if (!maxPrice) {
-        console.log('333')
-
-        maxPrice = Infinity
-      }
-      const tours = currentUser.searchTours;
-      console.log(tours.length)
-      const priceTours = tours.filter(el => el.price >= Number(minPrice) && el.price <= Number(maxPrice));
-      console.log('WHERE????', priceTours.length)
-      if (!priceTours.length) {
-        return res.status(204).send('No tours found');
-      } else {
-        const toursSortedByRating = priceTours.sort((a, b) => b.rating - a.rating);
-        currentUser.searchTours = toursSortedByRating;
-        await currentUser.save();
-        return res.status(200).json(toursSortedByRating)
-      }
     }
+    if (!minPrice) {
+      minPrice = -Infinity
+    }
+    if (!maxPrice) {
+      maxPrice = Infinity
+    }
+    const tours = [...currentUser.searchTours];
+    console.log(tours.length)
+    const priceTours = tours.filter(el => el.price >= Number(minPrice) && el.price <= Number(maxPrice));
+    if (!priceTours.length) {
+      return res.status(204).send('No tours found');
+    } else {
+      const toursSortedByRating = priceTours.sort((a, b) => b.rating - a.rating);
+      return res.status(200).json(toursSortedByRating)
+    }
+
   } catch (error) {
     return res.sendStatus(501)
   }

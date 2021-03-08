@@ -8,7 +8,7 @@ router.get('/login', async (req, res) => {
   try {
 
     // let currentUser = await User.findById(req.session.userID);
-    let currentUser = await User.findOne({ login: 'Admin' });
+    let user = await User.findOne({ login: 'Admin' });
     if (!user) return res.sendStatus(204);
   } catch (error) {
     return res.sendStatus(501);
