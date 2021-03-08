@@ -6,8 +6,9 @@ const { authenticated } = require('./middleware');
 
 // ================getTours==============
 router.post('/', authenticated, async (req, res) => {
-  const currentUser = await User.findById(req.session.userID);
-  let { minTemp, maxTemp } = req.body;
+    // let currentUser = await User.findById(req.session.userID);
+    let currentUser = await User.findOne({ login: 'Admin' });
+    let { minTemp, maxTemp } = req.body;
   if (!minTemp) minTemp = -Infinity;
   if (!maxTemp) maxTemp = Infinity;
   let tours;
@@ -26,8 +27,9 @@ router.post('/', authenticated, async (req, res) => {
 });
 
 router.post('/sortation', authenticated, async (req, res) => {
-  const currentUser = await User.findById(req.session.userID);
-  const { criteria } = req.body;
+    // let currentUser = await User.findById(req.session.userID);
+    let currentUser = await User.findOne({ login: 'Admin' });
+    const { criteria } = req.body;
   const tours = currentUser.searchTours;
   try {
     switch (criteria) {
@@ -56,7 +58,10 @@ router.post('/sortation', authenticated, async (req, res) => {
 
 router.post('/sortationprice', async (req, res) => {
   try {
-    let currentUser = await User.findOne({ login: 'a' });
+    // let currentUser = await User.findById(req.session.userID);
+        let currentUser = await User.findOne({ login: 'Admin' });
+
+    console.log(req.session)
     const { minPrice, maxPrice } = req.body;
     if ((minPrice !== '' && minPrice !== '0' && !Number(minPrice)) || (maxPrice !== '' && maxPrice !== '0' && !Number(maxPrice))) {
       console.log('111')
@@ -71,13 +76,10 @@ router.post('/sortationprice', async (req, res) => {
 
         maxPrice = Infinity
       }
-
-      // if (maxPrice < minPrice) {
-      //   return res.sendStatus(204).send('You have entered incorrect values')
-      // }
       const tours = currentUser.searchTours;
-      const priceTours = tours.filter(el => el.price >= minPrice && el.price <= maxPrice);
-      console.log('WHERE????', priceTours)
+      console.log(tours.length)
+      const priceTours = tours.filter(el => el.price >= Number(minPrice) && el.price <= Number(maxPrice));
+      console.log('WHERE????', priceTours.length)
       if (!priceTours.length) {
         return res.status(204).send('No tours found');
       } else {

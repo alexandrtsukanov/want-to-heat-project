@@ -38,10 +38,11 @@ function Filter() {
   const filterPriceSubmit = (event) => {
     event.preventDefault();
     const minPrice = event.target.minPrice.value;
-    const maxPrice = event.target.maxPrice.value
+    const maxPrice = event.target.maxPrice.value;
+    console.log(minPrice, maxPrice)
     dispatch(filterByPriceThunk(minPrice, maxPrice))
   }
-console.log(allTours)
+  
   return (
     <>
       <h1>Filter</h1>
@@ -135,11 +136,8 @@ console.log(allTours)
       <option value="tempMinToMax">temperature, min to max</option>
       <option value="tempMaxToMin">temperature, max to min</option>
       <option value="price">Price</option>
-<<<<<<< HEAD
-      <option defaultValue value="rating">Rating</option>
-=======
+
       <option value="rating" selected >Rating</option>
->>>>>>> 068f08f2f65dae6ef3ba5902d9b00b2628304404
       <option value="toSeaDistance">Distance to sea</option>
       <option value="reviewsCount">Reviews amount</option>
       <option value="tourDuration">Duration</option>

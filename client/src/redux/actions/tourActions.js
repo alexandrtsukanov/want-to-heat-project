@@ -42,20 +42,21 @@ const sortToursThunk = (criteriaParam) => async (dispatch) => {
 }
 
 const filterByPriceThunk = (minPriceParam, maxPriceParam) => async (dispatch) => {
-  const response = await fetch('http://localhost:8080/tours/sortationprice', {
+  const response = await fetch('http://localhost:3001/tours/sortationprice', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ minPrice: minPriceParam, maxPrice: maxPriceParam })
+    body: JSON.stringify({ minPrice: minPriceParam, maxPrice: maxPriceParam }, 
+      { credentials: 'include' })
   });
+  console.log(response)
   const result = await response.json();
   dispatch ({
     type: TYPES.SORTED_PRICE_TOURS,
     data: result
   })
 }
-
 
 export {
   filterByTemp,
