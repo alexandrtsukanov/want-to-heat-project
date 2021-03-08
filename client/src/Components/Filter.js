@@ -25,10 +25,12 @@ function Filter() {
 
   const criteriaHandler = ({ target }) => {
     setCriteria(target.value)
+    console.log(criteria)
   }
   const incCountryHandler = ({ target }) => {
     setIncCountry (target.value)
     console.log(incCountry)
+
   }
 
   return (
@@ -45,7 +47,7 @@ function Filter() {
       <>
     <div className="animate__animated animate__fadeInUp">
       <label htmlFor="sortation" className="form-label">Choose criteria</label>
-      <select onChange={criteriaHandler} multiple name="sortation" class="field">
+      <select onChange={criteriaHandler} name="sortation" class="field">
       <option value="tempMinToMax">temperature, min to max</option>
       <option value="tempMaxToMin">temperature, max to min</option>
       <option value="price">Price</option>
@@ -58,7 +60,7 @@ function Filter() {
       <button onClick={() => dispatch(sortToursThunk(criteria))}>Sort</button>
     </div>
 
-    {/* <div>
+    <div>
     <label htmlFor="choose-countries" className="form-label">Choose countries</label>
       <select onChange={criteriaHandler} name="choose-countries" class="field">
       <option value="Turkey">Turkey</option>
@@ -77,9 +79,9 @@ function Filter() {
       <option value="Greece">Greece</option>
       <option value="Cyprus">Cyprus</option>      </select> 
       <button onClick={() => dispatch(sortToursThunk(criteria))}>Exclude</button>
-    </div> */}
+    </div>
 
-    <div className='flex'>
+    <div className="flex row">
     {!!allTours && allTours.map((tour) =>
     (
       <Tour

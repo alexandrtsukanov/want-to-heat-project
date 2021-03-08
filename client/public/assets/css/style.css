@@ -393,14 +393,14 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
   -webkit-animation-delay: 1.5s;
   animation-delay: 1.5s;
-  border: 2px solid  #f3b50b;
+  border: 2px solid  #ef6603;
   width: 3.5cm;
-  background-color: #f3b50b;
+  background-color: #ef6603;
 }
 
 #hero .btn-get-started:hover {
-  background: #ef6603;
-  border: 2px solid #ef6603;
+  background: #fc8129;
+  border: 2px solid #fc8129;
   color: #fff;
   text-decoration: none;
 }
@@ -444,14 +444,52 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
   -webkit-animation-delay: 0.8s;
   animation-delay: 0.8s;
-  border: 2px solid  #f3b50b;
+  border: 2px solid  #ef6603;
   width: 3.5cm;
-  background-color: #f3b50b;
+  background: #ef6603;
 }
 
 #registration-form .registration-button:hover {
+  background: #fc8129;
+  border: 2px solid #fc8129;
+  color: #fff;
+  text-decoration: none;
+}
+
+#login-form .login-login {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+} 
+
+#login-form .login-password {
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+} 
+
+#login-form .login-button {
+  position: relative;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: 50px;
+  transition: 0.5s;
+  line-height: 1;
+  margin: 10px;
+  color: #fff;
+  -webkit-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+  border: 2px solid  #ef6603;
+  width: 3.5cm;
   background: #ef6603;
-  border: 2px solid #ef6603;
+}
+
+#login-form .login-button:hover {
+  background: #fc8129;
+  border: 2px solid #fc8129;
   color: #fff;
   text-decoration: none;
 }
@@ -1610,7 +1648,7 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background: #14151c;
+  background: #142433;
   color: #fff;
   font-size: 14px;
   text-align: center;

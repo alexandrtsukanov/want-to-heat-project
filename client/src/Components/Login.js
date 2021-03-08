@@ -19,17 +19,17 @@ function Login() {
 
   return (
 
-  <form onSubmit={handlerSubmit}>
+  <form onSubmit={handlerSubmit} id="login-form">
 
-    <div className="mb3">
+    <div className="login-login animate__animated animate__fadeInUp">
       <label hrmlFor="exampleInputPassword1" className="form-label">Login</label>
       <input type="text" className="form-control" name="login" id="exampleInputPassword1" placeholder='Login' />
     </div>
-    <div className="mb3">
+    <div className="login-password animate__animated animate__fadeInUp">
       <label hrmlFor="exampleInputPassword1" className="form-label">Password</label>
       <input type="password" className="form-control" name="password" id="exampleInputPassword1" placeholder='Password' />
     </div>
-    <button class="btn-get-started" type="submit" className="btn btn-primary">Log In</button>
+    <button type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Log In</button>
   </form>
 
     // <form type='submit' onSubmit={handlerSubmit}>

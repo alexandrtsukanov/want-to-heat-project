@@ -17,7 +17,7 @@ function Home () {
 
   return (
 
-<section id="hero" class="d-flex flex-column justify-content-end align-items-center">
+<section id="hero" class="home d-flex flex-column justify-content-end align-items-center">
     <div id="heroCarousel" data-bs-interval="5000" class="container carousel carousel-fade" data-bs-ride="carousel">
 
       {/* <!-- Slide 1 --> */}
@@ -30,17 +30,17 @@ function Home () {
       </div>
 
       {/* <!-- Slide 2 --> */}
-      <div class="carousel-item active">
-        <div class="carousel-container">
-          <h2 style={{fontSize: '48px'}} class="animate__animated animate__fadeInDown">I want to heat</h2>
-          <p style={{fontSize: '24px'}} class="animate__animated animate__fadeInUp">I want to heat - the coolest app ever developed. Lorem ipsum dolorem. Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam.</p>
+      <div className="carousel-item active">
+        <div className="carousel-container">
+          <h2 style={{fontSize: '48px'}} className="animate__animated animate__fadeInDown">I want to heat</h2>
+          <p style={{fontSize: '24px'}} className="animate__animated animate__fadeInUp">I want to heat - the coolest app ever developed. Lorem ipsum dolorem. Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam.</p>
           <div>
 
           <span id="btn-get-started-left">
-          <Link to="/register" class="btn-get-started animate__animated animate__fadeInUp scrollto">Sign Up</Link>
+          <Link to="/register" className="btn-get-started animate__animated animate__fadeInUp scrollto">Sign Up</Link>
           </span>
           <span id="btn-get-started-right">
-          <Link to="/login" class="btn-get-started animate__animated animate__fadeInUp scrollto">Log In</Link>
+          <Link to="/login" className="btn-get-started animate__animated animate__fadeInUp scrollto">Log In</Link>
           </span>
           </div>
 
