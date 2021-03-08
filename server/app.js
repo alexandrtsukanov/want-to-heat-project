@@ -7,6 +7,8 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const schedule = require('node-schedule');
+const seedFromTravelata = require('./db/seed');
 
 // Создаем приложение express.
 const app = express();
@@ -16,6 +18,8 @@ const userRouter = require('./routes/user');
 const toursRouter = require('./routes/tours');
 
 const port = (process.env.PORT ?? 3001);
+
+schedule.scheduleJob('37 23 * * *', () => seedFromTravelata());
 
 /* Подключаем middleware morgan с режимом логирования "dev",
 чтобы для каждого HTTP-запроса на сервер в консоль выводилась информация об этом запросе. */
