@@ -9,13 +9,13 @@ export function setTours(data) {
 }
 
 const filterByTemp = (paramMinTemp, paramMaxTemp) => (dispatch) => {
-
-  fetch('http://localhost:8080/tours', {
+  fetch('/tours', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ minTemp: paramMinTemp, maxTemp: paramMaxTemp })
+    body: JSON.stringify({ minTemp: +paramMinTemp, maxTemp: +paramMaxTemp },
+      { credentials: 'include' })
   })
 
     // fetch(`http://localhost:8080/tours?mintemp=${paramMinTemp}&maxtemp=${paramMaxTemp}`, {credentials: 'include'})
@@ -26,17 +26,18 @@ const filterByTemp = (paramMinTemp, paramMaxTemp) => (dispatch) => {
 }
 
 const sortToursThunk = (criteriaParam) => async (dispatch) => {
-  const response = await fetch('http://localhost:8080/tours/sortation', {
+  const response = await fetch('/tours/sortation', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ criteria: criteriaParam })
+    body: JSON.stringify({ criteria: criteriaParam },
+      { credentials: 'include' })
   });
   const result = await response.json();
-  dispatch ({
+  dispatch({
     type: TYPES.SET_SORTED_TOURS,
-    data: result
+    data: result,
   })
 }
 
