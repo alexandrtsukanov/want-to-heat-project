@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const Tour = require('../db/models/tour');
 const User = require('../db/models/user');
+const Avia = require('../db/models/avia');
 const { authenticated } = require('./middleware');
 
 // ================getTours==============
@@ -21,11 +22,37 @@ router.post('/', authenticated,
       // if (!tours.length) {
       //   return res.status(204).send('No tours found');
       // }
-console.log(currentUser);
+
       currentUser.searchTours = tours;
       currentUser.sortTours = tours;
       await currentUser.save();
       return res.status(200).json(tours.sort((a, b) => b.rating - a.rating));
+    } catch (error) {
+      console.log(error);
+      return res.sendStatus(501);
+    }
+  });
+
+router.post('/avia', authenticated,
+  async (req, res) => {
+    console.log('Session', req.session);
+    const currentUser = await User.findById(req.session.userID);
+    // let currentUser = await User.findOne({ login: 'Admin' });
+    let { minTemp, maxTemp } = req.body;
+    if (!minTemp) minTemp = -Infinity;
+    if (!maxTemp) maxTemp = Infinity;
+    let avia;
+    try {
+      avia = await (await Avia.find())
+        .filter((aviaItem) => aviaItem.temperature >= minTemp && aviaItem.temperature <= maxTemp);
+      // if (!tours.length) {
+      //   return res.status(204).send('No tours found');
+      // }
+
+      currentUser.searchAvia = avia;
+      currentUser.sortAvia = avia;
+      await currentUser.save();
+      return res.status(200).json(avia);
     } catch (error) {
       console.log(error);
       return res.sendStatus(501);
