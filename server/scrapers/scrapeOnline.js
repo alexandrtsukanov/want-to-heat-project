@@ -77,17 +77,17 @@ const scrapOnline = async () => {
       const urls = document.querySelectorAll('a.h0Cu5');
       console.log('urls', urls);
       for (let i = 0; i < locations.length; i += 1) {
-        const location = locations[i].innerText.split(',');
+        const location = locations[i]?.innerText.split(',');
         console.log('location', location);
-        const country = location[0].trim();
+        const country = location[0]?.trim();
         console.log('country', country);
-        const hotel = hotels[i].innerText;
+        const hotel = hotels[i]?.innerText;
         console.log('hotel', hotel);
         const rating = Number(ratings[i]?.innerText);
         console.log('rating', rating);
-        const reviewsCount = +(reviewsCountAll[i].innerText.split(' ')[0]);
+        const reviewsCount = +(reviewsCountAll[i]?.innerText.split(' ')[0]);
         console.log('reviewsCount', reviewsCount);
-        const turProp = tursProp[i].innerText.split(' ');
+        const turProp = tursProp[i]?.innerText.split(' ');
         console.log('turProp', turProp);
         const persons = 2;
         const dateDeparture = turProp[1];
@@ -96,13 +96,13 @@ const scrapOnline = async () => {
         console.log('tourDuration', tourDuration);
         // const priceChildNodes = prices[i].childNodes;
         // const toSeaDistance = toSeaDistances[i]?.innerText;
-        const price = Number(prices[i].innerText.replace(/\s/gi, ''));
+        const price = Number(prices[i]?.innerText.replace(/\s/gi, ''));
         console.log('price', price);
         const starsForHotel = starsForHotels[i]?.childElementCount;
         console.log('starsForHotel', starsForHotel);
-        let photoUrl = (images[i].style.backgroundImage.replace(/[url(", ")]/gi, ''));
+        let photoUrl = (images[i]?.style.backgroundImage.replace(/[url(", ")]/gi, ''));
         console.log('photoUrl', photoUrl);
-        if (photoUrl.split(':')[1] === 'undefined') photoUrl = 'https://sitecore-cd-imgr.shangri-la.com/MediaFiles/E/0/1/%7BE0144276-6A01-4CAE-8E4E-A68A099A5E98%7D200724_SLJ_Banner_ShangriLa_Hotel_Jakarta.jpg?width=750&height=752&mode=crop&quality=100&scale=both';
+        if (photoUrl?.split(':')[1] === 'undefined') photoUrl = 'https://sitecore-cd-imgr.shangri-la.com/MediaFiles/E/0/1/%7BE0144276-6A01-4CAE-8E4E-A68A099A5E98%7D200724_SLJ_Banner_ShangriLa_Hotel_Jakarta.jpg?width=750&height=752&mode=crop&quality=100&scale=both';
         const url = urls[i].href;
         console.log('url', url);
         const city = location[1].trim();
@@ -126,6 +126,6 @@ const scrapOnline = async () => {
   // // process.exit();
   return allTurs;
 };
-scrapOnline();
+// scrapOnline();
 
 module.exports = scrapOnline;
