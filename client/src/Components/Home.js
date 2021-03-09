@@ -77,7 +77,7 @@ function Home () {
         <use href="#wave-path" x="50" y="0" fill="rgba(255,255,255, .2)"/>
       </g>
       <g class="wave3">
-        <use href="#wave-path" x="50" y="9" fill="yellow"/>
+        <use href="#wave-path" x="50" y="9" fill="lightgrey"/>
       </g>
     </svg>
 
