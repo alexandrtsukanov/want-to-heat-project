@@ -1,0 +1,44 @@
+/* .price {
+  width: 2cm;
+  height: 1cm;
+  position: relative;
+  top: 0;
+  right: 0;
+  background-color: white;
+}
+
+.tour-container {
+  position: relative;
+
+} */
+
+.price {
+  width: 2cm;
+  height: 1cm;
+  /* position: relative;
+  top: 0;
+  right: 0; */
+  background-color: white;
+}
+
+.tour-container {
+  position: absolute;
+  /* background-color: white;
+  width:6cm;
+  height: 4cm; */
+  width: 200px;
+	height: 100px;
+	background: red;
+
+}
+
+.tour-up {
+  display: flex;
+  flex-direction: column;
+
+}
+.tour {
+   -webkit-animation-delay: 0.05s;
+   animation-delay: 0.05s;
+
+}
