@@ -1,6 +1,7 @@
 const initState = {
   user: null,
   allTours: [],
+  priceTours: [],
   usersTours: [],
 }
 

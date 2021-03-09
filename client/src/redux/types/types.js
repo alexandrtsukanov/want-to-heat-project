@@ -3,6 +3,12 @@ export const VERIFY_USER = "VERIFY_USER"
 export const LOGOUT_USER = "LOGOUT_USER"
 export const SET_TOURS = "SET_TOURS"
 export const SET_SORTED_TOURS = "SET_SORTED_TOURS"
+
+export const SORTED_PRICE_TOURS = 'SORTED_PRICE_TOURS'
+export const SORTED_RATE_TOURS = 'SORTED_RATE_TOURS'
+export const SORTED_STARS_TOURS = 'SORTED_STARS_TOURS'
+export const FILTER_TOURS = 'FILTER_TOURS'
+
 export const SET_USERS_TOURS = "SET_USERS_TOURS"
 export const ADD_TOUR = "ADD_TOUR"
 export const DELETE_TOUR = "DELETE_TOUR"

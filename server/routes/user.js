@@ -5,24 +5,33 @@ const { authenticated } = require('./middleware');
 
 router.get('/tours', authenticated, async (req, res) => {
   try {
+    
     const currentUser = await User.findById(req.session.UserID);
-    return res.status(200).json(currentUser.usersTours);
+    // const currentUser = await User.findById({ login: 'Admin' });
+    return res.json(currentUser.usersTours);
   } catch (error) {
     return res.sendStatus(501);
-  }
+  } 
 });
 
 router.post('/:id/addtour', authenticated, async (req, res) => {
   let { _id } = req.body;
+  const currentUser = await User.findById(req.params.id);
   // let currentUser = await User.findById(req.session.UserID);
   let tourToAdd = await Tour.findById(_id);
-  currentUser.usersTours.push(tourToAdd);
-  await currentUser.save();
-  res.json(tourToAdd);
+  if (!currentUser.usersTours.includes(tourToAdd)) {
+    currentUser.usersTours.push(tourToAdd);
+    await currentUser.save();
+    return res.json(tourToAdd);
+  } else {
+    return res.status(204).send('This tour is alreeady in yuor profile')
+  }
 });
 
 router.delete('/:id/deletetour', async (req, res) => {
   let { _id } = req.body;
+    // let currentUser = await User.findById(req.session.UserID);
+
   let currentUser = await User.findById(req.params.id);
   let tourToDelete = await Tour.findById(_id);
   currentUser.usersTours.splice(currentUser.usersTours.indexOf(tourToDelete), 1);
