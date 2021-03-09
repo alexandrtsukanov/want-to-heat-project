@@ -1,6 +1,8 @@
 import { React, useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addTourThunk, deleteTourThunk } from '../redux/actions/userAction'
+import { CHANGE_IS_ADDED } from '../redux/types/types'
+
 
 function Tour({ tour }) {
 
@@ -10,7 +12,10 @@ function Tour({ tour }) {
 
   const addTourHandler = (paramUser, paramTour) => {
     dispatch(addTourThunk(paramUser, paramTour));
-    setAddShow(pre => !pre)
+    dispatch({
+      type: CHANGE_IS_ADDED,
+      data: paramTour
+    })
   }
   const deleteTourHandler = (paramUser, paramTour) => {
     dispatch(deleteTourThunk(paramUser, paramTour));
@@ -47,7 +52,7 @@ function Tour({ tour }) {
 
   </div>
   <div>
-        {addShow ? 
+        {!tour.isAdded ? 
           <button onClick={() => addTourHandler(user._id, tour._id)} class="add-tour-button">Добавить в избранное</button>
          : 
         <button onClick={() => deleteTourHandler(user._id, tour._id)} class="delete-tour-button" >Remove from my profile</button>

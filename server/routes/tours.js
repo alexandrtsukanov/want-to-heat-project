@@ -7,9 +7,9 @@ const { authenticated } = require('./middleware');
 // ================getTours==============
 
 router.post('/', 
-// authenticated, 
+authenticated, 
 async (req, res) => {
-  console.log('YYY')
+  console.log('Session', req.session)
   let currentUser = await User.findById(req.session.userID);
   // let currentUser = await User.findOne({ login: 'Admin' });
   let { minTemp, maxTemp } = req.body;
@@ -66,7 +66,7 @@ router.post('/filter', async (req, res) => {
   try {
     console.log('TUT?')
     let currentUser = await User.findById(req.session.userID);
-
+    console.log('Session', req.session)
     // let currentUser = await User.findOne({ login: 'Admin' });
     const { minPrice, maxPrice, minRate, minStars } = req.body;
     console.log(req.body)
