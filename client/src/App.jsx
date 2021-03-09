@@ -13,6 +13,7 @@ import Filter from './Components/Filter';
 import Team from './Components/Team';
 import About from './Components/About';
 import Footer from './Components/Footer';
+import FilterAvia from './Components/FilterAvia';
 
 function App() {
 
@@ -27,11 +28,11 @@ function App() {
 
   return (
     <>
-    {Boolean(user) &&
-      <>
-        On site now: {user.login}
-      </>
-    }
+      {Boolean(user) &&
+        <>
+          On site now: {user.login}
+        </>
+      }
       <Router>
         <Navbar />
         <Switch>
@@ -44,8 +45,11 @@ function App() {
           <Route path='/logout'>
             <Logout />
           </Route>
+          <Route path='/avia'>
+            <FilterAvia />
+          </Route>
           <Route path='/login'>
-             <Login />
+            <Login />
           </Route>
           <Route path='/register'>
             <Register />

@@ -19,7 +19,7 @@ const filterByTemp = (paramMinTemp, paramMaxTemp) => async (dispatch) => {
     },
     body: JSON.stringify({minTemp: paramMinTemp, maxTemp: paramMaxTemp })
   }, { credentials: 'include' });
-  console.log(response)
+  console.log('response', response)
   const result = await response.json();
   dispatch({
     type: TYPES.SET_TOURS,

@@ -50,6 +50,7 @@ function Navbar() {
           <li className=""><Link exact to="/">Home</Link></li>
           <li><Link to="/filter">Search</Link></li>
           <li><Link onClick={() => history.push(`/user/${user._id}`)} to="/profile">Profile</Link></li>
+          <li><Link to="/avia">Авиа</Link></li>
 
           <li><Link to="/about">About</Link></li>
           <li><Link to="/team">Team</Link></li>
