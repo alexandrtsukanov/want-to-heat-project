@@ -6,8 +6,8 @@ const { authenticated } = require('./middleware');
 router.get('/tours', authenticated, async (req, res) => {
   try {
     
-    // const currentUser = await User.findById(req.session.UserID);
-    const currentUser = await User.findById({ login: 'Admin' });
+    const currentUser = await User.findById(req.session.UserID);
+    // const currentUser = await User.findById({ login: 'Admin' });
     return res.json(currentUser.usersTours);
   } catch (error) {
     return res.sendStatus(501);

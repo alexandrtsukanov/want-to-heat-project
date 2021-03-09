@@ -9,8 +9,8 @@ router.post('/',
 // authenticated, 
 async (req, res) => {
   console.log('YYY')
-  // let currentUser = await User.findById(req.session.userID);
-  let currentUser = await User.findOne({ login: 'Admin' });
+  let currentUser = await User.findById(req.session.userID);
+  // let currentUser = await User.findOne({ login: 'Admin' });
   let { minTemp, maxTemp } = req.body;
   if (!minTemp) minTemp = -Infinity;
   if (!maxTemp) maxTemp = Infinity;
@@ -32,8 +32,8 @@ async (req, res) => {
 
 router.post('/sortation', authenticated, async (req, res) => {
   try {
-    // let currentUser = await User.findById(req.session.userID);
-    let currentUser = await User.findOne({ login: 'Admin' });
+    let currentUser = await User.findById(req.session.userID);
+    // let currentUser = await User.findOne({ login: 'Admin' });
     const { criteria } = req.body;
     const tours = currentUser.sortTours;
     switch (criteria) {
@@ -64,9 +64,9 @@ router.post('/sortation', authenticated, async (req, res) => {
 router.post('/filter', async (req, res) => {
   try {
     console.log('TUT?')
-    // let currentUser = await User.findById(req.session.userID);
+    let currentUser = await User.findById(req.session.userID);
 
-    let currentUser = await User.findOne({ login: 'Admin' });
+    // let currentUser = await User.findOne({ login: 'Admin' });
     const { minPrice, maxPrice, minRate, minStars } = req.body;
     console.log(req.body)
     const tours = [...currentUser.searchTours];

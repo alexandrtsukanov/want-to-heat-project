@@ -148,6 +148,45 @@ function Filter() {
 
 </div>
 
+
+
+<section id="services" class="services">
+      <div class="container">
+
+        <div class="section-title aos-init aos-animate" data-aos="zoom-out">
+          <h2>Хочу в тепло!</h2>
+          <p><strong>Вот что мы для Вас нашли</strong></p>
+        </div>
+
+        <div class="row">
+
+    {!!allTours && allTours.map((tour) => (
+          <div class="col-lg-4 col-md-6">
+            <div class="icon-box aos-init aos-animate" data-aos="zoom-in-left">
+              <div class="icon"><i class="bi bi-briefcase" style={{color: '#ff689b'}}></i></div>
+              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+    
+      <Tour
+        tour={tour}
+        key={tour._id}
+      />
+            </div>
+          </div>
+          ))}
+          
+        </div>
+
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
     {/* <div>
     <div className="animate__animated animate__fadeInUp">
       <label htmlFor="sortation" className="form-label">Choose criteria</label>
@@ -187,15 +226,48 @@ function Filter() {
       <button onClick={() => dispatch(sortToursThunk(criteria))}>Exclude</button>
     </div>
   </div> */}
-    <div className="flex row">
-    {!!allTours && allTours.map((tour) =>
-    (
-      <Tour
-        tour={tour}
-        key={tour._id}
-      />
-    ))}
+
+  
+
+
+{/* <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        
+        <div class="col my-4">
+
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+  
+
+      </div>
+    </div> */}
+
+
+
+<div className="flex row">
+
+  
+
   </div>
+
+
+
   </>
   )}
     {!showFilterForm && (

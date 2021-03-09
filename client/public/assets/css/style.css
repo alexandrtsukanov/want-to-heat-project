@@ -1770,3 +1770,7 @@ section {
 #footer .credits {
   font-size: 13px;
 }
+
+.icon-box {
+  margin-bottom: 10px;
+}
