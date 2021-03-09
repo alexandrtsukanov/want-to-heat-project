@@ -10,7 +10,9 @@ export function checkUser(data) {
 }
 
 const checkUserSession = () => (dispatch) => {
-  fetch('/login', {credentials: 'include'})
+  // fetch('/login', {credentials: 'include'})
+    fetch('http://localhost:3001/login', {credentials: 'include'})
+
     .then(res => res.status === 200 ? res.json() : null)
     .then(data => {
       dispatch(checkUser(data));

@@ -5,7 +5,10 @@ const User = require('../db/models/user');
 const { authenticated } = require('./middleware');
 
 // ================getTours==============
-router.post('/', authenticated, async (req, res) => {
+router.post('/', 
+// authenticated, 
+async (req, res) => {
+  console.log('YYY')
   // let currentUser = await User.findById(req.session.userID);
   let currentUser = await User.findOne({ login: 'Admin' });
   let { minTemp, maxTemp } = req.body;
@@ -15,10 +18,11 @@ router.post('/', authenticated, async (req, res) => {
   try {
     tours = await (await Tour.find())
       .filter((tour) => tour.temperature >= minTemp && tour.temperature <= maxTemp);
-    if (!tours.length) {
-      return res.status(204).send('No tours found');
-    }
-    currentUser.searchTours = tours.sort((a, b) => b.rating - a.rating);
+    // if (!tours.length) {
+    //   return res.status(204).send('No tours found');
+    // }
+    currentUser.searchTours = tours;
+    currentUser.sortTours = tours;
     await currentUser.save();
     return res.status(200).json(tours.sort((a, b) => b.rating - a.rating));
   } catch (error) {
@@ -28,10 +32,10 @@ router.post('/', authenticated, async (req, res) => {
 
 router.post('/sortation', authenticated, async (req, res) => {
   try {
-  // let currentUser = await User.findById(req.session.userID);
+    // let currentUser = await User.findById(req.session.userID);
     let currentUser = await User.findOne({ login: 'Admin' });
     const { criteria } = req.body;
-    const tours = currentUser.searchTours;
+    const tours = currentUser.sortTours;
     switch (criteria) {
       case 'tempMinToMax':
         return res.status(200).json(tours.sort((a, b) => a.temperature - b.temperature));
@@ -56,28 +60,21 @@ router.post('/sortation', authenticated, async (req, res) => {
   }
 });
 
-router.post('/sortationprice', async (req, res) => {
+router.post('/sortationrate', async (req, res) => {
   try {
     // let currentUser = await User.findById(req.session.userID);
     let currentUser = await User.findOne({ login: 'Admin' });
-    const { minPrice, maxPrice } = req.body;
-    if ((minPrice !== '' && minPrice !== '0' && !Number(minPrice)) || (maxPrice !== '' && maxPrice !== '0' && !Number(maxPrice))) {
-      return res.status(204).send('You have entered incorrect values');
-    }
-    if (!minPrice) {
-      minPrice = -Infinity
-    }
-    if (!maxPrice) {
-      maxPrice = Infinity
-    }
+
+    const { minRate } = req.body;
+
     const tours = [...currentUser.searchTours];
-    console.log(tours.length)
-    const priceTours = tours.filter(el => el.price >= Number(minPrice) && el.price <= Number(maxPrice));
-    if (!priceTours.length) {
+
+    const rateTours = tours.filter(el => el.rating >= Number(minRate));
+    if (!rateTours.length) {
       return res.status(204).send('No tours found');
     } else {
-      const toursSortedByRating = priceTours.sort((a, b) => b.rating - a.rating);
-      return res.status(200).json(toursSortedByRating)
+      const rateToursSortedByRating = rateTours.sort((a, b) => b.rating - a.rating);
+      return res.json(rateToursSortedByRating)
     }
 
   } catch (error) {
@@ -85,12 +82,48 @@ router.post('/sortationprice', async (req, res) => {
   }
 })
 
-router.post('/sortationrate', async (req, res) => {
-
+router.post('/sortationstars', async (req, res) => {
+  try {
+    let currentUser = await User.findOne({ login: 'Admin' });
+    const { minStars } = req.body;
+    const tours = [...currentUser.searchTours];
+    const starsTours = tours.filter(el => el.stars >= Number(minStars));
+    if (!starsTours.length) {
+      return res.status(204).send('No tours found');
+    } else {
+      const starsToursSortedByRating = starsTours.sort((a, b) => b.rating - a.rating);
+      return res.json(starsToursSortedByRating)
+    }
+  } catch (error) {
+    return res.sendStatus(501)
+  }
 })
 
-router.post('/sortationstars', async (req, res) => {
+router.post('/filter', async (req, res) => {
+  try {
+    console.log('TUT?')
+    let currentUser = await User.findOne({ login: 'Admin' });
+    const { minPrice, maxPrice, minRate, minStars } = req.body;
+    console.log(req.body)
+    const tours = [...currentUser.searchTours];
+    if (!maxPrice) {
+      const filteredTours = await tours.filter(el => el.price >= minPrice && el.rating >= minRate && el.stars >= minStars)
+      const toursSortedByRating = filteredTours.sort((a, b) => b.price - a.price);
+      currentUser.sortTours = toursSortedByRating
+      await currentUser.save()
+      return res.json(toursSortedByRating)
 
+    } else {
+      const filteredTours = await tours.filter(el => el.price >= minPrice && el.price <= maxPrice && el.rating >= minRate && el.stars >= minStars)
+      console.log(filteredTours)
+      const toursSortedByRating = filteredTours.sort((a, b) => b.price - a.price);
+      currentUser.sortTours = toursSortedByRating
+      await currentUser.save()
+      return res.json(toursSortedByRating)
+    }
+  } catch (error) {
+    return res.sendStatus(501)
+  }
 })
 
 module.exports = router;

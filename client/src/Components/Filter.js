@@ -1,30 +1,26 @@
 import { React, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterByTemp, sortToursThunk, filterByPriceThunk } from '../redux/actions/tourActions';
+import { filterByTemp, sortToursThunk, filterByPriceThunk, filterByRateThunk, filterByStarsThunk, filterThunk } from '../redux/actions/tourActions';
 import Tour from './Tour';
 
 function Filter() {
-
   const dispatch = useDispatch();
-
+  
   const allTours = useSelector(state => state.allTours);
-  // const priceTours = useSelector(state => state.priceTours);
-
-  const user = useSelector(state => state.user);
+  console.log(allTours)
   const [criteria, setCriteria] = useState('');
   const [incCountry, setIncCountry] = useState('');
-  const [showSortationForm, setShowSortationForm] = useState(false);
-  const [showAllTours, setShowAllTours] = useState(false);
+  const [showFilterForm, setShowFilterForm] = useState(false);
   const [showSort, setShowSort] = useState(false)
-  const [showPrice, setShowPrice] = useState(false);
-
+  const [rate, setRate] = useState('');
+  const [stars, setStars] = useState('');
 
   const handlerSubmit = async (event) => {
     event.preventDefault();
     const minTemp = event.target.minTemp.value;
     const maxTemp = event.target.maxTemp.value
     dispatch(filterByTemp(minTemp, maxTemp));
-    setShowSortationForm(true)
+    setShowFilterForm(true)
   };
 
   const criteriaHandler = ({ target }) => {
@@ -39,10 +35,25 @@ function Filter() {
     event.preventDefault();
     const minPrice = event.target.minPrice.value;
     const maxPrice = event.target.maxPrice.value;
-    console.log(minPrice, maxPrice)
     dispatch(filterByPriceThunk(minPrice, maxPrice))
   }
-  
+
+  const filterSubmit = (event) => {
+    event.preventDefault();
+    const minPrice = event.target.minPrice.value;
+    const maxPrice = event.target.maxPrice.value;
+    const minRate = event.target.minRate.value;
+    const minStars = event.target.minStars.value;
+    dispatch(filterThunk(minPrice, maxPrice, minRate, minStars))
+
+  }
+
+  const rateHandler = ({ target }) => {
+    setRate(target.value)
+  }
+  const starsHandler = ({ target }) => {
+    setStars(target.value)
+  }
   return (
     <>
       <h1>Filter</h1>
@@ -53,60 +64,68 @@ function Filter() {
         <button type="submit" class="btn btn-primary">Take me to heat!</button>
       </form>
 
-    {showSortationForm && (
+    {showFilterForm && (
 
       <>
 <div>
 
-<form onSubmit={filterPriceSubmit}>
+<form onSubmit={filterSubmit}>
 
 <div className="login-login animate__animated animate__fadeInUp">
   <label htmlFor="exampleInputPassword1" className="form-label">Min price</label>
-  <input type="number" className="form-control" name="minPrice" id="exampleInputPassword1" placeholder='Login' />
+  <input type="number" className="form-control" name="minPrice" id="exampleInputPassword1" placeholder='Min price' />
 </div>
 <div className="login-password animate__animated animate__fadeInUp">
   <label hrmlFor="exampleInputPassword1" className="form-label">Max price</label>
-  <input type="number" className="form-control" name="maxPrice" id="exampleInputPassword1" placeholder='Password' />
+  <input type="number" className="form-control" name="maxPrice" id="exampleInputPassword1" placeholder='Max price' />
 </div>
+
+
+
+  <label htmlFor="minRate" className="form-label">Min rate</label>
+  <select onChange={rateHandler} name="minRate" class="field">
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option selected value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+  </select>
+
+
+  <label htmlFor="minStars" className="form-label">Min starts rate</label>
+  <select  onChange={starsHandler} name="minStars" class="field">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option selected value="4">4</option>
+      <option value="5">5</option>
+  </select>
+
 <button type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Set</button>
+
 </form>
 
-<form onSubmit={handlerSubmit}>
+{/* <form onSubmit={handlerSubmit}> */}
 
+{/* 
 <div className="login-login animate__animated animate__fadeInUp">
-  <label htmlFor="sortation-rate" className="form-label">Min rate</label>
-  <select onChange={criteriaHandler} name="sortation-rate" class="field">
-      <option value="tempMinToMax">0</option>
-      <option value="tempMaxToMin">0,5</option>
-      <option value="price">1</option>
-      <option selected value="rating">1,5</option>
-      <option value="toSeaDistance">2</option>
-      <option value="reviewsCount">2,5</option>
-      <option value="tourDuration">3</option>
-      <option value="stars">3,5</option>
-      <option value="reviewsCount">4</option>
-      <option value="tourDuration">4,5</option>
-      <option value="stars">5</option>
-  </select>
-  <button type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Set</button>
+  <button onClick={() => dispatch(filterByRateThunk(rate))} type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Set</button>
   </div>
   
   <div>
-  <label htmlFor="sortation-stars" className="form-label">Min starts rate</label>
-  <select onChange={criteriaHandler} name="sortation-stars" class="field">
-      <option value="tempMinToMax">1</option>
-      <option value="tempMaxToMin">2</option>
-      <option value="price">3</option>
-      <option selected value="rating">4</option>
-      <option value="toSeaDistance">5</option>
-  </select>
-  <button type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Set</button>
+  <button onClick={() => dispatch(filterByStarsThunk(stars))} type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Set</button>
 
-  </div>
+  </div> */}
 
-</form> 
+{/* </form>  */}
 
-<button onClick={() => setShowSort(true)} type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Sort tours</button>
+<button onClick={() => setShowSort(pre => !pre)} type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Sort tours</button>
 
     {showSort && (
       <>
@@ -179,7 +198,7 @@ function Filter() {
   </div>
   </>
   )}
-    {!showSortationForm && (
+    {!showFilterForm && (
 
       <div className='flex'>
         {!!allTours && allTours.map((tour) =>

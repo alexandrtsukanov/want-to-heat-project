@@ -16,6 +16,10 @@ const userSchema = Schema({
     type: Array,
     default: [],
   },
+  sortTours: {
+    type: Array,
+    default: [],
+  },
   usersTours: {
     type: Array,
     default: [],
