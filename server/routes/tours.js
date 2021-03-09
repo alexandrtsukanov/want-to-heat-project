@@ -6,34 +6,35 @@ const { authenticated } = require('./middleware');
 
 // ================getTours==============
 
-router.post('/', 
-authenticated, 
-async (req, res) => {
-  console.log('Session', req.session)
-  let currentUser = await User.findById(req.session.userID);
-  // let currentUser = await User.findOne({ login: 'Admin' });
-  let { minTemp, maxTemp } = req.body;
-  if (!minTemp) minTemp = -Infinity;
-  if (!maxTemp) maxTemp = Infinity;
-  let tours;
-  try {
-    tours = await (await Tour.find())
-      .filter((tour) => tour.temperature >= minTemp && tour.temperature <= maxTemp);
-    // if (!tours.length) {
-    //   return res.status(204).send('No tours found');
-    // }
-    currentUser.searchTours = tours;
-    currentUser.sortTours = tours;
-    await currentUser.save();
-    return res.status(200).json(tours.sort((a, b) => b.rating - a.rating));
-  } catch (error) {
-    return res.sendStatus(501);
-  }
-});
+router.post('/', authenticated,
+  async (req, res) => {
+    console.log('Session', req.session);
+    const currentUser = await User.findById(req.session.userID);
+    // let currentUser = await User.findOne({ login: 'Admin' });
+    let { minTemp, maxTemp } = req.body;
+    if (!minTemp) minTemp = -Infinity;
+    if (!maxTemp) maxTemp = Infinity;
+    let tours;
+    try {
+      tours = await (await Tour.find())
+        .filter((tour) => tour.temperature >= minTemp && tour.temperature <= maxTemp);
+      // if (!tours.length) {
+      //   return res.status(204).send('No tours found');
+      // }
+console.log(currentUser);
+      currentUser.searchTours = tours;
+      currentUser.sortTours = tours;
+      await currentUser.save();
+      return res.status(200).json(tours.sort((a, b) => b.rating - a.rating));
+    } catch (error) {
+      console.log(error);
+      return res.sendStatus(501);
+    }
+  });
 
 router.post('/sortation', authenticated, async (req, res) => {
   try {
-    let currentUser = await User.findById(req.session.userID);
+    const currentUser = await User.findById(req.session.userID);
     // let currentUser = await User.findOne({ login: 'Admin' });
     const { criteria } = req.body;
     const tours = currentUser.sortTours;
@@ -61,34 +62,33 @@ router.post('/sortation', authenticated, async (req, res) => {
   }
 });
 
-
 router.post('/filter', async (req, res) => {
   try {
-    console.log('TUT?')
-    let currentUser = await User.findById(req.session.userID);
-    console.log('Session', req.session)
+    console.log('TUT?');
+    const currentUser = await User.findById(req.session.userID);
+    console.log('Session', req.session);
     // let currentUser = await User.findOne({ login: 'Admin' });
-    const { minPrice, maxPrice, minRate, minStars } = req.body;
-    console.log(req.body)
+    const {
+      minPrice, maxPrice, minRate, minStars,
+    } = req.body;
+    console.log(req.body);
     const tours = [...currentUser.searchTours];
     if (!maxPrice) {
-      const filteredTours = await tours.filter(el => el.price >= minPrice && el.rating >= minRate && el.stars >= minStars)
+      const filteredTours = await tours.filter((el) => el.price >= minPrice && el.rating >= minRate && el.stars >= minStars);
       const toursSortedByRating = filteredTours.sort((a, b) => b.price - a.price);
-      currentUser.sortTours = toursSortedByRating
-      await currentUser.save()
-      return res.json(toursSortedByRating)
-
-    } else {
-      const filteredTours = await tours.filter(el => el.price >= minPrice && el.price <= maxPrice && el.rating >= minRate && el.stars >= minStars)
-      console.log(filteredTours)
-      const toursSortedByRating = filteredTours.sort((a, b) => b.price - a.price);
-      currentUser.sortTours = toursSortedByRating
-      await currentUser.save()
-      return res.json(toursSortedByRating)
+      currentUser.sortTours = toursSortedByRating;
+      await currentUser.save();
+      return res.json(toursSortedByRating);
     }
+    const filteredTours = await tours.filter((el) => el.price >= minPrice && el.price <= maxPrice && el.rating >= minRate && el.stars >= minStars);
+    console.log(filteredTours);
+    const toursSortedByRating = filteredTours.sort((a, b) => b.price - a.price);
+    currentUser.sortTours = toursSortedByRating;
+    await currentUser.save();
+    return res.json(toursSortedByRating);
   } catch (error) {
-    return res.sendStatus(501)
+    return res.sendStatus(501);
   }
-})
+});
 
 module.exports = router;

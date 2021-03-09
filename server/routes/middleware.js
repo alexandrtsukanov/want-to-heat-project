@@ -1,4 +1,5 @@
 function authenticated(req, res, next) {
+  console.log(req.session.userID);
   if (req.session.userID) {
     return next();
   }

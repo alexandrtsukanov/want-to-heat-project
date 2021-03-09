@@ -24,7 +24,11 @@ schedule.scheduleJob('37 23 * * *', () => seed());
 /* Подключаем middleware morgan с режимом логирования "dev",
 чтобы для каждого HTTP-запроса на сервер в консоль выводилась информация об этом запросе. */
 app.use(logger('dev'));
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true,
+  methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
+}));
 // app.set('trust proxy', 1)
 app.use(cookieParser());
 /* Подключаем middleware, которое сообщает epxress,
