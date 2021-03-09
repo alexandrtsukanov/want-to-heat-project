@@ -35,7 +35,16 @@ const loginUser = (login, password) => (dispatch) => {
       login,
       password,
     })
-  })
+  },
+  {credentials: 'include'})
+    .then(res => res.status === 200 ? res.json() : {})
+    .then(data => {
+      dispatch(signInUser(data));
+    })
+}
+//==============google auth==============
+const loginUserByGoogle = () => (dispatch) => {
+  fetch('http://localhost:3001/google', {credentials: 'include'})
     .then(res => res.status === 200 ? res.json() : {})
     .then(data => {
       dispatch(signInUser(data));
@@ -50,7 +59,7 @@ export function removeUser() {
 }
 
 const logoutUser = () => (dispatch) => {
-  fetch('/logout')
+  fetch('/logout', {credentials: 'include'})
     .then(res => res.status === 200 ? dispatch(removeUser()) : null)
 }
 
@@ -74,7 +83,8 @@ const registerUser = ({ email, login, password }) => (dispatch) => {
       email,
       password,
     })
-  })
+  },
+  {credentials: 'include'})
     .then(res => res.status === 200 ? res.json() : {})
     .then(data => {
       dispatch(signUpUser(data));
@@ -85,7 +95,7 @@ const registerUser = ({ email, login, password }) => (dispatch) => {
 
 const showProfileThunk = () => {
   return async (dispatch) => {
-    const response = await fetch('/user/tours');
+    const response = await fetch('/user/tours', {credentials: 'include'});
     const result = await response.json();
     console.log(result)
     dispatch ({
@@ -102,7 +112,7 @@ const addTourThunk = (paramUser, paramTour) => async (dispatch) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ _id: paramTour })
-  });
+  }, {credentials: 'include'});
   const result = await response.json();
   dispatch ({
     type: TYPES.ADD_TOUR,
@@ -117,10 +127,10 @@ const deleteTourThunk = (paramUser, paramTour) => async (dispatch) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ _id: paramTour })
-  });
+  }, {credentials: 'include'});
   dispatch ({
     type: TYPES.DELETE_TOUR,
-    data: paramTour
+    data: paramTour,
   })
 }
 
@@ -132,4 +142,5 @@ export {
   showProfileThunk,
   addTourThunk,
   deleteTourThunk,
+  loginUserByGoogle,
 }

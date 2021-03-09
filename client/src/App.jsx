@@ -23,8 +23,6 @@ function App() {
     (dispatch(checkUserSession()))
   }, [])
 
-  console.log(user)
-
   return (
     <>
     {Boolean(user) &&

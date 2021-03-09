@@ -1,3 +1,4 @@
+const passport = require('passport');
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const User = require('../db/models/user');
@@ -30,6 +31,34 @@ router.post('/login', async (req, res) => {
   req.session.userLogin = user.login;
   return res.status(200).json(user);
 });
+
+// ==================loginByGoogle==========================
+
+router.get('/google', passport.authenticate('google', {
+  scope: ['profile'],
+}));
+
+// callback route for google to redirect to
+// hand control to passport to use code to grab profile info
+router.get('/google/redirect', passport.authenticate('google', {
+  successRedirect: 'http://localhost:3000/filter',
+},
+async (req, res) => {
+  console.log(req);
+  // res.send(req.user);
+  // console.log(req.user);
+  // console.log('redirect');
+  // let user;
+  // try {
+  //   user = await User.findOne({ 'tokens.googleId': req.user.id });
+  // } catch (error) {
+  //   return res.sendStatus(501);
+  // }
+  // req.session.userID = user._id;
+  // req.session.userLogin = user.login;
+  // return res.status(200).json(user);
+}));
+
 // ==================register=======================
 
 router.post('/register', async (req, res) => {

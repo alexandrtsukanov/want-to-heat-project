@@ -20,6 +20,9 @@ const userSchema = Schema({
     type: Array,
     default: [],
   },
+  tokens: {
+    googleId: String,
+  },
 });
 
 module.exports = model('users', userSchema);

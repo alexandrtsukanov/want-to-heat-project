@@ -8,8 +8,10 @@ const FileStore = require('session-file-store')(session);
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const schedule = require('node-schedule');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const seed = require('./db/seed');
-
+const User = require('./db/models/user');
 // Создаем приложение express.
 const app = express();
 // Импортируем созданный в отдельный файлах рутеры.
@@ -20,6 +22,47 @@ const toursRouter = require('./routes/tours');
 const port = (process.env.PORT ?? 3001);
 
 schedule.scheduleJob('37 23 * * *', () => seed());
+
+passport.serializeUser((user, done) => {
+  console.log('user', user);
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id).then((user) => {
+    done(null, user);
+  });
+});
+
+// initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(
+  new GoogleStrategy({
+    // options for google strategy
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: 'http://localhost:3001/google/redirect',
+  }, (accessToken, refreshToken, profile, done) => {
+    // check if user already exists in our own db
+    User.findOne({ 'tokens.googleId': profile.id }).then((currentUser) => {
+      if (currentUser) {
+        // already have this user
+        console.log('here');
+        done(null, currentUser);
+      } else {
+        // if not, create user in our db
+        new User({
+          'tokens.googleId': profile.id,
+          login: profile.displayName,
+        }).save().then((newUser) => {
+          done(null, newUser);
+        });
+      }
+    });
+    return done(null, profile);
+  }),
+);
 
 /* Подключаем middleware morgan с режимом логирования "dev",
 чтобы для каждого HTTP-запроса на сервер в консоль выводилась информация об этом запросе. */
