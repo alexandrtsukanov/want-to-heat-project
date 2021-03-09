@@ -1,15 +1,25 @@
 import { React, useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addTourThunk } from '../redux/actions/userAction'
+import { addTourThunk, deleteTourThunk } from '../redux/actions/userAction'
 
 function Tour({ tour }) {
 
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user)
+  const user = useSelector(state => state.user);
+  const [addShow, setAddShow] = useState(true);
+
+  const addTourHandler = (paramUser, paramTour) => {
+    dispatch(addTourThunk(paramUser, paramTour));
+    setAddShow(pre => !pre)
+  }
+  const deleteTourHandler = (paramUser, paramTour) => {
+    dispatch(deleteTourThunk(paramUser, paramTour));
+    setAddShow(pre => !pre)
+  }
 
   return (
     <>
-      <div onClick={() => console.log('hover')}  className='tour'>
+      <div className='tour'>
         <div><strong>Температура: </strong> {tour.temperature}</div>
         <div><strong>Страна: </strong> {tour.country}</div>
         <div><strong>Город: </strong> {tour.city}</div> 
@@ -24,7 +34,13 @@ function Tour({ tour }) {
         <img src={tour.photoUrl} alt='hotelImg' width='300px' height='240px'/>
 
         <a href={tour.url}>Go to tour</a>
-      <button onClick={() => dispatch(addTourThunk(user._id, tour._id))}>Add to my profile</button>
+
+        {addShow ? (
+          <><span><div>Добавить в избранное</div></span><span><input onChange={() => addTourHandler(user._id, tour._id)} type="checkbox"/></span></>
+        ) : 
+        <button onClick={() => deleteTourHandler(user._id, tour._id)} class="delete-tour-button" >Remove from my profile</button>
+      }
+      {/* <button onClick={() => dispatch(addTourThunk(user._id, tour._id))} class="add-tour-button" >Add to my profile</button> */}
       </div>
     </>
   )

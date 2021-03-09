@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { showProfileThunk } from '../redux/actions/userAction'
 import TourInProfile from './TourInProfile'
@@ -10,7 +10,8 @@ function Profile() {
   const user = useSelector(state => state.user);
 
   useEffect(() => {
-    dispatch(showProfileThunk())
+    {Boolean(user) ? <Redirect exact to="/"/> :
+    dispatch(showProfileThunk())}
   }, [])
 
   return (

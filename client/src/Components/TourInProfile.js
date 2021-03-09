@@ -25,7 +25,7 @@ function TourInProfile({ tour }) {
         <a href={tour.url}>Go to tour</a>
         <img src={tour.photoUrl} alt='hotelImg' width='320px' height='240px'/>
       </div>
-      <button onClick={() => dispatch(deleteTourThunk(user._id, tour._id))}>Remove from my profile</button>
+      <button onClick={() => dispatch(deleteTourThunk(user._id, tour._id))} class="delete-tour-button" >Remove from my profile</button>
       </div>
     </>
   )

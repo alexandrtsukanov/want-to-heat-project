@@ -60,48 +60,12 @@ router.post('/sortation', authenticated, async (req, res) => {
   }
 });
 
-router.post('/sortationrate', async (req, res) => {
-  try {
-    // let currentUser = await User.findById(req.session.userID);
-    let currentUser = await User.findOne({ login: 'Admin' });
-
-    const { minRate } = req.body;
-
-    const tours = [...currentUser.searchTours];
-
-    const rateTours = tours.filter(el => el.rating >= Number(minRate));
-    if (!rateTours.length) {
-      return res.status(204).send('No tours found');
-    } else {
-      const rateToursSortedByRating = rateTours.sort((a, b) => b.rating - a.rating);
-      return res.json(rateToursSortedByRating)
-    }
-
-  } catch (error) {
-    return res.sendStatus(501)
-  }
-})
-
-router.post('/sortationstars', async (req, res) => {
-  try {
-    let currentUser = await User.findOne({ login: 'Admin' });
-    const { minStars } = req.body;
-    const tours = [...currentUser.searchTours];
-    const starsTours = tours.filter(el => el.stars >= Number(minStars));
-    if (!starsTours.length) {
-      return res.status(204).send('No tours found');
-    } else {
-      const starsToursSortedByRating = starsTours.sort((a, b) => b.rating - a.rating);
-      return res.json(starsToursSortedByRating)
-    }
-  } catch (error) {
-    return res.sendStatus(501)
-  }
-})
 
 router.post('/filter', async (req, res) => {
   try {
     console.log('TUT?')
+    // let currentUser = await User.findById(req.session.userID);
+
     let currentUser = await User.findOne({ login: 'Admin' });
     const { minPrice, maxPrice, minRate, minStars } = req.body;
     console.log(req.body)
