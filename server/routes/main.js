@@ -7,7 +7,8 @@ router.get('/login', async (req, res) => {
   let user;
   try {
 
-    let currentUser = await User.findById(req.session.userID);
+    let user = await User.findById(req.session.userID);
+    console.log(user)
     // let user = await User.findOne({ login: 'Admin' });
     if (!user) return res.sendStatus(204);
   } catch (error) {
@@ -30,6 +31,7 @@ router.post('/login', async (req, res) => {
   }
   req.session.userID = user._id;
   req.session.userLogin = user.login;
+  console.log()
   return res.status(200).json(user);
 });
 // ==================register=======================

@@ -13,7 +13,9 @@ function tourReducer(allTours = [], action) {
     case TYPES.SET_SORTED_TOURS:
       return action.data
     case TYPES.FILTER_TOURS:
-      return action.data  
+      return action.data
+      // case TYPES.CHANGE_IS_ADDED:
+      //   return [...]    
     default:
       return allTours;
   }

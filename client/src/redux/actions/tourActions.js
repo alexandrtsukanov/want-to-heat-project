@@ -10,15 +10,15 @@ import * as TYPES from '../types/types';
 
 const filterByTemp = (paramMinTemp, paramMaxTemp) => async (dispatch) => {
   console.log(paramMinTemp, paramMaxTemp)
-  const response = await fetch('http://localhost:3001/tours', {
+  const response = await fetch('/tours', {
+    // const response = await fetch('http://localhost:3001/tours', {
+
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({minTemp: paramMinTemp, maxTemp: paramMaxTemp },
-      // { credentials: 'include' }
-      )
-  });
+    body: JSON.stringify({minTemp: paramMinTemp, maxTemp: paramMaxTemp })
+  }, { credentials: 'include' });
   console.log(response)
   const result = await response.json();
   dispatch({
@@ -51,9 +51,8 @@ const sortToursThunk = (criteriaParam) => async (dispatch) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ criteria: criteriaParam },
-      { credentials: 'include' })
-  });
+    body: JSON.stringify({ criteria: criteriaParam })
+  }, { credentials: 'include' });
   const result = await response.json();
   dispatch({
     type: TYPES.SET_SORTED_TOURS,
@@ -68,8 +67,8 @@ const filterByPriceThunk = (minPriceParam, maxPriceParam) => async (dispatch) =>
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ minPrice: minPriceParam, maxPrice: maxPriceParam }, 
-      { credentials: 'include' })
-  });
+      )
+  },{ credentials: 'include' });
   console.log(response)
   const result = await response.json();
   dispatch ({
@@ -112,14 +111,13 @@ const filterByStarsThunk = (minStarsParam) => async (dispatch) => {
 
 const filterThunk = (minPriceParam, maxPriceParam, minRateParam, minStarsParam) => async (dispatch) => {
   console.log('QQQQQQQQQQQQQQQQQQQQQQQQQQQQQ')
-  const response = await fetch('http://localhost:3001/tours/filter', {
+  const response = await fetch('/tours/filter', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ minPrice: minPriceParam, maxPrice: maxPriceParam, minRate: minRateParam, minStars: minStarsParam }, 
-      { credentials: 'include' })
-  });
+    body: JSON.stringify({ minPrice: minPriceParam, maxPrice: maxPriceParam, minRate: minRateParam, minStars: minStarsParam }), 
+  }, { credentials: 'include' });
   const result = await response.json();
   console.log(result)
 

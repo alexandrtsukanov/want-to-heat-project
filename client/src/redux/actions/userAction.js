@@ -31,13 +31,13 @@ const loginUser = (login, password) => (dispatch) => {
   fetch('/login', {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       login,
       password,
-    })
-  })
+    }), 
+  }, { credentials: 'includes' })
     .then(res => res.status === 200 ? res.json() : {})
     .then(data => {
       dispatch(signInUser(data));
@@ -76,7 +76,7 @@ const registerUser = ({ email, login, password }) => (dispatch) => {
       email,
       password,
     })
-  })
+  }, { credentials: 'includes' })
     .then(res => res.status === 200 ? res.json() : {})
     .then(data => {
       dispatch(signUpUser(data));
@@ -104,7 +104,7 @@ const addTourThunk = (paramUser, paramTour) => async (dispatch) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ _id: paramTour })
-  });
+  }, { credentials: 'includes' });
   const result = await response.json();
   dispatch ({
     type: TYPES.ADD_TOUR,
@@ -119,7 +119,7 @@ const deleteTourThunk = (paramUser, paramTour) => async (dispatch) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ _id: paramTour })
-  });
+  }, { credentials: 'includes' });
   dispatch ({
     type: TYPES.DELETE_TOUR,
     data: paramTour

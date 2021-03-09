@@ -13,3 +13,5 @@ export const SET_USERS_TOURS = "SET_USERS_TOURS"
 export const ADD_TOUR = "ADD_TOUR"
 export const DELETE_TOUR = "DELETE_TOUR"
 
+export const CHANGE_IS_ADDED = 'CHANGE_IS_ADDED'
+
