@@ -19,7 +19,7 @@ function Tour({ tour }) {
 
   return (
     <>
-      <div className='tour'>
+      <div className='tour' key={tour._id}>
         <div><strong>Температура: </strong> {tour.temperature}</div>
         <div><strong>Страна: </strong> {tour.country}</div>
         <div><strong>Город: </strong> {tour.city}</div> 
@@ -34,14 +34,14 @@ function Tour({ tour }) {
         <img src={tour.photoUrl} alt='hotelImg' width='300px' height='240px'/>
 
         <a href={tour.url}>Go to tour</a>
-
-        {addShow ? (
-          <><span><div>Добавить в избранное</div></span><span><input onChange={() => addTourHandler(user._id, tour._id)} type="checkbox"/></span></>
-        ) : 
+        {addShow ? 
+          <button onClick={() => addTourHandler(user._id, tour._id)} class="add-tour-button">Добавить в избранное</button>
+         : 
         <button onClick={() => deleteTourHandler(user._id, tour._id)} class="delete-tour-button" >Remove from my profile</button>
       }
+        </div>
+
       {/* <button onClick={() => dispatch(addTourThunk(user._id, tour._id))} class="add-tour-button" >Add to my profile</button> */}
-      </div>
     </>
   )
 }

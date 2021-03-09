@@ -9,7 +9,7 @@ function TourInProfile({ tour }) {
 
   return (
     <>
-      <div className='tour'>
+      <div className='tour' key={tour._id}>
         <div>
         <div><strong>Температура: </strong> {tour.temperature}</div>
         <div><strong>Страна: </strong> {tour.country}</div>
