@@ -12,14 +12,9 @@ function Tour({ tour }) {
 
   const addTourHandler = (paramUser, paramTour) => {
     dispatch(addTourThunk(paramUser, paramTour));
-    dispatch({
-      type: CHANGE_IS_ADDED,
-      data: paramTour
-    })
   }
   const deleteTourHandler = (paramUser, paramTour) => {
     dispatch(deleteTourThunk(paramUser, paramTour));
-    setAddShow(pre => !pre)
   }
 
   return (
@@ -52,11 +47,15 @@ function Tour({ tour }) {
 
   </div>
   <div>
-        {!tour.isAdded ? 
+        {/* {
+        !
+        user.usersTours
+        // .includes(tour) 
+        ? 
           <button onClick={() => addTourHandler(user._id, tour._id)} class="add-tour-button">Добавить в избранное</button>
          : 
         <button onClick={() => deleteTourHandler(user._id, tour._id)} class="delete-tour-button" >Remove from my profile</button>
-      }
+      } */}
             {/* </div> */}</div>
 
   </span>

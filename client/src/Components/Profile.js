@@ -8,9 +8,10 @@ function Profile() {
 
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
+  console.log(user)
 
   useEffect(() => {
-    {Boolean(user) ? <Redirect exact to="/"/> :
+    {Boolean(user) === false ? <Redirect exact to="/"/> :
     dispatch(showProfileThunk())}
   }, [])
 

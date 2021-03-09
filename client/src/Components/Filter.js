@@ -7,6 +7,37 @@ function Filter() {
   const dispatch = useDispatch();
   
   const allTours = useSelector(state => state.allTours);
+  const toursToShow = 
+  function group (arr) {
+    let result = [];
+    let uniqueArr = unique(arr)
+    for (let i = 0; i < uniqueArr.length; i += 1) {
+      result.push(addOne(uniqueArr[i], arr))
+    }
+    return result
+  }
+
+  function addOne (el, arr) {
+    let resultArr = [];
+    for (let i = 0; i < arr.length; i += 1) {
+      if (arr[i].country === el.country) {
+        resultArr.push(arr[i])
+      }
+    }
+    return resultArr
+  }
+  
+  function unique(arr) {
+    let result = [];
+    for (let i = 0; i < arr.length; i += 1) {
+      if (!result.includes(arr[i])) {
+        result.push(arr[i]);
+      }
+    }
+    return result;
+  }
+  
+
   console.log(allTours)
   const [criteria, setCriteria] = useState('');
   const [incCountry, setIncCountry] = useState('');
@@ -76,7 +107,7 @@ function Filter() {
   <input type="number" className="form-control" name="minPrice" id="exampleInputPassword1" placeholder='Min price' />
 </div>
 <div className="login-password animate__animated animate__fadeInUp">
-  <label hrmlFor="exampleInputPassword1" className="form-label">Max price</label>
+  <label htmlFor="exampleInputPassword1" className="form-label">Max price</label>
   <input type="number" className="form-control" name="maxPrice" id="exampleInputPassword1" placeholder='Max price' />
 </div>
 
@@ -84,12 +115,12 @@ function Filter() {
 
   <label htmlFor="minRate" className="form-label">Min rate</label>
   <select onChange={rateHandler} name="minRate" class="field">
-      <option value="0">0</option>
+      <option defaultValue value="0">0</option>
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
       <option value="4">4</option>
-      <option selected value="5">5</option>
+      <option value="5">5</option>
       <option value="6">6</option>
       <option value="7">7</option>
       <option value="8">8</option>
@@ -132,10 +163,10 @@ function Filter() {
       <div className="animate__animated animate__fadeInUp">
       <label htmlFor="sortation" className="form-label">Choose criteria</label>
       <select onChange={criteriaHandler} name="sortation" class="field">
-      <option value="tempMinToMax">temperature, min to max</option>
+      <option defaultValue value="tempMinToMax">temperature, min to max</option>
       <option value="tempMaxToMin">temperature, max to min</option>
       <option value="price">Price</option>
-      <option selected value="rating">Rating</option>
+      <option value="rating">Rating</option>
       <option value="toSeaDistance">Distance to sea</option>
       <option value="reviewsCount">Reviews amount</option>
       <option value="tourDuration">Duration</option>
@@ -275,10 +306,12 @@ function Filter() {
       <div className='flex'>
         {!!allTours && allTours.map((tour) =>
         (
-          <Tour
-            tour={tour}
-            key={tour._id}
-          />
+          <div key={tour._id}>
+            <Tour
+              tour={tour}
+            />
+
+          </div>
         ))}
       </div>
     )}

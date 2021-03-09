@@ -87,7 +87,7 @@ const registerUser = ({ email, login, password }) => (dispatch) => {
 
 const showProfileThunk = () => {
   return async (dispatch) => {
-    const response = await fetch('/user/tours');
+    const response = await fetch('/user/tours', { credentials: 'include' });
     const result = await response.json();
     console.log(result)
     dispatch ({
@@ -109,6 +109,10 @@ const addTourThunk = (paramUser, paramTour) => async (dispatch) => {
   dispatch ({
     type: TYPES.ADD_TOUR,
     data: result
+  })
+  dispatch ({
+    type: TYPES.CHANGE_IS_ADDED,
+    data: paramTour
   })
 }
 
