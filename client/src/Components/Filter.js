@@ -163,9 +163,9 @@ function Filter() {
       <div className="animate__animated animate__fadeInUp">
       <label htmlFor="sortation" className="form-label">Choose criteria</label>
       <select onChange={criteriaHandler} name="sortation" class="field">
-      <option defaultValue value="tempMinToMax">temperature, min to max</option>
+      <option value="tempMinToMax">temperature, min to max</option>
       <option value="tempMaxToMin">temperature, max to min</option>
-      <option value="price">Price</option>
+      <option defaultValue value="price">Price</option>
       <option value="rating">Rating</option>
       <option value="toSeaDistance">Distance to sea</option>
       <option value="reviewsCount">Reviews amount</option>

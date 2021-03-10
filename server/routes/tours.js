@@ -68,9 +68,8 @@ router.post('/filter', async (req, res) => {
     console.log('Session', req.session)
     // let currentUser = await User.findOne({ login: 'Admin' });
     const { minPrice, maxPrice, minRate, minStars } = req.body;
-    if (minRate === null) minRate = 0
+    if (minRate === '') minRate = -Infinity
     console.log(req.body)
-    console.log(minPrice)
     const tours = [...currentUser.searchTours];
     console.log(tours.length);
     if (!maxPrice) {

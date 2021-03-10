@@ -36,4 +36,6 @@ function group (arr) {
   return result
 }
 
-console.log(group(array))
+// console.log(group(array))
+
+console.log(null > -Infinity)

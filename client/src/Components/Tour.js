@@ -8,6 +8,7 @@ function Tour({ tour }) {
 
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
+  // const toursIds = user.usersTours.map(el => el._id)
   const [addShow, setAddShow] = useState(true);
 
   const addTourHandler = (paramUser, paramTour) => {
@@ -47,15 +48,10 @@ function Tour({ tour }) {
 
   </div>
   <div>
-        {/* {
-        !
-        user.usersTours
-        // .includes(tour) 
-        ? 
-          <button onClick={() => addTourHandler(user._id, tour._id)} class="add-tour-button">Добавить в избранное</button>
-         : 
-        <button onClick={() => deleteTourHandler(user._id, tour._id)} class="delete-tour-button" >Remove from my profile</button>
-      } */}
+        
+          <button onClick={() => addTourHandler(user._id, tour._id)} class="add-tour-button">Добавить в избранное</button> 
+          <button onClick={() => deleteTourHandler(user._id, tour._id)} class="delete-tour-button" >Remove from my profile</button>
+      
             {/* </div> */}</div>
 
   </span>

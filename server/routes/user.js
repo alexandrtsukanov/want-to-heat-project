@@ -5,7 +5,7 @@ const { authenticated } = require('./middleware');
 
 router.get('/tours', authenticated, async (req, res) => {
   try {
-    const usersTours = await User.findById(req.session.UserID).populate('usersTours');
+    const usersTours = await User.findById(req.session.userID).populate('usersTours');
     console.log(usersTours)
     return res.json(usersTours);
   } catch (error) {
