@@ -10,7 +10,7 @@ export function checkUser(data) {
 }
 
 const checkUserSession = () => (dispatch) => {
-  fetch('/login', {credentials: 'include'})
+    fetch('/login')
     .then(res => res.status === 200 ? res.json() : null)
     .then(data => {
       dispatch(checkUser(data));
@@ -29,7 +29,7 @@ const loginUser = (login, password) => (dispatch) => {
   fetch('/login', {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       login,
@@ -44,7 +44,8 @@ const loginUser = (login, password) => (dispatch) => {
 }
 //==============google auth==============
 const loginUserByGoogle = () => (dispatch) => {
-  fetch('http://localhost:3001/google', {credentials: 'include'})
+  console.log('google hi')
+  fetch('http://localhost:3001/google')
     .then(res => res.status === 200 ? res.json() : {})
     .then(data => {
       dispatch(signInUser(data));

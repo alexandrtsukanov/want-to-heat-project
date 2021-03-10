@@ -1,34 +1,58 @@
 const router = require('express').Router();
+
 const Tour = require('../db/models/tour');
 const User = require('../db/models/user');
+const Avia = require('../db/models/avia');
 const { authenticated } = require('./middleware');
 
 // ================getTours==============
-router.post('/', authenticated, async (req, res) => {
-  const currentUser = await User.findById(req.session.userID);
-  let { minTemp, maxTemp } = req.body;
-  if (!minTemp) minTemp = -Infinity;
-  if (!maxTemp) maxTemp = Infinity;
-  let tours;
-  try {
-    tours = await (await Tour.find())
-      .filter((tour) => tour.temperature >= minTemp && tour.temperature <= maxTemp);
-    if (!tours.length) {
-      return res.status(204).send('No tours found');
+
+router.post('/', authenticated,
+  async (req, res) => {
+    const currentUser = await User.findById(req.session.passport.user);
+    let { minTemp, maxTemp } = req.body;
+    if (!minTemp) minTemp = -Infinity;
+    if (!maxTemp) maxTemp = Infinity;
+    let tours;
+    try {
+      tours = await (await Tour.find())
+        .filter((tour) => tour.temperature >= minTemp && tour.temperature <= maxTemp);
+      currentUser.searchTours = tours;
+      currentUser.sortTours = tours;
+      await currentUser.save();
+      return res.status(200).json(tours.sort((a, b) => b.rating - a.rating));
+    } catch (error) {
+      console.log(error);
+      return res.sendStatus(501);
     }
-    currentUser.searchTours = tours.sort((a, b) => b.rating - a.rating);
-    await currentUser.save();
-    return res.status(200).json(tours.sort((a, b) => b.rating - a.rating));
-  } catch (error) {
-    return res.sendStatus(501);
-  }
-});
+  });
+
+router.post('/avia', authenticated,
+  async (req, res) => {
+    const currentUser = await User.findById(req.session.passport.user);
+    let { minTemp, maxTemp } = req.body;
+    if (!minTemp) minTemp = -Infinity;
+    if (!maxTemp) maxTemp = Infinity;
+    let avia;
+    try {
+      avia = await (await Avia.find())
+        .filter((aviaItem) => aviaItem.temperature >= minTemp && aviaItem.temperature <= maxTemp);
+
+      currentUser.searchAvia = avia;
+      currentUser.sortAvia = avia;
+      await currentUser.save();
+      return res.status(200).json(avia);
+    } catch (error) {
+      console.log(error);
+      return res.sendStatus(501);
+    }
+  });
 
 router.post('/sortation', authenticated, async (req, res) => {
-  const currentUser = await User.findById(req.session.userID);
-  const { criteria } = req.body;
-  const tours = currentUser.searchTours;
   try {
+    const currentUser = await User.findById(req.session.passport.user);
+    const { criteria } = req.body;
+    const tours = currentUser.sortTours;
     switch (criteria) {
       case 'tempMinToMax':
         return res.status(200).json(tours.sort((a, b) => a.temperature - b.temperature));
@@ -48,6 +72,30 @@ router.post('/sortation', authenticated, async (req, res) => {
         return res.status(200).json(tours.sort((a, b) => b.stars - a.stars));
       default: return res.status(200).json(tours.sort((a, b) => b.rating - a.rating));
     }
+  } catch (error) {
+    return res.sendStatus(501);
+  }
+});
+
+router.post('/filter', async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.session.passport.user);
+    const {
+      minPrice, maxPrice, minRate, minStars,
+    } = req.body;
+    const tours = [...currentUser.searchTours];
+    if (!maxPrice) {
+      const filteredTours = await tours.filter((el) => el.price >= minPrice && el.rating >= minRate && el.stars >= minStars);
+      const toursSortedByRating = filteredTours.sort((a, b) => b.price - a.price);
+      currentUser.sortTours = toursSortedByRating;
+      await currentUser.save();
+      return res.json(toursSortedByRating);
+    }
+    const filteredTours = await tours.filter((el) => el.price >= minPrice && el.price <= maxPrice && el.rating >= minRate && el.stars >= minStars);
+    const toursSortedByRating = filteredTours.sort((a, b) => b.price - a.price);
+    currentUser.sortTours = toursSortedByRating;
+    await currentUser.save();
+    return res.json(toursSortedByRating);
   } catch (error) {
     return res.sendStatus(501);
   }

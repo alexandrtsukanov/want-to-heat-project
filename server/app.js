@@ -23,9 +23,28 @@ const port = (process.env.PORT ?? 3001);
 
 schedule.scheduleJob('37 23 * * *', () => seed());
 
+app.use(logger('dev'));
+app.use(cors({
+  origin: true,
+  credentials: true,
+  methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
+}));
+app.use(express.urlencoded({ extended: true }));
+/* Подключаем middleware, которое позволяет читать переменные JavaScript,
+сохранённые в формате JSON в body HTTP-запроса. */
+app.use(express.json());
+
+app.use(session({
+  store: new FileStore(),
+  key: 'sid',
+  secret: 'heat',
+  resave: true,
+  saveUninitialized: false,
+  cookie: { expires: 1000 * 60 * 60 * 12 },
+}));
+
 passport.serializeUser((user, done) => {
-  console.log('user', user);
-  done(null, user.id);
+  done(null, user._id);
 });
 
 passport.deserializeUser((id, done) => {
@@ -33,7 +52,6 @@ passport.deserializeUser((id, done) => {
     done(null, user);
   });
 });
-
 // initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
@@ -48,47 +66,32 @@ passport.use(
     User.findOne({ 'tokens.googleId': profile.id }).then((currentUser) => {
       if (currentUser) {
         // already have this user
-        console.log('here');
         done(null, currentUser);
       } else {
         // if not, create user in our db
         new User({
           'tokens.googleId': profile.id,
           login: profile.displayName,
+          img: profile.photos[0].value,
         }).save().then((newUser) => {
           done(null, newUser);
         });
       }
     });
-    return done(null, profile);
   }),
 );
 
 /* Подключаем middleware morgan с режимом логирования "dev",
 чтобы для каждого HTTP-запроса на сервер в консоль выводилась информация об этом запросе. */
-app.use(logger('dev'));
-app.use(cors());
 // app.set('trust proxy', 1)
-app.use(cookieParser());
+// app.use(cookieParser());
 /* Подключаем middleware, которое сообщает epxress,
 что в папке "ПапкаПроекта/public" будут находится статические файлы,
 т.е. файлы доступные для скачивания из других приложений. */
 app.use(express.static(path.join(process.env.PWD, 'public')));
 /* Подключаем middleware, которое позволяет читать содержимое
 body из HTTP-запросов типа POST, PUT и DELETE. */
-app.use(express.urlencoded({ extended: true }));
-/* Подключаем middleware, которое позволяет читать переменные JavaScript,
-сохранённые в формате JSON в body HTTP-запроса. */
-app.use(express.json());
 // Подключаем middleware, которое задает прамметры сесии пользователей.
-app.use(session({
-  store: new FileStore(),
-  key: 'sid',
-  secret: 'heat',
-  resave: true,
-  saveUninitialized: false,
-  cookie: { expires: 1000 * 60 * 60 * 12 },
-}));
 // Переход на ручки.
 app.use('/', mainRouter);
 app.use('/user', userRouter);

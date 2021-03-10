@@ -16,12 +16,29 @@ const userSchema = Schema({
     type: Array,
     default: [],
   },
+  sortTours: {
+    type: Array,
+    default: [],
+  },
   usersTours: {
     type: Array,
     default: [],
   },
   tokens: {
     googleId: String,
+  },
+  img: String,
+  searchAvia: {
+    type: Array,
+    default: [],
+  },
+  sortAvia: {
+    type: Array,
+    default: [],
+  },
+  usersAvia: {
+    type: Array,
+    default: [],
   },
 });
 

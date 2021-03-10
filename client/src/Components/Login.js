@@ -34,7 +34,14 @@ function Login() {
         </div>
         <button type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Log In</button>
       </form>
-        <button type='button' className="login-button animate__animated animate__fadeInUp scrollto" onClick={handlerGoogle}>Google</button>
+      <div className="row">
+        <div className="col-md-3">
+          <a className="btn btn-outline-dark" href="http://localhost:3001/google" role="button">
+            <img width="20px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+        Login with Google
+    </a>
+        </div>
+      </div>
     </>
   )
 }

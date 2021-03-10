@@ -7,7 +7,7 @@ const User = require('../db/models/user');
 router.get('/login', async (req, res) => {
   let user;
   try {
-    user = await User.findById(req.session.userID);
+    user = await User.findById(req.session.passport.user);
     if (!user) return res.sendStatus(204);
   } catch (error) {
     return res.sendStatus(501);
@@ -27,8 +27,7 @@ router.post('/login', async (req, res) => {
   } catch (error) {
     return res.sendStatus(501);
   }
-  req.session.userID = user._id;
-  req.session.userLogin = user.login;
+  req.session.user = user._id;
   return res.status(200).json(user);
 });
 
@@ -40,24 +39,10 @@ router.get('/google', passport.authenticate('google', {
 
 // callback route for google to redirect to
 // hand control to passport to use code to grab profile info
-router.get('/google/redirect', passport.authenticate('google', {
-  successRedirect: 'http://localhost:3000/filter',
-},
-async (req, res) => {
-  console.log(req);
-  // res.send(req.user);
-  // console.log(req.user);
-  // console.log('redirect');
-  // let user;
-  // try {
-  //   user = await User.findOne({ 'tokens.googleId': req.user.id });
-  // } catch (error) {
-  //   return res.sendStatus(501);
-  // }
-  // req.session.userID = user._id;
-  // req.session.userLogin = user.login;
-  // return res.status(200).json(user);
-}));
+router.get('/google/redirect', passport.authenticate('google'),
+  (req, res) => {
+    res.redirect('http://localhost:3000/filter');
+  });
 
 // ==================register=======================
 
@@ -72,8 +57,8 @@ router.post('/register', async (req, res) => {
   } catch (error) {
     return res.sendStatus(501);
   }
-  req.session.UserID = user._id;
-  req.session.UserLogin = user.login;
+  req.session.user = user._id;
+  // req.session.UserLogin = user.login;
   return res.status(200).json(user);
 });
 // ==================logout=======================
