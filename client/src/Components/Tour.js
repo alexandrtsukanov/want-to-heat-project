@@ -13,11 +13,16 @@ function Tour({ tour }) {
 
   const addTourHandler = (paramUser, paramTour) => {
     dispatch(addTourThunk(paramUser, paramTour));
-    setAddShow(pre => !pre)
-  }
+    dispatch({
+      type: CHANGE_IS_ADDED,
+      data: paramTour
+    })
   const deleteTourHandler = (paramUser, paramTour) => {
     dispatch(deleteTourThunk(paramUser, paramTour));
-    setAddShow(pre => !pre)
+    dispatch({
+      type: CHANGE_IS_ADDED,
+      data: paramTour
+    })
   }
 
   return (
@@ -50,11 +55,10 @@ function Tour({ tour }) {
 
   </div>
   <div>
-    { addShow ?
-        <button onClick={() => addTourHandler(user._id, tour._id)} class="add-tour-button">Добавить в избранное</button> :
-        
-        <button onClick={() => deleteTourHandler(user._id, tour._id)} class="delete-tour-button" >Remove from my profile</button>
-} 
+    { tour.isAdded ?
+        <button onClick={() => deleteTourHandler(user._id, tour._id)} class="delete-tour-button" >Remove from my profile</button> :
+        <button onClick={() => addTourHandler(user._id, tour._id)} class="add-tour-button">Добавить в избранное</button>    
+    } 
       </div>
 
   </span>
@@ -100,5 +104,5 @@ function Tour({ tour }) {
     </>
   )
 }
-
+}
 export default Tour;

@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterByTemp, sortToursThunk, filterByPriceThunk, filterByRateThunk, filterByStarsThunk, filterThunk } from '../redux/actions/tourActions';
+import { filterByTemp, sortToursThunk, filterByPriceThunk, filterThunk } from '../redux/actions/tourActions';
 import Tour from './Tour';
 import DraftCountry from './DraftCountry';
 
@@ -11,9 +11,8 @@ function Filter() {
   const user = useSelector(state => state.user);
   // const allTours = user.searchTours;
   const allTours = useSelector(state => state.allTours);
-  const allToursShow = group(allTours)
 
-  function addOne (el, arr) {
+  function addOne(el, arr) {
     let resultArr = [];
     for (let i = 0; i < arr.length; i += 1) {
       if (arr[i].country === el.country) {
@@ -24,7 +23,7 @@ function Filter() {
   }
 
   const forin = (arr, someEl) => {
-    let keys = arr.map(el => el.country) ;
+    let keys = arr.map(el => el.country);
     if (keys.includes(someEl)) {
       return true
     } else {
@@ -40,15 +39,17 @@ function Filter() {
     }
     return result
   }
-  
-  function group (arr) {
+
+  function group(arr) {
     let result = [];
     let uniqueArr = getRepeated(arr)
     for (let i = 0; i < uniqueArr.length; i += 1) {
       result.push(addOne(arr[i], arr))
     }
     return result
-  }  
+  }
+
+  const allToursShow = group(allTours)
 
   const [criteria, setCriteria] = useState('');
   const [incCountry, setIncCountry] = useState('');
@@ -69,7 +70,7 @@ function Filter() {
     setCriteria(target.value)
   }
   const incCountryHandler = ({ target }) => {
-    setIncCountry (target.value)
+    setIncCountry(target.value)
     console.log(incCountry)
   }
 
@@ -96,6 +97,9 @@ function Filter() {
   const starsHandler = ({ target }) => {
     setStars(target.value)
   }
+
+  console.log(allToursShow)
+
   return (
     <>
       <h1>Filter</h1>
@@ -106,126 +110,108 @@ function Filter() {
         <button type="submit" class="btn btn-primary">Take me to heat!</button>
       </form>
 
-    {showFilterForm && (
+      {showFilterForm && (
 
-      <>
-<div>
+        <>
+          <div>
 
-<form onSubmit={filterSubmit}>
+            <form onSubmit={filterSubmit}>
 
-<div className="login-login animate__animated animate__fadeInUp">
-  <label htmlFor="exampleInputPassword1" className="form-label">Min price</label>
-  <input type="number" className="form-control" name="minPrice" id="exampleInputPassword1" placeholder='Min price' />
-</div>
-<div className="login-password animate__animated animate__fadeInUp">
-  <label htmlFor="exampleInputPassword1" className="form-label">Max price</label>
-  <input type="number" className="form-control" name="maxPrice" id="exampleInputPassword1" placeholder='Max price' />
-</div>
+              <div className="login-login animate__animated animate__fadeInUp">
+                <label htmlFor="exampleInputPassword1" className="form-label">Min price</label>
+                <input type="number" className="form-control" name="minPrice" id="exampleInputPassword1" placeholder='Min price' />
+              </div>
+              <div className="login-password animate__animated animate__fadeInUp">
+                <label htmlFor="exampleInputPassword1" className="form-label">Max price</label>
+                <input type="number" className="form-control" name="maxPrice" id="exampleInputPassword1" placeholder='Max price' />
+              </div>
 
+              <label htmlFor="minRate" className="form-label">Min rate</label>
+              <select onChange={rateHandler} name="minRate" class="field">
+                <option defaultValue value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
 
+              <label htmlFor="minStars" className="form-label">Min starts rate</label>
+              <select onChange={starsHandler} name="minStars" class="field">
+                <option dafaultValue value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
 
-  <label htmlFor="minRate" className="form-label">Min rate</label>
-  <select onChange={rateHandler} name="minRate" class="field">
-      <option defaultValue value="0">0</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-  </select>
+              <button type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Set</button>
 
+            </form>
 
-  <label htmlFor="minStars" className="form-label">Min starts rate</label>
-  <select  onChange={starsHandler} name="minStars" class="field">
-      <option dafaultValue value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-  </select>
+            <button onClick={() => setShowSort(pre => !pre)} type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Sort tours</button>
 
-<button type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Set</button>
+            {showSort && (
+              <>
+                <div className="">
+                  <label htmlFor="sortation" className="form-label">Choose criteria</label>
+                  <select onChange={criteriaHandler} name="sortation" class="field">
+                    <option value="tempMinToMax">temperature, min to max</option>
+                    <option value="tempMaxToMin">temperature, max to min</option>
+                    <option defaultValue value="price">Price</option>
+                    <option value="rating">Rating</option>
+                    <option value="toSeaDistance">Distance to sea</option>
+                    <option value="reviewsCount">Reviews amount</option>
+                    <option value="tourDuration">Duration</option>
+                    <option value="stars">Hotel stars amount</option>
+                  </select>
+                  <button onClick={() => dispatch(sortToursThunk(criteria))}>Sort</button>
+                </div>
+              </>
+            )}
 
-</form>
+          </div>
 
-<button onClick={() => setShowSort(pre => !pre)} type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Sort tours</button>
+          <section id="services" class="services">
+            <div class="container">
 
-    {showSort && (
-      <>
-      <div className="">
-      <label htmlFor="sortation" className="form-label">Choose criteria</label>
-      <select onChange={criteriaHandler} name="sortation" class="field">
-      <option value="tempMinToMax">temperature, min to max</option>
-      <option value="tempMaxToMin">temperature, max to min</option>
-      <option defaultValue value="price">Price</option>
-      <option value="rating">Rating</option>
-      <option value="toSeaDistance">Distance to sea</option>
-      <option value="reviewsCount">Reviews amount</option>
-      <option value="tourDuration">Duration</option>
-      <option value="stars">Hotel stars amount</option>
-      </select> 
-      <button onClick={() => dispatch(sortToursThunk(criteria))}>Sort</button>
-    </div>
-      </>
-    )}
+              <div class="section-title aos-init aos-animate" data-aos="zoom-out">
+                <h2>Хочу в тепло!</h2>
+                <p><strong>Вот что мы для Вас нашли</strong></p>
+              </div>
 
-</div>
+              <div class="row">
 
-<section id="services" class="services">
-      <div class="container">
+                {!!allToursShow && allToursShow.map((el, index) => (
 
-        <div class="section-title aos-init aos-animate" data-aos="zoom-out">
-          <h2>Хочу в тепло!</h2>
-          <p><strong>Вот что мы для Вас нашли</strong></p>
-        </div>
-
-        <div class="row">
-
-    {!!allTours && allToursShow.map((el, index) => (
-          <div class="col-lg-4 col-md-6" key={index}>
-            <div class="icon-box aos-init aos-animate" data-aos="zoom-in-left">
-              <div class="icon"><i class="bi bi-briefcase" style={{color: '#ff689b'}}></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-    
-      <DraftCountry
-        country={el}
-      />
+                  <div class="col-lg-4 col-md-6" key={index}>
+                    <DraftCountry
+                      country={el}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-          ))}
-          
+          </section>
+         
+        </>
+      )}
+      {!showFilterForm && (
+        <div className='flex'>
+          {!!allToursShow && allToursShow.map((el, index) =>
+            ( <div key={index}>
+                <DraftCountry
+                  country={el}
+                />
+              </div>
+            ))}
         </div>
-
-      </div>
-    </section>
-
-
-<div className="flex row">
-
-  </div>
-
-  </>
-  )}
-    {!showFilterForm && (
-
-      <div className='flex'>
-        {!!allTours && allToursShow.map((el, index) =>
-        (
-          <div key={index}>
-            <DraftCountry
-              country={el}
-            />
-
-          </div>
-        ))}
-      </div>
-    )}
-
+      )}
     </>
   )
 }

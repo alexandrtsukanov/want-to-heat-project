@@ -32,8 +32,11 @@ router.delete('/:id/deletetour', async (req, res) => {
   const { _id } = req.body;
   const currentUser = await User.findById(req.params.id);
   const tourToDelete = await Tour.findById(_id);
+  console.log(currentUser.usersTours.length)
+
   currentUser.usersTours.splice(currentUser.usersTours.indexOf(tourToDelete), 1);
   await currentUser.save();
+  console.log(currentUser.usersTours.length)
   res.sendStatus(200);
 });
 

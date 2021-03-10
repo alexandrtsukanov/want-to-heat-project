@@ -14,6 +14,9 @@ import Team from './Components/Team';
 import About from './Components/About';
 import Footer from './Components/Footer';
 import FilterAvia from './Components/FilterAvia';
+import DraftFilter from './Components/DraftFilter';
+import DraftCountry from './Components/DraftCountry';
+import DraftTour from './Components/DraftTour';
 
 function App() {
 
@@ -54,9 +57,16 @@ function App() {
           <Route path='/register'>
             <Register />
           </Route>
+
           <Route path='/filter'>
-            <Filter />
+            <DraftFilter />
           </Route>
+
+          {/* <Route path='/filter'>
+            <Filter />
+          </Route> */}
+
+
           <Route path='/profile'>
             <Profile />
           </Route>
