@@ -214,11 +214,11 @@ function Filter() {
     {!showFilterForm && (
 
       <div className='flex'>
-        {!!allTours && allTours.map((tour) =>
+        {!!allTours && allToursShow.map((el, index) =>
         (
-          <div key={tour._id}>
-            <Tour
-              tour={tour}
+          <div key={index}>
+            <DraftCountry
+              country={el}
             />
 
           </div>
