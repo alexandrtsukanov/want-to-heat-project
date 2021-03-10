@@ -1,5 +1,7 @@
 const { pluralize, Schema, model } = require('mongoose');
 
+pluralize(null);
+
 const aviaSchema = new Schema({
   country: {
     type: String,
@@ -36,6 +38,14 @@ const aviaSchema = new Schema({
   isAdded: {
     type: Boolean,
     default: false,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now(),
   },
 });
 

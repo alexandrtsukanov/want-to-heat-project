@@ -6,7 +6,7 @@ mongoose.connect('mongodb://localhost:27017/heat', {
   useFindAndModify: false,
 });
 
-let User = mongoose.model('users', {
+const User = mongoose.model('users', {
   login: {
     type: String,
     unique: true,
@@ -26,4 +26,4 @@ let User = mongoose.model('users', {
   },
 });
 
-module.exports = User
+module.exports = User;

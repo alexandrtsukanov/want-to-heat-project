@@ -39,8 +39,9 @@ const scrapOnline = async () => {
       return link.href;
     }),
   );
+  console.log('postUrls', postUrls);
   /// удалить!!!
-  postUrls = [postUrls[0]];
+  // postUrls = [postUrls[0]];
   /// удалить!!!
   let allTurs = [];
   // Перейдём по каждой из них
@@ -55,7 +56,7 @@ const scrapOnline = async () => {
     }
     // const locationSelector = '.small-slideshow-image';
     // await page.waitForSelector(locationSelector, { timeout: 0 });
-    await page.waitFor(5000);// сделали 5 сек тк не подгружались данные
+    await page.waitForTimeout(5000);// сделали 5 сек тк не подгружались данные
     // позволяет работать с Dom деревом страницы
     const result = await page.evaluate(() => {
       const data = [];
@@ -83,9 +84,11 @@ const scrapOnline = async () => {
         console.log('country', country);
         const hotel = hotels[i]?.innerText;
         console.log('hotel', hotel);
-        const rating = Number(ratings[i]?.innerText);
+        let rating = Number(ratings[i]?.innerText);
+        if (!rating) { rating = 0; }
         console.log('rating', rating);
-        const reviewsCount = +(reviewsCountAll[i]?.innerText.split(' ')[0]);
+        let reviewsCount = +(reviewsCountAll[i]?.innerText.split(' ')[0]);
+        if (!reviewsCount) { reviewsCount = 0; }
         console.log('reviewsCount', reviewsCount);
         const turProp = tursProp[i]?.innerText.split(' ');
         console.log('turProp', turProp);
@@ -94,36 +97,39 @@ const scrapOnline = async () => {
         console.log('dateDeparture', dateDeparture);
         const tourDuration = Number(turProp[4]);
         console.log('tourDuration', tourDuration);
-        // const priceChildNodes = prices[i].childNodes;
-        // const toSeaDistance = toSeaDistances[i]?.innerText;
         const price = Number(prices[i]?.innerText.replace(/\s/gi, ''));
         console.log('price', price);
         const starsForHotel = starsForHotels[i]?.childElementCount;
         console.log('starsForHotel', starsForHotel);
-        let photoUrl = (images[i]?.style.backgroundImage.replace(/[url(", ")]/gi, ''));
-        console.log('photoUrl', photoUrl);
-        if (photoUrl?.split(':')[1] === 'undefined') photoUrl = 'https://sitecore-cd-imgr.shangri-la.com/MediaFiles/E/0/1/%7BE0144276-6A01-4CAE-8E4E-A68A099A5E98%7D200724_SLJ_Banner_ShangriLa_Hotel_Jakarta.jpg?width=750&height=752&mode=crop&quality=100&scale=both';
-        const url = urls[i].href;
+        let photoUrl;
+        if (images[i]) {
+          photoUrl = ((images[i]?.style.backgroundImage.replace(/url\("/gi, ''))).replace(/jpg"\)/gi, 'jpg');
+          // photoUrl = photoUrl.replace(/"\)/gm, '');
+          console.log('photoUrl', photoUrl);
+        } else {
+          photoUrl = 'https://sitecore-cd-imgr.shangri-la.com/MediaFiles/E/0/1/%7BE0144276-6A01-4CAE-8E4E-A68A099A5E98%7D200724_SLJ_Banner_ShangriLa_Hotel_Jakarta.jpg?width=750&height=752&mode=crop&quality=100&scale=both';
+        }
+        const url = urls[i]?.href;
         console.log('url', url);
-        const city = location[1].trim();
+        const city = location[1]?.trim();
         console.log('city', city);
         data.push(
           {
-            source: 'travelata', country, city, hotel, price, rating, stars: starsForHotel, persons, dateDeparture, tourDuration, photoUrl, url, reviewsCount,
+            source: 'Online', country, city, hotel, price, rating, stars: starsForHotel, persons, dateDeparture, tourDuration, photoUrl, url, reviewsCount,
           },
         );
       }
-      console.log('data', data);
+      // console.log('data', data);
       return data;
     });
     allTurs = [...allTurs, ...result];
   }
-  console.log('allTurs', allTurs);
   allTurs = await addLonLat(allTurs);
   allTurs = await addTemperture(allTurs);
   // Всё сделано, закроем браузер
   await browser.close();
   // // process.exit();
+  // console.log(allTurs);
   return allTurs;
 };
 // scrapOnline();
