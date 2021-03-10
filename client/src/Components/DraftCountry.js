@@ -10,10 +10,10 @@ function DraftCountry({ country }) {
     <div>
       <h6>{country[0].country}</h6>
     </div>
-    < div className="myrow">
+    < div className="row">
     { country.map((tour, index) => 
       index <= 2 ?
-       
+      
         <DraftTour
           tour={tour}
         />
