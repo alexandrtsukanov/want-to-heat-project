@@ -5,7 +5,10 @@ import Tour from './Tour';
 
 function Filter() {
   const dispatch = useDispatch();
-  
+
+  const user = useSelector(state => state.user);
+  // const allTours = user.searchTours;
+
   const allTours = useSelector(state => state.allTours);
   const toursToShow = 
   function group (arr) {
@@ -131,10 +134,10 @@ function Filter() {
 
   <label htmlFor="minStars" className="form-label">Min starts rate</label>
   <select  onChange={starsHandler} name="minStars" class="field">
-      <option value="1">1</option>
+      <option dafaultValue value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
-      <option selected value="4">4</option>
+      <option value="4">4</option>
       <option value="5">5</option>
   </select>
 

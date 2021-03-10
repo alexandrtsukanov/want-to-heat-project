@@ -11,7 +11,6 @@ authenticated,
 async (req, res) => {
   console.log('Session', req.session)
   let currentUser = await User.findById(req.session.userID);
-  // let currentUser = await User.findOne({ login: 'Admin' });
   let { minTemp, maxTemp } = req.body;
   if (!minTemp) minTemp = -Infinity;
   if (!maxTemp) maxTemp = Infinity;
@@ -25,6 +24,7 @@ async (req, res) => {
     currentUser.searchTours = tours;
     currentUser.sortTours = tours;
     await currentUser.save();
+    console.log(currentUser)
     return res.status(200).json(tours.sort((a, b) => b.rating - a.rating));
   } catch (error) {
     return res.sendStatus(501);
@@ -63,7 +63,7 @@ router.post('/sortation', authenticated, async (req, res) => {
 
 
 router.post('/filter', async (req, res) => {
-  try {
+  
     let currentUser = await User.findById(req.session.userID);
     console.log('Session', req.session)
     // let currentUser = await User.findOne({ login: 'Admin' });
@@ -90,9 +90,7 @@ router.post('/filter', async (req, res) => {
       await currentUser.save()
       return res.json(toursSortedByRating)
     }
-  } catch (error) {
-    res.sendStatus(501)
-  }
+
 })
 
 module.exports = router;

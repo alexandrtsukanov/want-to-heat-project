@@ -13,9 +13,11 @@ function Tour({ tour }) {
 
   const addTourHandler = (paramUser, paramTour) => {
     dispatch(addTourThunk(paramUser, paramTour));
+    setAddShow(pre => !pre)
   }
   const deleteTourHandler = (paramUser, paramTour) => {
     dispatch(deleteTourThunk(paramUser, paramTour));
+    setAddShow(pre => !pre)
   }
 
   return (
@@ -48,20 +50,16 @@ function Tour({ tour }) {
 
   </div>
   <div>
+    { addShow ?
+        <button onClick={() => addTourHandler(user._id, tour._id)} class="add-tour-button">Добавить в избранное</button> :
         
-          <button onClick={() => addTourHandler(user._id, tour._id)} class="add-tour-button">Добавить в избранное</button> 
-          <button onClick={() => deleteTourHandler(user._id, tour._id)} class="delete-tour-button" >Remove from my profile</button>
-      
-            {/* </div> */}</div>
+        <button onClick={() => deleteTourHandler(user._id, tour._id)} class="delete-tour-button" >Remove from my profile</button>
+} 
+      </div>
 
   </span>
-     {/* </div> */}
 
-
-
-
-
-              {/* <div><strong>Температура: </strong> {tour.temperature}</div>
+        {/* <div><strong>Температура: </strong> {tour.temperature}</div>
         <div><strong>Страна: </strong> {tour.country}</div>
         <div><strong>Город: </strong> {tour.city}</div> 
         <div><strong>Отель: </strong> {tour.hotel}</div> 
