@@ -8,14 +8,12 @@ function Tour({ tour }) {
 
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
+  // const toursIds = user.usersTours.map(el => el._id)
   const [addShow, setAddShow] = useState(true);
 
   const addTourHandler = (paramUser, paramTour) => {
     dispatch(addTourThunk(paramUser, paramTour));
-    dispatch({
-      type: CHANGE_IS_ADDED,
-      data: paramTour
-    })
+    setAddShow(pre => !pre)
   }
   const deleteTourHandler = (paramUser, paramTour) => {
     dispatch(deleteTourThunk(paramUser, paramTour));
@@ -52,21 +50,16 @@ function Tour({ tour }) {
 
   </div>
   <div>
-        {!tour.isAdded ? 
-          <button onClick={() => addTourHandler(user._id, tour._id)} class="add-tour-button">Добавить в избранное</button>
-         : 
+    { addShow ?
+        <button onClick={() => addTourHandler(user._id, tour._id)} class="add-tour-button">Добавить в избранное</button> :
+        
         <button onClick={() => deleteTourHandler(user._id, tour._id)} class="delete-tour-button" >Remove from my profile</button>
-      }
-            {/* </div> */}</div>
+} 
+      </div>
 
   </span>
-     {/* </div> */}
 
-
-
-
-
-              {/* <div><strong>Температура: </strong> {tour.temperature}</div>
+        {/* <div><strong>Температура: </strong> {tour.temperature}</div>
         <div><strong>Страна: </strong> {tour.country}</div>
         <div><strong>Город: </strong> {tour.city}</div> 
         <div><strong>Отель: </strong> {tour.hotel}</div> 
