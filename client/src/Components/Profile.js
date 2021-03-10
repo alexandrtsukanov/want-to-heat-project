@@ -9,7 +9,7 @@ function Profile() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const [usersTours, setUsersTours] = useState('')
-  console.log(user.usersTours)
+  console.log('==========>>>>>>>>',user.usersTours)
 
   useEffect(() => {
     {!Boolean(user) ? <Redirect exact to="/"/> :
