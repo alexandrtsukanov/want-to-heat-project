@@ -178,10 +178,10 @@ function Filter() {
               <h2>Хочу в тепло!</h2>
               <p><strong>Вот что мы для Вас нашли</strong></p>
             </div>
-            
-            <div className="row">
+
+            <div className="mycolumn">
               {!!allToursGrouped && allToursGrouped.map((el, index) => (
-                <div className="row" key={index}>
+                <div className="mycolumn" key={index}>
                   <DraftCountry
                     country={el}
                   />
@@ -191,9 +191,9 @@ function Filter() {
           </div>
         </>
       )}
-
+    <div className="mycolumn">
       {!showFilterForm && (
-        <div className='flex'>
+        <div className='mycolumn'>
           {!!allToursGrouped && allToursGrouped.map((el, index) =>
             (<div key={index}>
               <DraftCountry
@@ -203,6 +203,7 @@ function Filter() {
             ))}
         </div>
       )}
+      </div>
     </div>
   )
 }

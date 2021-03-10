@@ -27,7 +27,7 @@ function DraftTour ({ tour }) {
   }
 
   return (
-    <>
+    <div className="">
     <div className='tour' key={tour._id}>
     <div>
       <div><strong>Температура: </strong> {tour.temperature}</div>
@@ -48,7 +48,7 @@ function DraftTour ({ tour }) {
     <button onClick={() => dispatch(addTourThunk(user._id, tour._id))} class="add-tour-button" >Добавить в избранное</button> :
     <button onClick={() => dispatch(deleteTourThunk(user._id, tour._id))} class="delete-tour-button" >Удалить тур</button> }
     </div>
-  </>
+  </div>
   )
 }
 

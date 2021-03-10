@@ -1,20 +1,33 @@
 import DraftTour from './DraftTour';
-
+import {useState } from 'react';
 
 function DraftCountry({ country }) {
 
+  const [showAll, setShowAll] = useState(false)
+
   return (
-    <>
+  <div className="mycolumn">
     <div>
-      <h4>{country[0].country}</h4>
+      <h6>{country[0].country}</h6>
     </div>
-    { country.map((tour) =>
-        <div key={tour._id} className="col-4">
-          <DraftTour
+    < div className="myrow">
+    { country.map((tour, index) => 
+      index <= 2 ?
+       
+        <DraftTour
+          tour={tour}
+        />
+         : (
+          showAll ? 
+          <DraftTour 
             tour={tour}
           />
-        </div> )}
-  </>
+           : null
+        )
+         )}
+    </div>
+    <button onClick={() => setShowAll(pre => !pre)}>Показать все</button>
+  </div>
   )
 }
 
