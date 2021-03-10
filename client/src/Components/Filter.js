@@ -5,7 +5,7 @@ import Tour from './Tour';
 
 function Filter() {
   const dispatch = useDispatch();
-  
+
   const allTours = useSelector(state => state.allTours);
   console.log(allTours)
   const [criteria, setCriteria] = useState('');
@@ -27,7 +27,7 @@ function Filter() {
     setCriteria(target.value)
   }
   const incCountryHandler = ({ target }) => {
-    setIncCountry (target.value)
+    setIncCountry(target.value)
     console.log(incCountry)
   }
 
@@ -59,230 +59,117 @@ function Filter() {
       <h1>Filter</h1>
 
       <form type='submit' onSubmit={handlerSubmit}>
-        <span><input type='number' id="exampleInputEmail1" className="form-label form-control" name='minTemp' placeholder='Set min temp' /></span>
-        <span><input type='number' id="exampleInputPassword1" className="form-label form-control" name='maxTemp' placeholder='Set max temp' /></span>
-        <button type="submit" class="btn btn-primary">Take me to heat!</button>
+        <span><input type='number' id="exampleInputEmail1" classNameName="form-label form-control" name='minTemp' placeholder='Set min temp' /></span>
+        <span><input type='number' id="exampleInputPassword1" classNameName="form-label form-control" name='maxTemp' placeholder='Set max temp' /></span>
+        <button type="submit" className="btn btn-primary">Take me to heat!</button>
       </form>
 
-    {showFilterForm && (
+      {showFilterForm && (
 
-      <>
-<div>
+        <>
+          <div>
 
-<form onSubmit={filterSubmit}>
+            <form onSubmit={filterSubmit}>
 
-<div className="login-login animate__animated animate__fadeInUp">
-  <label htmlFor="exampleInputPassword1" className="form-label">Min price</label>
-  <input type="number" className="form-control" name="minPrice" id="exampleInputPassword1" placeholder='Min price' />
-</div>
-<div className="login-password animate__animated animate__fadeInUp">
-  <label hrmlFor="exampleInputPassword1" className="form-label">Max price</label>
-  <input type="number" className="form-control" name="maxPrice" id="exampleInputPassword1" placeholder='Max price' />
-</div>
-
-
-
-  <label htmlFor="minRate" className="form-label">Min rate</label>
-  <select onChange={rateHandler} name="minRate" class="field">
-      <option value="0">0</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option selected value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-  </select>
-
-
-  <label htmlFor="minStars" className="form-label">Min starts rate</label>
-  <select  onChange={starsHandler} name="minStars" class="field">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option selected value="4">4</option>
-      <option value="5">5</option>
-  </select>
-
-<button type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Set</button>
-
-</form>
-
-{/* <form onSubmit={handlerSubmit}> */}
-
-{/* 
-<div className="login-login animate__animated animate__fadeInUp">
-  <button onClick={() => dispatch(filterByRateThunk(rate))} type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Set</button>
-  </div>
-  
-  <div>
-  <button onClick={() => dispatch(filterByStarsThunk(stars))} type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Set</button>
-
-  </div> */}
-
-{/* </form>  */}
-
-<button onClick={() => setShowSort(pre => !pre)} type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Sort tours</button>
-
-    {showSort && (
-      <>
-      <div className="animate__animated animate__fadeInUp">
-      <label htmlFor="sortation" className="form-label">Choose criteria</label>
-      <select onChange={criteriaHandler} name="sortation" class="field">
-      <option value="tempMinToMax">temperature, min to max</option>
-      <option value="tempMaxToMin">temperature, max to min</option>
-      <option value="price">Price</option>
-      <option selected value="rating">Rating</option>
-      <option value="toSeaDistance">Distance to sea</option>
-      <option value="reviewsCount">Reviews amount</option>
-      <option value="tourDuration">Duration</option>
-      <option value="stars">Hotel stars amount</option>
-      </select> 
-      <button onClick={() => dispatch(sortToursThunk(criteria))}>Sort</button>
-    </div>
-      </>
-    )}
-
-</div>
+              <div classNameName="login-login animate__animated animate__fadeInUp">
+                <label htmlFor="exampleInputPassword1" classNameName="form-label">Min price</label>
+                <input type="number" classNameName="form-control" name="minPrice" id="exampleInputPassword1" placeholder='Min price' />
+              </div>
+              <div classNameName="login-password animate__animated animate__fadeInUp">
+                <label hrmlFor="exampleInputPassword1" classNameName="form-label">Max price</label>
+                <input type="number" classNameName="form-control" name="maxPrice" id="exampleInputPassword1" placeholder='Max price' />
+              </div>
 
 
 
-<section id="services" class="services">
-      <div class="container">
-
-        <div class="section-title aos-init aos-animate" data-aos="zoom-out">
-          <h2>Хочу в тепло!</h2>
-          <p><strong>Вот что мы для Вас нашли</strong></p>
-        </div>
-
-        <div class="row">
-
-    {!!allTours && allTours.map((tour) => (
-          <div class="col-lg-4 col-md-6">
-            <div class="icon-box aos-init aos-animate" data-aos="zoom-in-left">
-              <div class="icon"><i class="bi bi-briefcase" style={{color: '#ff689b'}}></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-    
-      <Tour
-        tour={tour}
-        key={tour._id}
-      />
-            </div>
-          </div>
-          ))}
-          
-        </div>
-
-      </div>
-    </section>
+              <label htmlFor="minRate" classNameName="form-label">Min rate</label>
+              <select onChange={rateHandler} name="minRate" className="field">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option selected value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
 
 
+              <label htmlFor="minStars" classNameName="form-label">Min starts rate</label>
+              <select onChange={starsHandler} name="minStars" className="field">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option selected value="4">4</option>
+                <option value="5">5</option>
+              </select>
+              <button type="submit" classNameName="login-button animate__animated animate__fadeInUp scrollto">Set</button>
+            </form>
 
 
+            <button onClick={() => setShowSort(pre => !pre)} type="submit" classNameName="login-button animate__animated animate__fadeInUp scrollto">Sort tours</button>
 
-
-
-
-
-    {/* <div>
-    <div className="animate__animated animate__fadeInUp">
-      <label htmlFor="sortation" className="form-label">Choose criteria</label>
-      <select onChange={criteriaHandler} name="sortation" class="field">
-      <option value="tempMinToMax">temperature, min to max</option>
-      <option value="tempMaxToMin">temperature, max to min</option>
-      <option value="price">Price</option>
-
-      <option value="rating" selected >Rating</option>
-      <option value="toSeaDistance">Distance to sea</option>
-      <option value="reviewsCount">Reviews amount</option>
-      <option value="tourDuration">Duration</option>
-      <option value="stars">Hotel stars amount</option>
-      </select> 
-      <button onClick={() => dispatch(sortToursThunk(criteria))}>Sort</button>
-    </div>
-
-    <div>
-    <label htmlFor="choose-countries" className="form-label">Choose countries</label>
-      <select onChange={criteriaHandler} name="choose-countries" class="field">
-      <option value="Turkey">Turkey</option>
-      <option value="Thailand">Thailand</option>
-      <option value="Greece">Greece</option>
-      <option value="Cyprus">Cyprus</option>
-      </select> 
-      <button onClick={incCountryHandler}>Choose</button>
-    </div>
-
-    <div>
-    <label htmlFor="exclude-countries" className="form-label">Exclude countries</label>
-    <select onChange={criteriaHandler} name="exclude-countries" class="field">
-      <option value="Turkey">Turkey</option>
-      <option value="Thailand">Thailand</option>
-      <option value="Greece">Greece</option>
-      <option value="Cyprus">Cyprus</option>      
-    </select> 
-      <button onClick={() => dispatch(sortToursThunk(criteria))}>Exclude</button>
-    </div>
-  </div> */}
-
-  
-
-
-{/* <div class="container">
-
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        
-        <div class="col my-4">
-
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+            {showSort && (
+              <>
+                <div classNameName="animate__animated animate__fadeInUp">
+                  <label htmlFor="sortation" classNameName="form-label">Choose criteria</label>
+                  <select onChange={criteriaHandler} name="sortation" className="field">
+                    <option value="tempMinToMax">temperature, min to max</option>
+                    <option value="tempMaxToMin">temperature, max to min</option>
+                    <option value="price">Price</option>
+                    <option selected value="rating">Rating</option>
+                    <option value="toSeaDistance">Distance to sea</option>
+                    <option value="reviewsCount">Reviews amount</option>
+                    <option value="tourDuration">Duration</option>
+                    <option value="stars">Hotel stars amount</option>
+                  </select>
+                  <button onClick={() => dispatch(sortToursThunk(criteria))}>Sort</button>
                 </div>
-                <small class="text-muted">9 mins</small>
+              </>
+            )}
+
+          </div>
+
+
+
+          <section id="services" className="services">
+            <div className="container">
+
+              <div className="section-title aos-init aos-animate" data-aos="zoom-out">
+                <h2>Хочу в тепло!</h2>
+                <p><strong>Вот что мы для Вас нашли</strong></p>
+              </div>
+
+              <div className="row">
+
+                {!!allTours && allTours.map((tour) => (
+                  <Tour
+                    tour={tour}
+                    key={tour._id}
+                  />
+                ))}
               </div>
             </div>
+          </section>
+          <div classNameName="flex row">
           </div>
+        </>
+      )}
+      {!showFilterForm && (
+
+        <div classNameName='flex'>
+          {!!allTours && allTours.map((tour) =>
+          (
+            <Tour
+              tour={tour}
+              key={tour._id}
+            />
+          ))}
         </div>
-
-
-  
-
-      </div>
-    </div> */}
-
-
-
-<div className="flex row">
-
-  
-
-  </div>
-
-
-
-  </>
-  )}
-    {!showFilterForm && (
-
-      <div className='flex'>
-        {!!allTours && allTours.map((tour) =>
-        (
-          <Tour
-            tour={tour}
-            key={tour._id}
-          />
-        ))}
-      </div>
-    )}
-
+      )}
     </>
   )
 }
