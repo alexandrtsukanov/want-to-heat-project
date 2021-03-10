@@ -31,11 +31,11 @@ function group (arr) {
   let result = [];
   let uniqueArr = unique(arr)
   for (let i = 0; i < uniqueArr.length; i += 1) {
-    result.push(addOne(uniqueArr[i], arr))
+    result.push(addOne(arr[i], arr))
   }
   return result
 }
 
-// console.log(group(array))
+console.log(group(array))
 
-console.log(null > -Infinity)
+// console.log(null > -Infinity)
