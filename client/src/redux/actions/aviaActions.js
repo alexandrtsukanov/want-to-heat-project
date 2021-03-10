@@ -10,7 +10,7 @@ import * as TYPES from '../types/types';
 
 const filterByTemp = (paramMinTemp, paramMaxTemp) => async (dispatch) => {
   console.log(paramMinTemp, paramMaxTemp)
-  const response = await fetch('/tours', {
+  const response = await fetch('tours/avia', {
     // const response = await fetch('http://localhost:3001/tours', {
 
     method: 'POST',
