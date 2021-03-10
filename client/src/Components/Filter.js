@@ -160,7 +160,7 @@ function Filter() {
 
     {showSort && (
       <>
-      <div className="animate__animated animate__fadeInUp">
+      <div className="">
       <label htmlFor="sortation" className="form-label">Choose criteria</label>
       <select onChange={criteriaHandler} name="sortation" class="field">
       <option value="tempMinToMax">temperature, min to max</option>
