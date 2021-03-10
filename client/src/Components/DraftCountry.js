@@ -5,18 +5,15 @@ function DraftCountry({ country }) {
 
   return (
     <>
-    <h4>{country[0].country}</h4>
-    {
-      country.map((tour) =>
-
-        <span key={tour._id} style={{display: 'inline'}}>
+    <div>
+      <h4>{country[0].country}</h4>
+    </div>
+    { country.map((tour) =>
+        <div key={tour._id} className="col-4">
           <DraftTour
             tour={tour}
           />
-        </span>
-      
-      )
-  }
+        </div> )}
   </>
   )
 }

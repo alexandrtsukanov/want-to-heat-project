@@ -26,8 +26,6 @@ function DraftTour ({ tour }) {
     })
   }
 
-
-
   return (
     <>
     <div className='tour' key={tour._id}>

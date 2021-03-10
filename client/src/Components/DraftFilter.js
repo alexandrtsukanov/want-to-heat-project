@@ -6,10 +6,8 @@ import DraftCountry from './DraftCountry';
 
 
 function Filter() {
-  const dispatch = useDispatch();
 
-  const user = useSelector(state => state.user);
-  // const allTours = user.searchTours;
+  const dispatch = useDispatch();
   const allTours = useSelector(state => state.allTours);
 
   function addOne(el, arr) {
@@ -22,7 +20,7 @@ function Filter() {
     return resultArr
   }
 
-  const forin = (arr, someEl) => {
+  function forin(arr, someEl) {
     let keys = arr.map(el => el.country);
     if (keys.includes(someEl)) {
       return true
@@ -30,7 +28,7 @@ function Filter() {
       return false
     }
   }
-  const getRepeated = (arr) => {
+  function getRepeated(arr) {
     let result = [];
     for (let i = 0; i < arr.length; i += 1) {
       if (!forin(result, arr[i].country)) {
@@ -44,12 +42,12 @@ function Filter() {
     let result = [];
     let uniqueArr = getRepeated(arr)
     for (let i = 0; i < uniqueArr.length; i += 1) {
-      result.push(addOne(arr[i], arr))
+      result.push(addOne(uniqueArr[i], arr))
     }
     return result
   }
 
-  const allToursShow = group(allTours)
+  const allToursGrouped = group(allTours)
 
   const [criteria, setCriteria] = useState('');
   const [incCountry, setIncCountry] = useState('');
@@ -97,17 +95,16 @@ function Filter() {
   const starsHandler = ({ target }) => {
     setStars(target.value)
   }
-
-  console.log(allToursShow)
+  console.log(allToursGrouped)
 
   return (
-    <>
+    <div>
       <h1>Filter</h1>
 
       <form type='submit' onSubmit={handlerSubmit}>
         <span><input type='number' id="exampleInputEmail1" className="form-label form-control" name='minTemp' placeholder='Set min temp' /></span>
         <span><input type='number' id="exampleInputPassword1" className="form-label form-control" name='maxTemp' placeholder='Set max temp' /></span>
-        <button type="submit" class="btn btn-primary">Take me to heat!</button>
+        <button type="submit" className="btn btn-primary">Take me to heat!</button>
       </form>
 
       {showFilterForm && (
@@ -127,8 +124,8 @@ function Filter() {
               </div>
 
               <label htmlFor="minRate" className="form-label">Min rate</label>
-              <select onChange={rateHandler} name="minRate" class="field">
-                <option defaultValue value="0">0</option>
+              <select onChange={rateHandler} defaultValue="0" name="minRate" className="field">
+                <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -142,8 +139,8 @@ function Filter() {
               </select>
 
               <label htmlFor="minStars" className="form-label">Min starts rate</label>
-              <select onChange={starsHandler} name="minStars" class="field">
-                <option dafaultValue value="1">1</option>
+              <select onChange={starsHandler} dafaultValue="1" name="minStars" className="field">
+                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -160,10 +157,10 @@ function Filter() {
               <>
                 <div className="">
                   <label htmlFor="sortation" className="form-label">Choose criteria</label>
-                  <select onChange={criteriaHandler} name="sortation" class="field">
+                  <select onChange={criteriaHandler} defaultValue="price" name="sortation" className="field">
                     <option value="tempMinToMax">temperature, min to max</option>
                     <option value="tempMaxToMin">temperature, max to min</option>
-                    <option defaultValue value="price">Price</option>
+                    <option value="price">Price</option>
                     <option value="rating">Rating</option>
                     <option value="toSeaDistance">Distance to sea</option>
                     <option value="reviewsCount">Reviews amount</option>
@@ -176,43 +173,37 @@ function Filter() {
             )}
 
           </div>
-
-          <section id="services" class="services">
-            <div class="container">
-
-              <div class="section-title aos-init aos-animate" data-aos="zoom-out">
-                <h2>Хочу в тепло!</h2>
-                <p><strong>Вот что мы для Вас нашли</strong></p>
-              </div>
-
-              <div class="row">
-
-                {!!allToursShow && allToursShow.map((el, index) => (
-
-                  <div class="col-lg-4 col-md-6" key={index}>
-                    <DraftCountry
-                      country={el}
-                    />
-                  </div>
-                ))}
-              </div>
+          <div className="container">
+            <div className="section-title aos-init aos-animate" data-aos="zoom-out">
+              <h2>Хочу в тепло!</h2>
+              <p><strong>Вот что мы для Вас нашли</strong></p>
             </div>
-          </section>
-         
+            
+            <div className="row">
+              {!!allToursGrouped && allToursGrouped.map((el, index) => (
+                <div className="row" key={index}>
+                  <DraftCountry
+                    country={el}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </>
       )}
+
       {!showFilterForm && (
         <div className='flex'>
-          {!!allToursShow && allToursShow.map((el, index) =>
-            ( <div key={index}>
-                <DraftCountry
-                  country={el}
-                />
-              </div>
+          {!!allToursGrouped && allToursGrouped.map((el, index) =>
+            (<div key={index}>
+              <DraftCountry
+                country={el}
+              />
+            </div>
             ))}
         </div>
       )}
-    </>
+    </div>
   )
 }
 

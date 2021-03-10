@@ -77,3 +77,15 @@ body {
   }
 }
 /* лоадер */
+
+.mycolumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.myrow {
+  display: flex;
+  flex-direction: row;
+}
+
+
