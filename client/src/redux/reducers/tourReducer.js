@@ -14,8 +14,8 @@ function tourReducer(allTours = [], action) {
       return action.data
     case TYPES.FILTER_TOURS:
       return action.data
-      // case TYPES.CHANGE_IS_ADDED:
-      //   return [...]    
+    case TYPES.CHANGE_IS_ADDED:
+        return allTours.map(el => el._id === action.data ? {...el, isAdded: !el.isAdded} : el)    
     default:
       return allTours;
   }

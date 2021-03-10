@@ -12,26 +12,19 @@ import Profile from './Components/Profile';
 import Filter from './Components/Filter';
 import Team from './Components/Team';
 import About from './Components/About';
-import Footer from './Components/Footer';
+// import Footer from './Components/Footer';
+import FilterAvia from './Components/FilterAvia';
 
 function App() {
 
-  const user = useSelector(state => state.user);
   const dispatch = useDispatch()
 
   useEffect(() => {
     (dispatch(checkUserSession()))
   }, [])
 
-  console.log(user)
-
   return (
     <>
-    {Boolean(user) &&
-      <>
-        On site now: {user.login}
-      </>
-    }
       <Router>
         <Navbar />
         <Switch>
@@ -44,8 +37,11 @@ function App() {
           <Route path='/logout'>
             <Logout />
           </Route>
+          <Route path='/avia'>
+            <FilterAvia />
+          </Route>
           <Route path='/login'>
-             <Login />
+            <Login />
           </Route>
           <Route path='/register'>
             <Register />

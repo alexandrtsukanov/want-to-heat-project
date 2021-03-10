@@ -3,6 +3,7 @@ const initState = {
   allTours: [],
   priceTours: [],
   usersTours: [],
+  avia: [],
 }
 
 export default initState;

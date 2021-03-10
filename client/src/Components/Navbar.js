@@ -6,7 +6,7 @@ function Navbar() {
 
   const user = useSelector(state => state.user);
   const history = useHistory();
-
+  console.log(user)
   return (
     <>
       {/* <div>
@@ -47,9 +47,11 @@ function Navbar() {
         <ul>
           {Boolean(user) ? 
           <>
-          <li className=""><Link exact to="/">Home</Link></li>
+          <li><img src={user.img} alt='' width="40px" className='userImg'></img></li>
+          <li className='userLogin'>{user.login}</li>
           <li><Link to="/filter">Search</Link></li>
           <li><Link onClick={() => history.push(`/user/${user._id}`)} to="/profile">Profile</Link></li>
+          <li><Link to="/avia">Авиа</Link></li>
 
           <li><Link to="/about">About</Link></li>
           <li><Link to="/team">Team</Link></li>

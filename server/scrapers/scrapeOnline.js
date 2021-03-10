@@ -113,12 +113,12 @@ const scrapOnline = async () => {
           },
         );
       }
-      console.log('data', data);
+      // console.log('data', data);
       return data;
     });
     allTurs = [...allTurs, ...result];
   }
-  console.log('allTurs', allTurs);
+  // console.log('allTurs', allTurs);
   allTurs = await addLonLat(allTurs);
   allTurs = await addTemperture(allTurs);
   // Всё сделано, закроем браузер

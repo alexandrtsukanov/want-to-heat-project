@@ -1,5 +1,6 @@
 function authenticated(req, res, next) {
-  if (req.session.userID) {
+  console.log(req.session.passport.user);
+  if (req.session.passport.user) {
     return next();
   }
   return res.status(501);
