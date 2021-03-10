@@ -13,15 +13,18 @@ function DraftCountry({ country }) {
     < div className="row">
     { country.map((tour, index) => 
       index <= 2 ?
-      
-        <DraftTour
-          tour={tour}
-        />
+        <div key={tour._id}>
+          <DraftTour
+            tour={tour}
+          />
+        </div>
          : (
           showAll ? 
+        <div key={tour._id}>
           <DraftTour 
             tour={tour}
           />
+        </div>
            : null
         )
          )}
