@@ -26,7 +26,10 @@ function DraftCountry({ country }) {
         )
          )}
     </div>
-    <button onClick={() => setShowAll(pre => !pre)}>Показать все</button>
+    {!showAll ?
+    <button onClick={() => setShowAll(pre => !pre)}>Показать все</button> :
+    <button onClick={() => setShowAll(pre => !pre)}>Скрыть</button>
+  }
   </div>
   )
 }
