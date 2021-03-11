@@ -73,6 +73,7 @@ passport.use(
           'tokens.googleId': profile.id,
           login: profile.displayName,
           img: profile.photos[0].value,
+          email: profile.emails[0].value,
         }).save().then((newUser) => {
           done(null, newUser);
         });

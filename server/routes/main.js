@@ -17,12 +17,10 @@ router.get('/login', async (req, res) => {
 
 // ==================login=======================
 router.post('/login', async (req, res) => {
-  console.log(req.body)
   const { login, password } = req.body;
   let user;
   try {
     user = await User.findOne({ login });
-    console.log(user)
     if (!user || !(await bcrypt.compare(password, user?.password))) {
       return res.sendStatus(501);
     }
@@ -36,7 +34,7 @@ router.post('/login', async (req, res) => {
 // ==================loginByGoogle==========================
 
 router.get('/google', passport.authenticate('google', {
-  scope: ['profile'],
+  scope: ['profile', 'email'],
 }));
 
 // callback route for google to redirect to
