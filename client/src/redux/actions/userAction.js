@@ -125,6 +125,10 @@ const addTourThunk = (paramUser, paramTour) => async (dispatch) => {
     type: TYPES.ADD_TOUR,
     data: result
   })
+  dispatch ({
+    type: TYPES.CHANGE_IS_ADDED,
+    data: paramTour
+  })
 }
 
 const deleteTourThunk = (paramUser, paramTour) => async (dispatch) => {

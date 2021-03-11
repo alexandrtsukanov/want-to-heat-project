@@ -46,9 +46,9 @@ return (
     <div className='link'>
       <a className='orange' href={tour.url}>Перейти на тур</a>
       {!tour.isAdded ?
-        <i onClick={() => addTourHandler(user._id, tour._id)} className="far fa-star addStar"></i>
+        <i onClick={() => dispatch(addTourThunk(user._id, tour._id))} className="far fa-star addStar"></i>
         :
-        <i onClick={() => deleteTourHandler(user._id, tour._id)} className="fas fa-star delStar" ></i>
+        <i onClick={() => dispatch(addTourThunk(user._id, tour._id))} className="fas fa-star delStar" ></i>
       }
     </div>
   </div>

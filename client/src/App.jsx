@@ -21,6 +21,7 @@ import DraftTour from './Components/DraftTour';
 function App() {
 
   const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
 
   useEffect(() => {
     (dispatch(checkUserSession()))
@@ -32,8 +33,10 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact path='/'>
-            <Home />
-          </Route>
+          {Boolean(user) ? 
+            <DraftFilter /> :
+            <Home />}
+        </Route>
           <Route path='/about'>
             <About />
           </Route>
