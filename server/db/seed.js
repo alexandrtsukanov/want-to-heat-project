@@ -37,9 +37,9 @@ async function seed() {
   // } catch (error) {
   //   console.log(error);
   // }
-  if (allAviaFromCity[3]?.city) {
-    Avia.deleteMany({ source: 'city-avia' });
-  } else { console.log('не получили билеты'); }
+  // if (allAviaFromCity[3]?.city) {
+  //   Avia.deleteMany({ source: 'city-avia' });
+  // } else { console.log('не получили билеты'); }
   await Avia.insertMany(allAviaFromCity);
 
   await mongoose.connection.close();

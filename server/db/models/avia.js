@@ -47,6 +47,8 @@ const aviaSchema = new Schema({
     type: Date,
     default: Date.now(),
   },
+  lonLat: [String],
+  temperature: Number,
 });
 
 module.exports = model('avia', aviaSchema);
