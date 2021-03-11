@@ -1,13 +1,15 @@
 import DraftTour from './DraftTour';
 import { useState } from 'react';
 import Tour from './Tour';
+import { useHistory } from "react-router-dom";
 
 function DraftCountry({ country }) {
 
   const [showAll, setShowAll] = useState(false)
+  const history = useHistory()
 
   return (
-    <div className="mycolumn">
+    <div className="mycolumn" id={country[0].country}>
 
       < div className="row">
         {country.map((tour, index) =>
@@ -44,7 +46,10 @@ function DraftCountry({ country }) {
           <h2 className="countryName">{country[0].country}</h2>
           <hr />
           <button className="login-button animate__animated animate__fadeInUp scrollto btn btn-primary button"
-            onClick={() => setShowAll(pre => !pre)}>Скрыть</button>
+            onClick={() => {
+              setShowAll(pre => !pre)
+            }
+            }><a className='href' href={`#${country[0].country}`}>Скрыть</a></button>
           <div className="pading2">
             <hr />
           </div>

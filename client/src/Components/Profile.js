@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from 'react';
-import { useHistory, useParams, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { showProfileThunk, checkUserSession } from '../redux/actions/userAction'
+import { checkUserSession } from '../redux/actions/userAction'
 import TourInProfile from './TourInProfile'
 
 function Profile() {
@@ -19,11 +19,9 @@ function Profile() {
 
   return (
     <>
-    <h1>Профиль</h1>
+    <h1>Личный кабинет</h1>
     <hr />
-
-    <h1>Имя: <strong>{user.login}</strong></h1>
-    <div className='flex'>
+    <div className='flex-prof'>
     {Boolean(user.usersTours.length) && user.usersTours.map((tour) =>
         (
           <TourInProfile
