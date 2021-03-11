@@ -110,7 +110,6 @@ const filterByStarsThunk = (minStarsParam) => async (dispatch) => {
 }
 
 const filterThunk = (minPriceParam, maxPriceParam, minRateParam, minStarsParam) => async (dispatch) => {
-  console.log('QQQQQQQQQQQQQQQQQQQQQQQQQQQQQ')
   const response = await fetch('/tours/filter', {
     method: 'POST',
     headers: {

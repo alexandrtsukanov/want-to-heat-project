@@ -10,45 +10,6 @@ function Filter() {
   const dispatch = useDispatch();
   const allTours = useSelector(state => state.allTours);
 
-  function addOne(el, arr) {
-    let resultArr = [];
-    for (let i = 0; i < arr.length; i += 1) {
-      if (arr[i].country === el.country) {
-        resultArr.push(arr[i])
-      }
-    }
-    return resultArr
-  }
-
-  function forin(arr, someEl) {
-    let keys = arr.map(el => el.country);
-    if (keys.includes(someEl)) {
-      return true
-    } else {
-      return false
-    }
-  }
-  function getRepeated(arr) {
-    let result = [];
-    for (let i = 0; i < arr.length; i += 1) {
-      if (!forin(result, arr[i].country)) {
-        result.push(arr[i])
-      }
-    }
-    return result
-  }
-
-  function group(arr) {
-    let result = [];
-    let uniqueArr = getRepeated(arr)
-    for (let i = 0; i < uniqueArr.length; i += 1) {
-      result.push(addOne(uniqueArr[i], arr))
-    }
-    return result
-  }
-
-  const allToursGrouped = group(allTours)
-
   const [criteria, setCriteria] = useState('');
   const [incCountry, setIncCountry] = useState('');
   const [showFilterForm, setShowFilterForm] = useState(false);
@@ -86,7 +47,6 @@ function Filter() {
     const minRate = event.target.minRate.value;
     const minStars = event.target.minStars.value;
     dispatch(filterThunk(minPrice, maxPrice, minRate, minStars))
-
   }
 
   const rateHandler = ({ target }) => {
@@ -95,7 +55,6 @@ function Filter() {
   const starsHandler = ({ target }) => {
     setStars(target.value)
   }
-  console.log(allToursGrouped)
 
   return (
     <div>
@@ -180,7 +139,7 @@ function Filter() {
             </div>
 
             <div className="mycolumn">
-              {!!allToursGrouped && allToursGrouped.map((el, index) => (
+              {!!allTours && allTours.map((el, index) => (
                 <div className="mycolumn" key={index}>
                   <DraftCountry
                     country={el}
@@ -194,7 +153,7 @@ function Filter() {
     <div className="mycolumn">
       {!showFilterForm && (
         <div className='mycolumn'>
-          {!!allToursGrouped && allToursGrouped.map((el, index) =>
+          {!!allTours && allTours.map((el, index) =>
             (<div key={index}>
               <DraftCountry
                 country={el}

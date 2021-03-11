@@ -10,36 +10,6 @@ function Filter() {
   // const allTours = user.searchTours;
   const allTours = useSelector(state => state.allTours);
 
-  function group(arr) {
-    let result = [];
-    let uniqueArr = unique(arr)
-    for (let i = 0; i < uniqueArr.length; i += 1) {
-      result.push(addOne(uniqueArr[i], arr))
-    }
-    return result
-  }
-
-  function addOne(el, arr) {
-    let resultArr = [];
-    for (let i = 0; i < arr.length; i += 1) {
-      if (arr[i].country === el.country) {
-        resultArr.push(arr[i])
-      }
-    }
-    return resultArr
-  }
-
-  function unique(arr) {
-    let result = [];
-    for (let i = 0; i < arr.length; i += 1) {
-      if (!result.includes(arr[i])) {
-        result.push(arr[i]);
-      }
-    }
-    return result;
-  }
-
-
   const [criteria, setCriteria] = useState('');
   const [incCountry, setIncCountry] = useState('');
   const [showFilterForm, setShowFilterForm] = useState(false);

@@ -84,55 +84,58 @@
 // ]
 
 let array = [
-  {country: 'Russia', city: 'Msc', id: 1},
-  {country: 'Japan', city: 'Tokyo', id: 2},
-  {country: 'Russia', city: 'Spb', id: 3},
+  {country: 'Russia', city: 'Msc', id: 7},
+  {country: 'Japan', city: 'Tokyo', id: 6},
+  {country: 'Russia', city: 'Spb', id: 5},
   {country: 'Japan', city: 'Osaka', id: 4},
-  {country: 'China', city: 'Beijing', id: 5},
-  {country: 'Japan', city: 'Kobe', id: 6},
-  {country: 'China', city: 'Shanghai', id: 6},
+  {country: 'China', city: 'Beijing', id: 3},
+  {country: 'Japan', city: 'Kobe', id: 2},
+  {country: 'China', city: 'Shanghai', id: 1},
 ];
 
-function addOne (el, arr) {
-  let resultArr = [];
-  for (let i = 0; i < arr.length; i += 1) {
-    if (arr[i].country === el.country) {
-      resultArr.push(arr[i])
+
+function group(arr) {
+  let finalResult = [];
+  let uniqueArr = getUnique(arr)
+  for (let i = 0; i < uniqueArr.length; i += 1) {
+    finalResult.push(addOne(uniqueArr[i], arr))
+  }
+  function addOne(el, arr) {
+    let resultArr = [];
+    for (let i = 0; i < arr.length; i += 1) {
+      if (arr[i].country === el.country) {
+        resultArr.push(arr[i])
+      }
+    }
+    return resultArr
+  }
+  
+  function forin(arr, someEl) {
+    let keys = arr.map(el => el.country);
+    if (keys.includes(someEl)) {
+      return true
+    } else {
+      return false
     }
   }
-  return resultArr
-}
-
-const forin = (arr, someEl) => {
-  let keys = arr.map(el => el.country) ;
-  if (keys.includes(someEl)) {
-    return true
-  } else {
-    return false
-  }
-}
-const getRepeated = (arr) => {
-  let result = [];
-  for (let i = 0; i < arr.length; i += 1) {
-    if (!forin(result, arr[i].country)) {
-      result.push(arr[i])
+  function getUnique(arr) {
+    let result = [];
+    for (let i = 0; i < arr.length; i += 1) {
+      if (!forin(result, arr[i].country)) {
+        result.push(arr[i])
+      }
     }
+    return result
   }
-  return result
-}
-
-function group (arr) {
-  let result = [];
-  let uniqueArr = getRepeated(arr)
-  console.log(uniqueArr)
-  for (let i = 2; i < uniqueArr.length; i += 1) {
-    result.push(addOne(uniqueArr[i], arr))
-  }
-  return result
+  return finalResult
 }
 
 // console.log('all tours =>', getRepeated(array))
 // console.log('all tours =>', forin(array))
 // console.log('all tours =>', addOne({country: 'China', city: 'Beijing', id: 5}, array))
 
-  console.log('all tours =>', group(array))
+  // console.log('all tours =>', group(array))
+  console.log('sort =>', group(array).map(el => el.sort((a, b) => a.id - b.id)).sort((a, b) => a[0].id - b[0].id))
+  
+ 
+
