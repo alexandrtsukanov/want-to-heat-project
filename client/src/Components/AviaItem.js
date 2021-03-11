@@ -28,19 +28,17 @@ function AviaItem({ avia }) {
       <div style={{
         backgroundImage: `url(${avia.photoUrl})`
       }} className='tour'>
-        <div className="price">
-          {avia.price} руб.
+        <div className="price-avia">
+          {avia.price} руб. в обе стороны
       </div>
         <div className='info'>
-          <div className='stars'>
-            <div>{avia.city}</div>
-          </div>
+            <div className='avia-city'>{avia.city}</div>
           <div className='digrees'>
             <div>{avia.temperature} °С</div>
           </div>
         </div>
         <div className='link'>
-          <a className='orange' href={avia.url}>Перейти на тур</a>
+          <a className='orange' href={avia.url}>Купить билет</a>
           {!avia.isAdded ?
             <i onClick={() => addTourHandler(user._id, avia._id)} className="far fa-star addStar"></i>
             :
