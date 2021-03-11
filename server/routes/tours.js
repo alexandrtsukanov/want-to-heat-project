@@ -11,7 +11,7 @@ router.post('/', authenticated,
   async (req, res) => {
     const currentUser = await User.findById(req.session.passport.user);
     let { minTemp, maxTemp } = req.body;
-    if (!minTemp) minTemp = -Infinity;
+    if (!minTemp) minTemp = -999;
     if (!maxTemp) maxTemp = Infinity;
     let tours;
     try {
@@ -21,7 +21,7 @@ router.post('/', authenticated,
       currentUser.sortTours = tours;
       await currentUser.save();
       let toursGrouped = group(tours);
-      return res.status(200).json(toursGrouped);
+      return res.status(200).json(toursGrouped.map(el => el.sort((a, b) => a.price - b.price)).sort((a, b) => a[0].price - b[0].price));
     } catch (error) {
       console.log(error);
       return res.sendStatus(501);

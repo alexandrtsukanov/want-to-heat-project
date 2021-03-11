@@ -10,7 +10,7 @@ const userSchema = Schema({
   password: String,
   email: {
     type: String,
-    unique: true,
+    // unique: true,
   },
   searchTours: {
     type: Array,

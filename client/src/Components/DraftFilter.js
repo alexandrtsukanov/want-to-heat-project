@@ -98,7 +98,7 @@ function Filter() {
               </select>
 
               <label htmlFor="minStars" className="form-label">Min starts rate</label>
-              <select onChange={starsHandler} dafaultValue="1" name="minStars" className="field">
+              <select onChange={starsHandler} defaultValue="1" name="minStars" className="field">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -150,18 +150,18 @@ function Filter() {
           </div>
         </>
       )}
-    <div className="mycolumn">
-      {!showFilterForm && (
-        <div className='mycolumn'>
-          {!!allTours && allTours.map((el, index) =>
-            (<div key={index}>
-              <DraftCountry
-                country={el}
-              />
-            </div>
-            ))}
-        </div>
-      )}
+      <div className="mycolumn">
+        {!showFilterForm && (
+          <div className='mycolumn'>
+            {!!allTours && allTours.map((el, index) =>
+              (<div key={index}>
+                <DraftCountry
+                  country={el}
+                />
+              </div>
+              ))}
+          </div>
+        )}
       </div>
     </div>
   )

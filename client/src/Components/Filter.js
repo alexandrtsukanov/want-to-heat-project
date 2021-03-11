@@ -92,7 +92,7 @@ function Filter() {
               </select>
               <label htmlFor="minStars" className="form-label">Min starts rate</label>
               <select onChange={starsHandler} name="minStars" class="field">
-                <option dafaultValue value="1">1</option>
+                <option defaultValue value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -128,10 +128,10 @@ function Filter() {
               </div>
               <div class="row">
                 {!!allTours && allTours.map((tour) => (
-                      <Tour
-                        tour={tour}
-                        key={tour._id}
-                      />
+                  <Tour
+                    tour={tour}
+                    key={tour._id}
+                  />
                 ))}
               </div>
             </div>
