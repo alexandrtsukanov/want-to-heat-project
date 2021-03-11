@@ -1,5 +1,6 @@
 import DraftTour from './DraftTour';
 import {useState } from 'react';
+import Tour from './Tour';
 
 function DraftCountry({ country }) {
 
@@ -14,14 +15,14 @@ function DraftCountry({ country }) {
     { country.map((tour, index) => 
       index <= 2 ?
         <div key={tour._id}>
-          <DraftTour
+          <Tour
             tour={tour}
           />
         </div>
          : (
           showAll ? 
         <div key={tour._id}>
-          <DraftTour 
+          <Tour 
             tour={tour}
           />
         </div>
