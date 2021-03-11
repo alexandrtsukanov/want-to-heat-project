@@ -10,6 +10,10 @@ body {
   font-family: 'Montserrat', sans-serif !important;
 }
 
+.team {
+  background-color: #F2F2E5 !important;
+}
+
 .logo {
   /* font-family: 'Lobster', cursive; */
   font-family: 'Reggae One', cursive;

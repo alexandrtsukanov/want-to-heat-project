@@ -42,7 +42,7 @@ function FilterAvia() {
   }
 
   return (
-    <>
+    <div>
       <h1><strong>Поиск авиабилетов</strong></h1>
       <div className='flex-filter'>
         <form type='submit' onSubmit={handlerSubmit} className='filter'>
@@ -108,7 +108,7 @@ function FilterAvia() {
           ))}
         </div>
       )}
-    </>
+    </div>
   )
 }
 
