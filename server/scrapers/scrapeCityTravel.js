@@ -17,6 +17,7 @@ const scrapSityAvia = async () => {
     args: [
       '--window-size=1920,1080',
       '--no-sandbox',
+      // '--proxy-server=138.50.50.50:38886',
     ],
   });
   // Откроем новую страницу
@@ -38,26 +39,35 @@ const scrapSityAvia = async () => {
   const waySelector = 'body > div.wrap > div.popular-gal > div > div.navi > div.navi-place > span > span.selection > span > span.select2-selection__rendered';
   await page.waitForTimeout(3000);
   await page.waitForSelector(waySelector);
-  await page.click(waySelector);
+  if (page.$(waySelector)) {
+    await page.click(waySelector);
+  }
+  await page.waitForTimeout(2000);
   console.log('отработал раскрытие списка');
   const chooseWaySelector = 'body > div.wrap > div.popular-gal > div > div.navi > div.navi-place > span > span.dropdown-wrapper > span > span > ul > li:nth-child(2)';
   await page.waitForSelector(chooseWaySelector);
   await page.waitForTimeout(3000);
-  await page.click(chooseWaySelector);
+  if (page.$(chooseWaySelector)) {
+    await page.click(chooseWaySelector);
+  }
   console.log('отработал выбор списка');
-  await page.waitForTimeout(3000);
+  await page.waitForTimeout(5000);
+
+  await page.waitForSelector('body > div.wrap > div.popular-gal > div > div.navi > div.navi-date > div > div.ctps-single > span.ctps-rendered');
+
   await page.click('body > div.wrap > div.popular-gal > div > div.navi > div.navi-date > div > div.ctps-single > span.ctps-rendered');
+  console.log('отработал раскрытие списка');
+
   await page.waitForTimeout(3000);
-  await page.click('div.navi-date > div > div.ctps-dropdown > div:nth-child(3)');
+  if (page.$('div.navi-date > div > div.ctps-dropdown > div:nth-child(3)')) {
+    await page.click('div.navi-date > div > div.ctps-dropdown > div:nth-child(3)');
+  }
   await page.waitForTimeout(3000);
-  console.log('eval', await page.$eval('body > div.wrap > div.popular-gal > div > a', (el) => el.style.display === 'block'));
-  const ev = await page.$eval('body > div.wrap > div.popular-gal > div > a', (el) => el.style.display === 'block');
-  console.log(ev);
   while (await page.$eval('body > div.wrap > div.popular-gal > div > a', (el) => el.style.display === 'block')) {
     console.log('v while');
     await page.waitForTimeout(2000);
     await page.click('body > div.wrap > div.popular-gal > div > a > span');
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(2000);
   }
 
   //  ищем данные
@@ -98,7 +108,9 @@ const scrapSityAvia = async () => {
   });
 
   const allAviaWithLonLat = await addLonLat(result);
+  console.log('добавили координаты');
   const allAviaWithTemp = await addTemperture(allAviaWithLonLat);
+  console.log('добавили температуру');
   // Всё сделано, закроем браузер
   await browser.close();
   // // process.exit();
@@ -106,4 +118,5 @@ const scrapSityAvia = async () => {
   return allAviaWithTemp;
 };
 
+// scrapSityAvia();
 module.exports = scrapSityAvia;

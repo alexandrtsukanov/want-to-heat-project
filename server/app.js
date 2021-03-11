@@ -1,4 +1,4 @@
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 const express = require('express');
 const { connect } = require('mongoose');
 const logger = require('morgan');
@@ -21,7 +21,7 @@ const toursRouter = require('./routes/tours');
 
 const port = (process.env.PORT ?? 3001);
 
-schedule.scheduleJob('37 23 * * *', () => seed());
+// schedule.scheduleJob('37 23 * * *', () => seed());
 
 app.use(logger('dev'));
 app.use(cors({

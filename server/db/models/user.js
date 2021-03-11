@@ -40,6 +40,9 @@ const userSchema = Schema({
     type: Array,
     default: [],
   },
-});
+  createdAt: Date,
+  updatedAt: Date,
+},
+{ timestamps: true });
 
 module.exports = model('users', userSchema);
