@@ -8,7 +8,7 @@ router.get('/login', async (req, res) => {
   try {
 
     let user = await User.findById(req.session.userID);
-    console.log(user)
+    // console.log(user)
     // let user = await User.findOne({ login: 'Admin' });
     if (!user) return res.sendStatus(204);
   } catch (error) {
