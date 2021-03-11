@@ -26,6 +26,7 @@ export function signInUser(data) {
 }
 
 const loginUser = (login, password) => (dispatch) => {
+  console.log(login, password)
   fetch('/login', {
     method: "POST",
     headers: {
@@ -56,6 +57,12 @@ export function removeUser() {
   return {
     type: TYPES.VERIFY_USER,
     data: null
+  }
+}
+export function removeTours() {
+  return {
+    type: TYPES.SET_TOURS,
+    data: []
   }
 }
 
@@ -131,6 +138,10 @@ const deleteTourThunk = (paramUser, paramTour) => async (dispatch) => {
   dispatch ({
     type: TYPES.DELETE_TOUR,
     data: paramTour,
+  })
+  dispatch ({
+    type: TYPES.CHANGE_IS_ADDED,
+    data: paramTour
   })
 }
 

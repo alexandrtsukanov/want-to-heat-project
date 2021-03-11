@@ -1,13 +1,13 @@
 import { React, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterByTemp, sortToursThunk, filterByPriceThunk, filterByRateThunk, filterByStarsThunk, filterThunk } from '../redux/actions/tourActions';
+import { filterByTemp, sortToursThunk, filterByPriceThunk, filterThunk } from '../redux/actions/tourActions';
 import Tour from './Tour';
+import DraftCountry from './DraftCountry';
+
 
 function Filter() {
-  const dispatch = useDispatch();
 
-  // const user = useSelector(state => state.user);
-  // const allTours = user.searchTours;
+  const dispatch = useDispatch();
   const allTours = useSelector(state => state.allTours);
 
   const [criteria, setCriteria] = useState('');
@@ -47,7 +47,6 @@ function Filter() {
     const minRate = event.target.minRate.value;
     const minStars = event.target.minStars.value;
     dispatch(filterThunk(minPrice, maxPrice, minRate, minStars))
-
   }
 
   const rateHandler = ({ target }) => {
@@ -56,18 +55,24 @@ function Filter() {
   const starsHandler = ({ target }) => {
     setStars(target.value)
   }
+
   return (
-    <>
+    <div>
       <h1>Filter</h1>
+
       <form type='submit' onSubmit={handlerSubmit}>
         <span><input type='number' id="exampleInputEmail1" className="form-label form-control" name='minTemp' placeholder='Set min temp' /></span>
         <span><input type='number' id="exampleInputPassword1" className="form-label form-control" name='maxTemp' placeholder='Set max temp' /></span>
-        <button type="submit" class="btn btn-primary">Take me to heat!</button>
+        <button type="submit" className="btn btn-primary">Take me to heat!</button>
       </form>
+
       {showFilterForm && (
+
         <>
           <div>
+
             <form onSubmit={filterSubmit}>
+
               <div className="login-login animate__animated animate__fadeInUp">
                 <label htmlFor="exampleInputPassword1" className="form-label">Min price</label>
                 <input type="number" className="form-control" name="minPrice" id="exampleInputPassword1" placeholder='Min price' />
@@ -76,9 +81,10 @@ function Filter() {
                 <label htmlFor="exampleInputPassword1" className="form-label">Max price</label>
                 <input type="number" className="form-control" name="maxPrice" id="exampleInputPassword1" placeholder='Max price' />
               </div>
+
               <label htmlFor="minRate" className="form-label">Min rate</label>
-              <select onChange={rateHandler} name="minRate" class="field">
-                <option defaultValue value="0">0</option>
+              <select onChange={rateHandler} defaultValue="0" name="minRate" className="field">
+                <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -90,25 +96,30 @@ function Filter() {
                 <option value="9">9</option>
                 <option value="10">10</option>
               </select>
+
               <label htmlFor="minStars" className="form-label">Min starts rate</label>
-              <select onChange={starsHandler} name="minStars" class="field">
-                <option dafaultValue value="1">1</option>
+              <select onChange={starsHandler} dafaultValue="1" name="minStars" className="field">
+                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
               </select>
+
               <button type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Set</button>
+
             </form>
+
             <button onClick={() => setShowSort(pre => !pre)} type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Sort tours</button>
+
             {showSort && (
               <>
                 <div className="">
                   <label htmlFor="sortation" className="form-label">Choose criteria</label>
-                  <select onChange={criteriaHandler} name="sortation" class="field">
+                  <select onChange={criteriaHandler} defaultValue="price" name="sortation" className="field">
                     <option value="tempMinToMax">temperature, min to max</option>
                     <option value="tempMaxToMin">temperature, max to min</option>
-                    <option defaultValue value="price">Price</option>
+                    <option value="price">Price</option>
                     <option value="rating">Rating</option>
                     <option value="toSeaDistance">Distance to sea</option>
                     <option value="reviewsCount">Reviews amount</option>
@@ -119,38 +130,41 @@ function Filter() {
                 </div>
               </>
             )}
+
           </div>
-          <section id="services" class="services">
-            <div class="container">
-              <div class="section-title aos-init aos-animate" data-aos="zoom-out">
-                <h2>Хочу в тепло!</h2>
-                <p><strong>Вот что мы для Вас нашли</strong></p>
-              </div>
-              <div class="row">
-                {!!allTours && allTours.map((tour) => (
-                      <Tour
-                        tour={tour}
-                        key={tour._id}
-                      />
-                ))}
-              </div>
+          <div className="container">
+            <div className="section-title aos-init aos-animate" data-aos="zoom-out">
+              <h2>Хочу в тепло!</h2>
+              <p><strong>Вот что мы для Вас нашли</strong></p>
             </div>
-          </section>
+
+            <div className="mycolumn">
+              {!!allTours && allTours.map((el, index) => (
+                <div className="mycolumn" key={index}>
+                  <DraftCountry
+                    country={el}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </>
       )}
+    <div className="mycolumn">
       {!showFilterForm && (
-        <div className='flex'>
-          {!!allTours && allTours.map((tour) =>
-            (
-              <div key={tour._id}>
-                <Tour
-                  tour={tour}
-                />
-              </div>
+        <div className='mycolumn'>
+          {!!allTours && allTours.map((el, index) =>
+            (<div key={index}>
+              <DraftCountry
+                country={el}
+              />
+            </div>
             ))}
         </div>
       )}
-    </>
+      </div>
+    </div>
   )
 }
+
 export default Filter;

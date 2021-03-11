@@ -9,38 +9,12 @@ function Navbar() {
   console.log(user)
   return (
     <>
-      {/* <div>
-        <Link className='a' to='/'>
-          Home
-        </Link>
-        {user._id ?
-          (<>
-            <Link className='a' to={`/user/${user._id}`}>
-              Profile
-            </Link>
-            <Link className='a' to='/logout'>
-              Logout
-            </Link>
-          </>)
-          :
-          (<>
-            <Link className='a' to='/login'>
-              Login
-           </Link>
-            <Link className='a' to='/register'>
-              Register
-           </Link>
-          </>)
-        }
-      </div> */}
 
   <header style={{backgroundColor: '#142433'}} id="header" className="d-flex align-items-center  header-transparent ">
     <div className="container d-flex align-items-center">
 
       <div className="logo mr-auto">
-        <h1 className="text-light"><a href="index.html">I want to heat</a></h1>
-        {/* Uncomment below if you prefer to use an image logo
-        <a href="index.html"><img src="assets/img/logo.png" alt="" className="img-fluid"/></a> */}
+        <h1 className="text-light"><a href="index.html">Хочу в тепло!</a></h1>
       </div>
 
       <nav className="nav-menu d-none d-lg-block">
@@ -53,42 +27,38 @@ function Navbar() {
           <li><Link onClick={() => history.push(`/user/${user._id}`)} to="/profile">Profile</Link></li>
           <li><Link to="/avia">Авиа</Link></li>
 
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/team">Team</Link></li>
-          <li><Link to="/logout">Log Out</Link></li>
+          <li><Link className="my-menu" to="/about">О нас</Link></li>
+          <li><Link className="my-menu" to="/team">Авторы</Link></li>
+          <li><Link className="my-menu" to="/logout">Log Out</Link></li>
           </> : 
           <>
-          <li className=""><Link exact to="/">Home</Link></li>
-          <li><Link to="/register">Sign Up</Link></li>
-          <li><Link to="/login">Log In</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/team">Team</Link></li>
-          <li><Link to="/logout">Log Out</Link></li>
+          <li><Link className="my-menu" exact to="/">Главная</Link></li>
+          <li><Link className="my-menu" to="/register">Регистрация</Link></li>
+          <li><Link className="my-menu" to="/login">Вход</Link></li>
+          <li><Link className="my-menu" to="/about">О нас</Link></li>
+          <li><Link className="my-menu" to="/team">Авторы</Link></li>
           </>}
           
-            {/* <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li className="drop-down"><a href="#">Drop Down 2</a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-              <li><a href="#">Drop Down 5</a></li>
-            </ul> */}
-
-          {/* <li><a href="#contact">Contact</a></li> */}
 
         </ul>
       </nav>
 
     </div>
   </header>
+    <svg style={{backgroundColor: '#142433'}} class="hero-waves" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
+      <defs>
+        <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+      </defs>
+      <g class="wave1">
+        <use href="#wave-path" x="50" y="3" fill="rgba(255,255,255, .1)"/>
+      </g>
+      <g class="wave2">
+        <use href="#wave-path" x="50" y="0" fill="rgba(255,255,255, .2)"/>
+      </g>
+      <g class="wave3">
+        <use href="#wave-path" x="50" y="9" fill="lightgrey"/>
+      </g>
+    </svg>
 
 
     </>

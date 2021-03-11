@@ -32,7 +32,7 @@ function Home () {
       {/* <!-- Slide 2 --> */}
       <div className="carousel-item active">
         <div className="carousel-container">
-          <h2 style={{fontSize: '48px'}} className="animate__animated animate__fadeInDown">I want to heat</h2>
+          <h2 style={{fontSize: '48px'}} className="animate__animated animate__fadeInDown">Хочу в тепло!</h2>
           <p style={{fontSize: '24px'}} className="animate__animated animate__fadeInUp">I want to heat - the coolest app ever developed. Lorem ipsum dolorem. Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam.</p>
           <div>
 
