@@ -5,7 +5,7 @@ pluralize(null);
 const userSchema = Schema({
   login: {
     type: String,
-    unique: true,
+    // unique: true,
   },
   password: String,
   email: {
