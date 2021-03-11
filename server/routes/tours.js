@@ -9,8 +9,7 @@ const group = require('../group')
 
 router.post('/', authenticated,
   async (req, res) => {
-    console.log('Session', req.session);
-    const currentUser = await User.findById(req.session.userID);
+    const currentUser = await User.findById(req.session.passport.user);
     let { minTemp, maxTemp } = req.body;
     if (!minTemp) minTemp = -Infinity;
     if (!maxTemp) maxTemp = Infinity;
@@ -18,9 +17,6 @@ router.post('/', authenticated,
     try {
       tours = await (await Tour.find())
         .filter((tour) => tour.temperature >= minTemp && tour.temperature <= maxTemp);
-      // if (!tours.length) {
-      //   return res.status(204).send('No tours found');
-      // }
       currentUser.searchTours = tours;
       currentUser.sortTours = tours;
       await currentUser.save();
@@ -34,8 +30,7 @@ router.post('/', authenticated,
 
 router.post('/avia', authenticated,
   async (req, res) => {
-    console.log('Session', req.session);
-    const currentUser = await User.findById(req.session.userID);
+    const currentUser = await User.findById(req.session.passport.user);
     let { minTemp, maxTemp } = req.body;
     if (!minTemp) minTemp = -Infinity;
     if (!maxTemp) maxTemp = Infinity;
@@ -43,9 +38,6 @@ router.post('/avia', authenticated,
     try {
       avia = await (await Avia.find())
         .filter((aviaItem) => aviaItem.temperature >= minTemp && aviaItem.temperature <= maxTemp);
-      // if (!tours.length) {
-      //   return res.status(204).send('No tours found');
-      // }
 
       currentUser.searchAvia = avia;
       currentUser.sortAvia = avia;
@@ -59,7 +51,7 @@ router.post('/avia', authenticated,
 
 router.post('/sortation', authenticated, async (req, res) => {
   try {
-    const currentUser = await User.findById(req.session.userID);
+    const currentUser = await User.findById(req.session.passport.user);
     const { criteria } = req.body;
     const tours = group(currentUser.sortTours);
     switch (criteria) {
@@ -90,22 +82,18 @@ router.post('/sortation', authenticated, async (req, res) => {
 });
 
 router.post('/filter', async (req, res) => {
-  let currentUser = await User.findById(req.session.userID);
+  let currentUser = await User.findById(req.session.passport.user);
   const { minPrice, maxPrice, minRate, minStars } = req.body;
   if (minRate === '') minRate = -Infinity
-  console.log(req.body)
   const tours = [...currentUser.searchTours];
-  console.log(tours.length);
   if (!maxPrice) {
     const filteredTours = tours.filter(el => el.price >= minPrice && el.rating >= minRate && el.stars >= minStars)
-    console.log(filteredTours.length)
     currentUser.sortTours = filteredTours
     await currentUser.save()
     const toursGrouped = group(filteredTours)
     return res.json(toursGrouped)
   } else {
     const filteredTours = tours.filter(el => el.price >= minPrice && el.price <= maxPrice && el.rating >= minRate && el.stars >= minStars)
-    console.log(filteredTours.length)
     currentUser.sortTours = filteredTours
     await currentUser.save()
     const toursGrouped = group(filteredTours)

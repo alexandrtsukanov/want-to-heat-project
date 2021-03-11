@@ -6,7 +6,7 @@ function Navbar() {
 
   const user = useSelector(state => state.user);
   const history = useHistory();
-
+  console.log(user)
   return (
     <>
 
@@ -21,10 +21,11 @@ function Navbar() {
         <ul>
           {Boolean(user) ? 
           <>
-          <li><Link className="my-menu" exact to="/">Главная</Link></li>
-          <li><Link className="my-menu" to="/filter">Поиск туров</Link></li>
-          <li><Link className="my-menu" onClick={() => history.push(`/user/${user._id}`)} to="/profile">Profile</Link></li>
-          <li><Link className="my-menu" to="/avia">Поиск авиабилетов</Link></li>
+          <li><img src={user.img} alt='' width="40px" className='userImg'></img></li>
+          <li className='userLogin'>{user.login}</li>
+          <li><Link to="/filter">Search</Link></li>
+          <li><Link onClick={() => history.push(`/user/${user._id}`)} to="/profile">Profile</Link></li>
+          <li><Link to="/avia">Авиа</Link></li>
 
           <li><Link className="my-menu" to="/about">О нас</Link></li>
           <li><Link className="my-menu" to="/team">Авторы</Link></li>

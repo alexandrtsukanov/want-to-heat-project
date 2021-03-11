@@ -10,9 +10,7 @@ export function checkUser(data) {
 }
 
 const checkUserSession = () => (dispatch) => {
-  // fetch('/login', {credentials: 'include'})
-    fetch('http://localhost:3001/login', {credentials: 'include'})
-
+    fetch('/login')
     .then(res => res.status === 200 ? res.json() : null)
     .then(data => {
       dispatch(checkUser(data));
@@ -37,8 +35,18 @@ const loginUser = (login, password) => (dispatch) => {
     body: JSON.stringify({
       login,
       password,
-    }), 
-  }, { credentials: 'includes' })
+    })
+  },
+  {credentials: 'include'})
+    .then(res => res.status === 200 ? res.json() : {})
+    .then(data => {
+      dispatch(signInUser(data));
+    })
+}
+//==============google auth==============
+const loginUserByGoogle = () => (dispatch) => {
+  console.log('google hi')
+  fetch('http://localhost:3001/google')
     .then(res => res.status === 200 ? res.json() : {})
     .then(data => {
       dispatch(signInUser(data));
@@ -59,7 +67,7 @@ export function removeTours() {
 }
 
 const logoutUser = () => (dispatch) => {
-  fetch('/logout')
+  fetch('/logout', {credentials: 'include'})
     .then(res => res.status === 200 ? dispatch(removeUser()) : null)
 }
 
@@ -83,7 +91,8 @@ const registerUser = ({ email, login, password }) => (dispatch) => {
       email,
       password,
     })
-  }, { credentials: 'includes' })
+  },
+  {credentials: 'include'})
     .then(res => res.status === 200 ? res.json() : {})
     .then(data => {
       dispatch(signUpUser(data));
@@ -94,7 +103,7 @@ const registerUser = ({ email, login, password }) => (dispatch) => {
 
 const showProfileThunk = () => {
   return async (dispatch) => {
-    const response = await fetch('/user/tours', { credentials: 'include' });
+    const response = await fetch('/user/tours', {credentials: 'include'});
     const result = await response.json();
     dispatch ({
       type: TYPES.SET_USERS_TOURS,
@@ -110,7 +119,7 @@ const addTourThunk = (paramUser, paramTour) => async (dispatch) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ _id: paramTour })
-  }, { credentials: 'includes' });
+  }, {credentials: 'include'});
   const result = await response.json();
   dispatch ({
     type: TYPES.ADD_TOUR,
@@ -129,10 +138,10 @@ const deleteTourThunk = (paramUser, paramTour) => async (dispatch) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ _id: paramTour })
-  }, { credentials: 'includes' });
+  }, {credentials: 'include'});
   dispatch ({
     type: TYPES.DELETE_TOUR,
-    data: paramTour
+    data: paramTour,
   })
   dispatch ({
     type: TYPES.CHANGE_IS_ADDED,
@@ -148,4 +157,5 @@ export {
   showProfileThunk,
   addTourThunk,
   deleteTourThunk,
+  loginUserByGoogle,
 }

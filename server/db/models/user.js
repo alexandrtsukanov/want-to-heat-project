@@ -24,6 +24,10 @@ const userSchema = Schema({
     type: Array,
     default: [],
   },
+  tokens: {
+    googleId: String,
+  },
+  img: String,
   searchAvia: {
     type: Array,
     default: [],
@@ -36,6 +40,9 @@ const userSchema = Schema({
     type: Array,
     default: [],
   },
-});
+  createdAt: Date,
+  updatedAt: Date,
+},
+{ timestamps: true });
 
 module.exports = model('users', userSchema);
