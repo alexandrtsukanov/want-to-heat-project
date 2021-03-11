@@ -14,7 +14,7 @@ function Navbar() {
     <div className="container d-flex align-items-center">
 
       <div className="logo mr-auto">
-        <h1 className="text-light"><a href="index.html">Хочу в тепло!</a></h1>
+        <h1 className="text-light"><Link exact to="/">Хочу в тепло!</Link></h1>
       </div>
 
       <nav className="nav-menu d-none d-lg-block">
@@ -23,13 +23,12 @@ function Navbar() {
           <>
           <li><img src={user.img} alt='' width="40px" className='userImg'></img></li>
           <li className='userLogin'>{user.login}</li>
-          <li><Link to="/filter">Search</Link></li>
-          <li><Link onClick={() => history.push(`/user/${user._id}`)} to="/profile">Profile</Link></li>
-          <li><Link to="/avia">Авиа</Link></li>
-
+          <li><Link to="/filter">Туры</Link></li>
+          <li><Link onClick={() => history.push(`/user/${user._id}`)} to="/profile">Личный кабинет</Link></li>
+          <li><Link to="/avia">Авиабилеты</Link></li>
           <li><Link className="my-menu" to="/about">О нас</Link></li>
           <li><Link className="my-menu" to="/team">Авторы</Link></li>
-          <li><Link className="my-menu" to="/logout">Log Out</Link></li>
+          <li><Link className="my-menu" to="/logout">Выйти</Link></li>
           </> : 
           <>
           <li><Link className="my-menu" exact to="/">Главная</Link></li>

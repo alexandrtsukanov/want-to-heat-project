@@ -19,10 +19,10 @@ function Profile() {
 
   return (
     <>
-    <h1>Profile</h1>
+    <h1>Профиль</h1>
     <hr />
 
-    Name: {user.login}
+    <h1>Имя: <strong>{user.login}</strong></h1>
     <div className='flex'>
     {Boolean(user.usersTours.length) && user.usersTours.map((tour) =>
         (
@@ -30,7 +30,7 @@ function Profile() {
             tour={tour}
             key={tour._id}
           />
-        ))}</div>
+      ))}</div>
     </>
   )
 }

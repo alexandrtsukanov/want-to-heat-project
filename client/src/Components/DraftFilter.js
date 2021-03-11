@@ -58,12 +58,12 @@ function Filter() {
 
   return (
     <div>
-      <h1>Filter</h1>
+      <h1>Найти туры</h1>
 
       <form type='submit' onSubmit={handlerSubmit}>
-        <span><input type='number' id="exampleInputEmail1" className="form-label form-control" name='minTemp' placeholder='Set min temp' /></span>
-        <span><input type='number' id="exampleInputPassword1" className="form-label form-control" name='maxTemp' placeholder='Set max temp' /></span>
-        <button type="submit" className="btn btn-primary">Take me to heat!</button>
+        <span><input type='number' id="exampleInputEmail1" className="form-label form-control" name='minTemp' placeholder="Не ниже, °C" /></span>
+        <span><input type='number' id="exampleInputPassword1" className="form-label form-control" name='maxTemp' placeholder='Не выше, °C' /></span>
+        <button type="submit" className="btn btn-primary">Погнали в тепло!</button>
       </form>
 
       {showFilterForm && (
@@ -74,15 +74,15 @@ function Filter() {
             <form onSubmit={filterSubmit}>
 
               <div className="login-login animate__animated animate__fadeInUp">
-                <label htmlFor="exampleInputPassword1" className="form-label">Min price</label>
-                <input type="number" className="form-control" name="minPrice" id="exampleInputPassword1" placeholder='Min price' />
+                <label htmlFor="exampleInputPassword1" className="form-label">Минимальная цена</label>
+                <input type="number" className="form-control" name="minPrice" id="exampleInputPassword1" placeholder='Мин. цена' />
               </div>
               <div className="login-password animate__animated animate__fadeInUp">
-                <label htmlFor="exampleInputPassword1" className="form-label">Max price</label>
-                <input type="number" className="form-control" name="maxPrice" id="exampleInputPassword1" placeholder='Max price' />
+                <label htmlFor="exampleInputPassword1" className="form-label">Максимальная цена</label>
+                <input type="number" className="form-control" name="maxPrice" id="exampleInputPassword1" placeholder='Макс. цена' />
               </div>
 
-              <label htmlFor="minRate" className="form-label">Min rate</label>
+              <label htmlFor="minRate" className="form-label">Минимальная оценка</label>
               <select onChange={rateHandler} defaultValue="0" name="minRate" className="field">
                 <option value="0">0</option>
                 <option value="1">1</option>
@@ -97,7 +97,7 @@ function Filter() {
                 <option value="10">10</option>
               </select>
 
-              <label htmlFor="minStars" className="form-label">Min starts rate</label>
+              <label htmlFor="minStars" className="form-label">Минимальная категория отеля &#9733;</label>
               <select onChange={starsHandler} defaultValue="1" name="minStars" className="field">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -106,27 +106,27 @@ function Filter() {
                 <option value="5">5</option>
               </select>
 
-              <button type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Set</button>
+              <button type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Применить</button>
 
             </form>
 
-            <button onClick={() => setShowSort(pre => !pre)} type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Sort tours</button>
+            <button onClick={() => setShowSort(pre => !pre)} type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Сортировка</button>
 
             {showSort && (
               <>
                 <div className="">
-                  <label htmlFor="sortation" className="form-label">Choose criteria</label>
+                  <label htmlFor="sortation" className="form-label">Критерий сортировки</label>
                   <select onChange={criteriaHandler} defaultValue="price" name="sortation" className="field">
-                    <option value="tempMinToMax">temperature, min to max</option>
-                    <option value="tempMaxToMin">temperature, max to min</option>
-                    <option value="price">Price</option>
-                    <option value="rating">Rating</option>
-                    <option value="toSeaDistance">Distance to sea</option>
-                    <option value="reviewsCount">Reviews amount</option>
-                    <option value="tourDuration">Duration</option>
-                    <option value="stars">Hotel stars amount</option>
+                    <option value="tempMinToMax">Температура, мин &rarr; макс</option>
+                    <option value="tempMaxToMin">Температура, макс &rarr; мин</option>
+                    <option value="price">Цена</option>
+                    <option value="rating">Средняя оценка</option>
+                    <option value="toSeaDistance">Расстояние до моря</option>
+                    <option value="reviewsCount">Количество отзывов</option>
+                    <option value="tourDuration">Продолжительность тура</option>
+                    <option value="stars">Категория отеля &#9733;</option>
                   </select>
-                  <button onClick={() => dispatch(sortToursThunk(criteria))}>Sort</button>
+                  <button onClick={() => dispatch(sortToursThunk(criteria))}>Сортировать</button>
                 </div>
               </>
             )}

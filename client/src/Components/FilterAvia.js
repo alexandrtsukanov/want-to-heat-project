@@ -49,12 +49,12 @@ function FilterAvia() {
 
   return (
     <div>
-      <h1>Filter</h1>
+      <h1>Найти авиабилеты</h1>
 
       <form type='submit' onSubmit={handlerSubmit}>
-        <span><input type='number' id="exampleInputEmail1" className="form-label form-control" name='minTemp' placeholder='Set min temp' /></span>
-        <span><input type='number' id="exampleInputPassword1" className="form-label form-control" name='maxTemp' placeholder='Set max temp' /></span>
-        <button type="submit" class="btn btn-primary">Погнали</button>
+        <span><input type='number' id="exampleInputEmail1" className="form-label form-control" name='minTemp' placeholder='Не ниже, °C' /></span>
+        <span><input type='number' id="exampleInputPassword1" className="form-label form-control" name='maxTemp' placeholder='Не выше, °C' /></span>
+        <button type="submit" class="btn btn-primary">Погнали в тепло!</button>
       </form>
      {avia && <AviaItem avia={avia[0]}/>}
      Filter Avia
