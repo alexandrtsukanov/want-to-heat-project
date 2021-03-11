@@ -22,7 +22,7 @@ function Home () {
       <div className="carousel-item active">
         <div className="carousel-container">
           <h2 style={{fontSize: '48px'}} className="animate__animated animate__fadeInDown">Хочу в тепло!</h2>
-          <p style={{fontSize: '24px'}} className="animate__animated animate__fadeInUp">"Хочу в тепло!" - это уникальный сервис, который позволяет найти и подобрать для Вас путёвки и авиабилеты, основываясь на температуре воздуха в желаемой Вами локации. С нами Вы можете быть уверены, что Ваш отдых будет максимально комфортным и приятным!</p>
+          <p style={{fontSize: '24px'}} className="animate__animated animate__fadeInUp">"Хочу в тепло!" - это уникальный сервис, который позволяет найти и подобрать для Вас путёвки и авиабилеты, основываясь на температуре воздуха в желаемой Вами локации. С нашей помощью Вы сможете найти подходящий тур или авиабилет максимально быстро!</p>
           <div>
 
           <span id="btn-get-started-left">

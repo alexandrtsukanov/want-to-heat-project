@@ -11,7 +11,7 @@ function Tour({ tour }) {
   const [addShow, setAddShow] = useState(true);
 
   const addTourHandler = (paramUser, paramTour) => {
-    dispatch(addTourThunk(paramUser, paramTour));
+    // dispatch(addTourThunk(paramUser, paramTour));
     dispatch({
       type: TYPES.CHANGE_IS_ADDED,
       data: paramTour
@@ -19,18 +19,18 @@ function Tour({ tour }) {
   }
 
   const deleteTourHandler = (paramUser, paramTour) => {
-    dispatch(deleteTourThunk(paramUser, paramTour));
-    setAddShow(pre => !pre)
+    // dispatch(deleteTourThunk(paramUser, paramTour));
     dispatch({
       type: TYPES.CHANGE_IS_ADDED,
       data: paramTour
     })
   }
+  console.log('=> IS ADDED', tour.isAdded)
 
 return (
   <div style={{
     backgroundImage: `url(${tour.photoUrl})`
-  }} className='tour'>
+  }} className= 'tour'>
     <div className="price">
       {tour.price} руб. на двоих
       </div>
@@ -48,7 +48,7 @@ return (
       {!tour.isAdded ?
         <i onClick={() => dispatch(addTourThunk(user._id, tour._id))} className="far fa-star addStar"></i>
         :
-        <i onClick={() => dispatch(addTourThunk(user._id, tour._id))} className="fas fa-star delStar" ></i>
+        <i onClick={() => dispatch(deleteTourThunk(user._id, tour._id))} className="fas fa-star delStar" ></i>
       }
     </div>
   </div>

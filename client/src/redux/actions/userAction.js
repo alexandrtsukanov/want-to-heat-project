@@ -132,6 +132,7 @@ const addTourThunk = (paramUser, paramTour) => async (dispatch) => {
 }
 
 const deleteTourThunk = (paramUser, paramTour) => async (dispatch) => {
+  console.log('response')
   const response = await fetch(`/user/${paramUser}/deletetour`, {
     method: 'DELETE',
     headers: {
@@ -141,7 +142,11 @@ const deleteTourThunk = (paramUser, paramTour) => async (dispatch) => {
   }, {credentials: 'include'});
   dispatch ({
     type: TYPES.DELETE_TOUR,
-    data: paramTour,
+    data: paramTour
+  })
+  dispatch ({
+    type: TYPES.CHANGE_IS_ADDED,
+    data: paramTour
   })
 }
 
