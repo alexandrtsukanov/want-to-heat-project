@@ -21,7 +21,7 @@ function Navbar() {
                   <li className='userImg'><img src={user.img} alt='' width="40px" className='userImg'></img></li>
                   <li className='userLogin'>{user.login}</li>
                   <li><Link to="/filter">Туры</Link></li>
-                  <li><Link to="/avia">Авиа</Link></li>
+                  <li><Link to="/avia">Авиабилеты</Link></li>
                   <li><Link onClick={() => history.push(`/user/${user._id}`)} to="/profile">Личный кабинет</Link></li>
                   {/* <li><Link className="my-menu" to="/about">О нас</Link></li> */}
                   <li><Link className="my-menu" to="/team">Авторы</Link></li>

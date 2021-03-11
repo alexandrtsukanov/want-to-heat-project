@@ -11,17 +11,19 @@ function AviaItem({ avia }) {
   const user = useSelector(state => state.user);
   const [addShow, setAddShow] = useState(true);
 
-  const addTourHandler = (paramUser, paramTour) => {
-    dispatch(addTourThunk(paramUser, paramTour));
-    dispatch({
-      type: CHANGE_IS_ADDED,
-      data: paramTour
-    })
-  }
-  const deleteTourHandler = (paramUser, paramTour) => {
-    dispatch(deleteTourThunk(paramUser, paramTour));
-    setAddShow(pre => !pre)
-  }
+  // const addTourHandler = (paramUser, paramTour) => {
+  //   dispatch(addTourThunk(paramUser, paramTour));
+  //   dispatch({
+  //     type: CHANGE_IS_ADDED,
+  //     data: paramTour
+  //   })
+  // }
+  // const deleteTourHandler = (paramUser, paramTour) => {
+  //   dispatch(deleteTourThunk(paramUser, paramTour));
+  //   setAddShow(pre => !pre)
+  // }
+
+  console.log(avia.isAdded)
 
   return (
     <>

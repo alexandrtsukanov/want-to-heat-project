@@ -26,7 +26,7 @@ function Home () {
           <div>
 
           <span id="btn-get-started-left">
-          <Link to="/register" className="btn-get-started animate__animated animate__fadeInUp scrollto">Зарегистрироваться</Link>
+          <Link to="/register" style={{width: '5.6cm', textAlign: 'center'}} className="btn-register-home btn-get-started animate__animated animate__fadeInUp scrollto">Зарегистрироваться</Link>
           </span>
           <span id="btn-get-started-right">
           <Link to="/login" className="btn-get-started animate__animated animate__fadeInUp scrollto">Войти</Link>
@@ -48,7 +48,7 @@ function Home () {
         <use href="#wave-path" x="50" y="0" fill="rgba(255,255,255, .2)"/>
       </g>
       <g class="wave3">
-        <use href="#wave-path" x="50" y="9" fill="lightgrey"/>
+        <use href="#wave-path" x="50" y="9" fill="#f2f2e5"/>
       </g>
     </svg>
 

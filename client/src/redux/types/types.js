@@ -21,4 +21,7 @@ export const SET_SORTED_AVIA = 'SET_SORTED_AVIA'
 export const ADD_AVIA = 'ADD_AVIA'
 export const DELETE_AVIA = 'DELETE_AVIA'
 
+export const CHANGE_IS_ADDED_AVIA = 'CHANGE_IS_ADDED_AVIA'
+
+
 

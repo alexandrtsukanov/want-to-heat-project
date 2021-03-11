@@ -56,6 +56,7 @@ router.post('/:id/addavia', authenticated, async (req, res) => {
 });
 
 router.delete('/:id/deleteavia', async (req, res) => {
+  console.log('+++++',req.body)
   const { _id } = req.body;
   const currentUser = await User.findById(req.params.id);
   const aviaToDelete = await Tour.findById(_id);

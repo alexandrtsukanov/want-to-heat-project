@@ -42,15 +42,15 @@ function FilterAvia() {
   }
 
   return (
-    <>
     <div>
-      <h1>Найти авиабилеты</h1>
-
-      <form type='submit' onSubmit={handlerSubmit}>
-        <span><input type='number' id="exampleInputEmail1" className="form-label form-control" name='minTemp' placeholder='Не ниже, °C' /></span>
-        <span><input type='number' id="exampleInputPassword1" className="form-label form-control" name='maxTemp' placeholder='Не выше, °C' /></span>
-        <button type="submit" class="btn btn-primary">Погнали в тепло!</button>
-      </form>
+      <h1><strong>Поиск авиабилетов</strong></h1>
+      <div className='flex-filter'>
+        <form type='submit' onSubmit={handlerSubmit} className='filter'>
+          <span><input type='number' id="exampleInputEmail1" className="input w" name='minTemp' placeholder='Минимальная температура' /></span>
+          <span><input type='number' id="exampleInputPassword1" className="input w" name='maxTemp' placeholder='Максимальная температура' /></span>
+          <button type="submit" class="btn btn-primary button">Хочу в тепло!</button>
+        </form>
+      </div>
       {showFilterForm && (
         <>
           <div className='flex-filter'>
@@ -109,7 +109,6 @@ function FilterAvia() {
         </div>
       )}
     </div>
-    </>
   )
 }
 

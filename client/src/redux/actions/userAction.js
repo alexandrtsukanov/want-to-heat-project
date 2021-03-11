@@ -59,12 +59,6 @@ export function removeUser() {
     data: null
   }
 }
-export function removeTours() {
-  return {
-    type: TYPES.SET_TOURS,
-    data: []
-  }
-}
 
 const logoutUser = () => (dispatch) => {
   fetch('/logout', {credentials: 'include'})
