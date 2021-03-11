@@ -579,7 +579,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-waves {
   display: block;
   width: 100%;
-  height: 60px;
+  height: 50px;
   position: relative;
 }
 
