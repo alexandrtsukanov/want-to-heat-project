@@ -63,12 +63,12 @@ const scrapSityAvia = async () => {
     await page.click('div.navi-date > div > div.ctps-dropdown > div:nth-child(3)');
   }
   await page.waitForTimeout(3000);
-  // while (await page.$eval('body > div.wrap > div.popular-gal > div > a', (el) => el.style.display === 'block')) {
-  //   console.log('v while');
-  //   await page.waitForTimeout(2000);
-  //   await page.click('body > div.wrap > div.popular-gal > div > a > span');
-  //   await page.waitForTimeout(2000);
-  // }
+  while (await page.$eval('body > div.wrap > div.popular-gal > div > a', (el) => el.style.display === 'block')) {
+    console.log('v while');
+    await page.waitForTimeout(2000);
+    await page.click('body > div.wrap > div.popular-gal > div > a > span');
+    await page.waitForTimeout(2000);
+  }
 
   //  ищем данные
 

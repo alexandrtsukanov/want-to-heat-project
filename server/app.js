@@ -21,7 +21,7 @@ const toursRouter = require('./routes/tours');
 
 const port = (process.env.PORT ?? 3001);
 
-schedule.scheduleJob('37 23 * * *', () => seed());
+// schedule.scheduleJob('37 23 * * *', () => seed());
 
 app.use(logger('dev'));
 app.use(cors({

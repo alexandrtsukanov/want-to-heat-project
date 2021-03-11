@@ -31,7 +31,7 @@ const scrapOnline = async () => {
       страницу: ${pageURL} из-за ошибки: ${error}`);
   }
   // Найдём все ссылки на туры
-  const postsSelector = 'a.tn-atom';
+  const postsSelector = '#rec224802417 > div > div > div.t396__elem a.tn-atom';
   await page.waitForSelector(postsSelector, { timeout: 0 });
   let postUrls = await page.$$eval(
     postsSelector, (postLinks) => postLinks.map((link) => {
@@ -39,7 +39,7 @@ const scrapOnline = async () => {
       return link.href;
     }),
   );
-  console.log('postUrls', postUrls);
+  console.log('postUrls', postUrls, postUrls.length);
   /// удалить!!!
   postUrls = [...postUrls];
   /// удалить!!!
