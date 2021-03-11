@@ -9,7 +9,6 @@ body {
   background: fixed;
   font-family: 'Montserrat', sans-serif !important;
 }
-
 .logo {
   /* font-family: 'Lobster', cursive; */
   font-family: 'Reggae One', cursive;
@@ -17,11 +16,9 @@ body {
   font-weight: 900;
   background-color: transparent;
 }
-
 .logoImg {
   margin-left: 20px !important;
 }
-
 #root {
   font-size: 15px;
   display: flex;
@@ -29,7 +26,6 @@ body {
   flex-direction: column;
   align-items: center;
 }
-
 /* a {
   text-decoration: none;
 } */
@@ -45,7 +41,6 @@ body {
   justify-content: space-around;
   flex-wrap: wrap;
 }
-
 .flex-filter {
   width: 1200px;
   display: flex;
@@ -55,7 +50,6 @@ body {
   align-items: center;
   margin-bottom: 10px;
 }
-
 /* .navbar {
   width: 400px;
   display: flex;
@@ -66,7 +60,6 @@ body {
   padding: 0px;
   width: 50px;
 }
-
 .userLogin {
   display: block;
   position: relative;
@@ -76,7 +69,6 @@ body {
   transition: 0.3s;
   font-size: 14px;
 }
-
 .tour {
   position: relative;
   border-radius: 10px;
@@ -99,34 +91,28 @@ body {
   width: 320px;
   height: 320px;
 }
-
 .tour:hover .link {
   opacity: 1;
   transition: 1s;
 }
-
 .tour:hover .link-right {
   opacity: 1;
   transition: 1s;
 }
-
 .tour:hover .price {
   transition: 1s;
   left: 180px;
   height: 35px;
 }
-
 .tour:hover .price-avia {
   transition: 1s;
   left: 130px;
   height: 35px;
 }
-
 .tour:hover .digrees {
   transition: 1s;
   border: 5px rgba(248, 148, 6, 1) solid;
 }
-
 .price {
   min-width: fit-content;
   height: 35px;
@@ -144,7 +130,6 @@ body {
   -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
   box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
 }
-
 .price-avia {
   min-width: fit-content;
   height: 35px;
@@ -162,7 +147,6 @@ body {
   -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
   box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
 }
-
 .digrees {
   margin: 5px;
   border: 5px rgb(0, 0, 0, 0.5) solid;
@@ -175,7 +159,6 @@ body {
   transition: 1s;
   font-size: 20px;
 }
-
 .info {
   position: absolute;
   padding: 10px;
@@ -189,7 +172,6 @@ body {
   width: 100%;
   align-items: center;
 }
-
 .link {
   font-size: 20px;
   left: 0px;
@@ -206,11 +188,9 @@ body {
   opacity: 0; /*Элемент полностью прозрачный (невидимый)*/
   transition: 1s; /*Скорость перехода состояния элемента*/
 }
-
 .link :hover {
   display: flex;
 }
-
 .link-right {
   position: absolute;
   font-size: 16px;
@@ -226,15 +206,12 @@ body {
   opacity: 0; /*Элемент полностью прозрачный (невидимый)*/
   transition: 1s; /*Скорость перехода состояния элемента*/
 }
-
 .link-rigth :hover {
   display: flex;
 }
-
 .prof {
   width: 800px;
 }
-
 #my_container {
   margin: 0px;
   padding: 0px;
@@ -252,14 +229,12 @@ body {
   background: #fff;
   animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
-
 .stars {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 80px;
 }
-
 .star-ratings-css {
   unicode-bidi: bidi-override;
   color: #c5c5c5;
@@ -273,7 +248,6 @@ body {
   content: "★★★★★";
   opacity: 0.3;
 }
-
 [title="0"]::after {
   width: 0%;
 }
@@ -289,7 +263,6 @@ body {
 [title="4"]::after {
   width: 87.5%;
 }
-
 .star-ratings-css::after {
   color: gold;
   content: "★★★★★";
@@ -302,26 +275,20 @@ body {
   width: attr(rating);
   overflow: hidden;
 }
-
 .orange {
   color: orange;
   text-decoration: none;
 }
-
 .orange:hover {
   color: orange;
   text-decoration: none;
 }
-
-
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
-
 .filter {
   display: flex !important;
   justify-content: center;
   align-items: center;
 }
-
 .input {
   min-width: 200px;
   margin: 10px;
@@ -337,11 +304,9 @@ body {
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-
 .w {
   width: 300px;
 }
-
 .button {
   max-width: fit-content;
   align-self: unset;
@@ -357,19 +322,16 @@ body {
   -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
   box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
 }
-
 .select {
   display: flex;
   flex-direction: column;
 }
-
 .sort {
   display: flex;
   justify-content: center;
   align-items: center;
   white-space: nowrap;
 }
-
 .countryName {
   color: black;
   font-size: 20px;
@@ -377,22 +339,18 @@ body {
   -moz-text-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
   text-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
 }
-
 .pading {
   padding: 0px;
   margin: 0px;
 }
-
 .pading20 {
   padding-top: 40px;
   margin: 0px;
 }
-
 .line {
   display: flex;
   justify-content: space-between;
 }
-
 hr {
   border: none; /* Убираем границу */
   background-color: orange;
@@ -400,36 +358,29 @@ hr {
   height: 2px; /* Толщина линии */
   margin-top: 0px;
 }
-
 .pading20 {
   padding-bottom: 20px;
 }
-
 .href {
   color: black;
   text-decoration: none;
 }
-
 .href:hover {
   color: white;
   text-decoration: none;
 }
-
 /* .navbarGrad {
   background: rgb(149,216,247) !important;
   background: linear-gradient(0deg, rgba(149,216,247,1) 0%, rgba(68,145,255,1) 100%) !important; 
 } */
-
 .navbarGrad {
   background: rgb(32,108,235) !important;
   background: linear-gradient(0deg, rgba(32,108,235,1) 0%, rgba(47,1,102,1) 100%) !important; 
 }
-
 /* .navbarGrad {
   background: rgb(247,175,116) !important;
   background: linear-gradient(180deg, rgba(247,175,116,1) 0%, rgba(67,34,255,1) 50%) !important; 
 } */
-
 .avia-city {
 font-size: 25px;
 text-align:center;

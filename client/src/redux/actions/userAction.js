@@ -150,6 +150,44 @@ const deleteTourThunk = (paramUser, paramTour) => async (dispatch) => {
   })
 }
 
+const addAviaThunk = (paramUser, paramTour) => async (dispatch) => {
+  const response = await fetch(`/user/${paramUser}/addavia`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ _id: paramTour })
+  }, {credentials: 'include'});
+  const result = await response.json();
+  dispatch ({
+    type: TYPES.ADD_AVIA,
+    data: result
+  })
+  dispatch ({
+    type: TYPES.CHANGE_IS_ADDED_AVIA,
+    data: paramTour
+  })
+}
+
+const deleteAviaThunk = (paramUser, paramTour) => async (dispatch) => {
+  console.log('response')
+  const response = await fetch(`/user/${paramUser}/deleteavia`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ _id: paramTour })
+  }, {credentials: 'include'});
+  dispatch ({
+    type: TYPES.DELETE_AVIA,
+    data: paramTour
+  })
+  dispatch ({
+    type: TYPES.CHANGE_IS_ADDED_AVIA,
+    data: paramTour
+  })
+}
+
 export {
   checkUserSession,
   loginUser,
@@ -159,4 +197,6 @@ export {
   addTourThunk,
   deleteTourThunk,
   loginUserByGoogle,
+  addAviaThunk,
+  deleteAviaThunk,
 }

@@ -18,3 +18,7 @@ export const CHANGE_IS_ADDED = 'CHANGE_IS_ADDED'
 export const SET_AVIA_FROM_BD = 'SET_AVIA_FROM_BD'
 export const FILTER_AVIA_BY_PRICE = 'FILTER_AVIA_BY_PRICE'
 export const SET_SORTED_AVIA = 'SET_SORTED_AVIA'
+export const ADD_AVIA = 'ADD_AVIA'
+export const DELETE_AVIA = 'DELETE_AVIA'
+
+

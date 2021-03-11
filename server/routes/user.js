@@ -59,10 +59,10 @@ router.delete('/:id/deleteavia', async (req, res) => {
   const { _id } = req.body;
   const currentUser = await User.findById(req.params.id);
   const aviaToDelete = await Tour.findById(_id);
-  console.log(currentUser.usersTours.length)
-  currentUser.aviaToAdd.splice(currentUser.usersAvia.indexOf(aviaToDelete), 1);
+  console.log(currentUser.usersAvia.length)
+  currentUser.usersAvia.splice(currentUser.usersAvia.indexOf(aviaToDelete), 1);
   await currentUser.save();
-  console.log(currentUser.usersTours.length)
+  console.log(currentUser.usersAvia.length)
   res.sendStatus(200);
 });
 
