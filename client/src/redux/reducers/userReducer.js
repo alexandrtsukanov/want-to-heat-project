@@ -16,7 +16,6 @@ function userReducer(user = {}, action) {
       return {...user, usersTours: [...user.usersTours, action.data ]}
     case TYPES.DELETE_TOUR:
       return {...user, usersTours: user.usersTours.filter(el => el._id !== action.data)}
-
     default:
       return user;
   }

@@ -21,13 +21,13 @@ function Navbar() {
         <ul>
           {Boolean(user) ? 
           <>
-          <li><img src={user.img} alt='' width="40px" className='userImg'></img></li>
+          <li className='userImg'><img src={user.img} alt='' width="40px" className='userImg'></img></li>
           <li className='userLogin'>{user.login}</li>
-          <li><Link to="/filter">Search</Link></li>
-          <li><Link onClick={() => history.push(`/user/${user._id}`)} to="/profile">Profile</Link></li>
+          <li><Link to="/filter">Туры</Link></li>
+          <li><Link onClick={() => history.push(`/user/${user._id}`)} to="/profile">Личный кабинет</Link></li>
           <li><Link to="/avia">Авиа</Link></li>
 
-          <li><Link className="my-menu" to="/about">О нас</Link></li>
+          {/* <li><Link className="my-menu" to="/about">О нас</Link></li> */}
           <li><Link className="my-menu" to="/team">Авторы</Link></li>
           <li><Link className="my-menu" to="/logout">Log Out</Link></li>
           </> : 
@@ -45,17 +45,17 @@ function Navbar() {
 
     </div>
   </header>
-    <svg style={{backgroundColor: '#142433'}} class="hero-waves" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
+    <svg style={{backgroundColor: '#142433'}} className="hero-waves" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
       <defs>
         <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
       </defs>
-      <g class="wave1">
+      <g className="wave1">
         <use href="#wave-path" x="50" y="3" fill="rgba(255,255,255, .1)"/>
       </g>
-      <g class="wave2">
+      <g className="wave2">
         <use href="#wave-path" x="50" y="0" fill="rgba(255,255,255, .2)"/>
       </g>
-      <g class="wave3">
+      <g className="wave3">
         <use href="#wave-path" x="50" y="9" fill="lightgrey"/>
       </g>
     </svg>
