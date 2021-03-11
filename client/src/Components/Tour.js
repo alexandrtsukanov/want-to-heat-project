@@ -1,30 +1,30 @@
-import { React, useState, createElement, } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addTourThunk, deleteTourThunk } from '../redux/actions/userAction'
-import * as TYPES from '../redux/types/types'
-
+import * as TYPES from '../redux/types/types';
 
 function Tour({ tour }) {
 
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
-  // const toursIds = user.usersTours.map(el => el._id)
+  const allTours = useSelector(state => state.allTours);
   const [addShow, setAddShow] = useState(true);
 
   const addTourHandler = (paramUser, paramTour) => {
+    dispatch(addTourThunk(paramUser, paramTour));
     dispatch({
       type: TYPES.CHANGE_IS_ADDED,
       data: paramTour
     })
-    dispatch(addTourThunk(paramUser, paramTour));
   }
 
   const deleteTourHandler = (paramUser, paramTour) => {
+    dispatch(deleteTourThunk(paramUser, paramTour));
+    setAddShow(pre => !pre)
     dispatch({
       type: TYPES.CHANGE_IS_ADDED,
       data: paramTour
     })
-    dispatch(deleteTourThunk(paramUser, paramTour));
   }
 
 return (
@@ -32,7 +32,7 @@ return (
     backgroundImage: `url(${tour.photoUrl})`
   }} className='tour'>
     <div className="price">
-      {tour.price} руб.
+      {tour.price} руб. на двоих
       </div>
     <div className='info'>
       <div className='stars'>

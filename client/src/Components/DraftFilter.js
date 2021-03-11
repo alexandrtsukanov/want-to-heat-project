@@ -72,10 +72,10 @@ function Filter() {
           <div className='flex-filter'>
             <form onSubmit={filterSubmit} className='filter'>
               <div className="login-login animate__animated animate__fadeInUp">
-                <input type="number" className="input" name="minPrice" min="0" step="1" id="exampleInputPassword1" placeholder='Min price' />
+                <input type="number" className="input" name="minPrice" min="0" step="1" id="exampleInputPassword1" placeholder='Минимальная цена' />
               </div>
               <div className="login-password animate__animated animate__fadeInUp">
-                <input type="number" className="input" name="maxPrice" min="10000" max="" step="1" id="exampleInputPassword1" placeholder='Max price' />
+                <input type="number" className="input" name="maxPrice" min="10000" max="" step="1" id="exampleInputPassword1" placeholder='Максимальная цена' />
               </div>
               <div className="login-login animate__animated animate__fadeInUp select">
                 <select onChange={rateHandler} defaultValue="0" name="minRate" className="field input">

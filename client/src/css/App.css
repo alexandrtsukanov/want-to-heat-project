@@ -5,7 +5,7 @@ body {
   background: url("https://static9.depositphotos.com/1554103/1168/i/600/depositphotos_11688413-stock-photo-yellow-orange-circle-gradient-background.jpg");
   background-size: cover; */
   /* background-color: yellow; */
-  background: rgb(233, 230, 230) !important;
+  background: lightgrey !important;
   background: linear-gradient(
     circle,
     rgba(233, 230, 230, 1) 50%,
@@ -50,6 +50,7 @@ body {
 .userImg {
   border-radius: 50%;
   padding: 0px;
+  width: 50px;
 }
 
 .userLogin {
@@ -92,7 +93,7 @@ body {
 
 .tour:hover .price {
   transition: 1s;
-  left: 240px;
+  left: 180px;
   height: 35px;
 }
 
@@ -105,7 +106,7 @@ body {
   min-width: fit-content;
   height: 35px;
   position: absolute;
-  left: 220px;
+  left: 160px;
   background-color: orange;
   border-radius: 5px;
   font-weight: bold;
