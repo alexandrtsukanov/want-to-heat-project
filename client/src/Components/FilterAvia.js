@@ -1,18 +1,16 @@
 import { React, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterByTemp, sortToursThunk, filterByPriceThunk, filterByRateThunk, filterByStarsThunk, filterThunk } from '../redux/actions/tourActions';
+import { filterByTemp, sortToursThunk, filterByPriceThunk, filterByRateThunk, filterByStarsThunk, filterThunk } from '../redux/actions/aviaActions';
 import AviaItem from './AviaItem.js';
 
 function FilterAvia() {
   const dispatch = useDispatch();
   const avia = useSelector(state => state.avia);
-  console.log(avia)
   const [criteria, setCriteria] = useState('');
   const [incCountry, setIncCountry] = useState('');
   const [showFilterForm, setShowFilterForm] = useState(false);
   const [showSort, setShowSort] = useState(false)
-  const [rate, setRate] = useState('');
-  const [stars, setStars] = useState('');
+
 
   const handlerSubmit = async (event) => {
     event.preventDefault();
@@ -27,7 +25,6 @@ function FilterAvia() {
   }
   const incCountryHandler = ({ target }) => {
     setIncCountry(target.value)
-    console.log(incCountry)
   }
 
   const filterPriceSubmit = (event) => {
@@ -41,24 +38,78 @@ function FilterAvia() {
     event.preventDefault();
     const minPrice = event.target.minPrice.value;
     const maxPrice = event.target.maxPrice.value;
-    const minRate = event.target.minRate.value;
-    const minStars = event.target.minStars.value;
-    dispatch(filterThunk(minPrice, maxPrice, minRate, minStars))
-
+    dispatch(filterThunk(minPrice, maxPrice))
   }
 
   return (
-    <div>
+    <>
       <h1>Filter</h1>
-
       <form type='submit' onSubmit={handlerSubmit}>
         <span><input type='number' id="exampleInputEmail1" className="form-label form-control" name='minTemp' placeholder='Set min temp' /></span>
         <span><input type='number' id="exampleInputPassword1" className="form-label form-control" name='maxTemp' placeholder='Set max temp' /></span>
-        <button type="submit" class="btn btn-primary">Погнали</button>
+        <button type="submit" class="btn btn-primary">Take me to heat!</button>
       </form>
-     {avia && <AviaItem avia={avia[0]}/>}
-     Filter Avia
-    </div>
+      {showFilterForm && (
+        <>
+          <div>
+            <form onSubmit={filterSubmit}>
+              <div className="login-login animate__animated animate__fadeInUp">
+                <label htmlFor="exampleInputPassword1" className="form-label">Min price</label>
+                <input type="number" className="form-control" name="minPrice" id="exampleInputPassword1" placeholder='Min price' />
+              </div>
+              <div className="login-password animate__animated animate__fadeInUp">
+                <label htmlFor="exampleInputPassword1" className="form-label">Max price</label>
+                <input type="number" className="form-control" name="maxPrice" id="exampleInputPassword1" placeholder='Max price' />
+              </div>
+
+              <button type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Set</button>
+            </form>
+            <button onClick={() => setShowSort(pre => !pre)} type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Sort avia</button>
+            {showSort && (
+              <>
+                <div className="">
+                  <label htmlFor="sortation" className="form-label">Choose criteria</label>
+                  <select onChange={criteriaHandler} name="sortation" class="field">
+                    <option value="tempMinToMax">temperature, min to max</option>
+                    <option value="tempMaxToMin">temperature, max to min</option>
+                    <option defaultValue value="price">Price</option>
+                  </select>
+                  <button onClick={() => dispatch(sortToursThunk(criteria))}>Sort</button>
+                </div>
+              </>
+            )}
+          </div>
+          <section id="services" class="services">
+            <div class="container">
+              <div class="section-title aos-init aos-animate" data-aos="zoom-out">
+                <h2>Хочу в тепло!</h2>
+                <p><strong>Вот что мы для Вас нашли</strong></p>
+              </div>
+              <div class="row">
+                {!!avia && avia.map((tour) => (
+                      <AviaItem
+                        avia={tour}
+                        key={tour._id}
+                      />
+                ))}
+              </div>
+            </div>
+          </section>
+        </>
+      )}
+      {!showFilterForm && (
+        <div className='flex'>
+          {!!avia && avia.map((tour) =>
+            (
+              <div key={tour._id}>
+                <AviaItem
+                  avia={tour}
+                />
+              </div>
+            ))}
+        </div>
+      )}
+    </>
   )
 }
 
