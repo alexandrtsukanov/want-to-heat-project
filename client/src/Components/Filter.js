@@ -58,7 +58,7 @@ function Filter() {
   }
   return (
     <>
-      <h1>Filter</h1>
+      <h1>Поиск Туров</h1>
       <form type='submit' onSubmit={handlerSubmit}>
         <span><input type='number' id="exampleInputEmail1" className="form-label form-control" name='minTemp' placeholder='Set min temp' /></span>
         <span><input type='number' id="exampleInputPassword1" className="form-label form-control" name='maxTemp' placeholder='Set max temp' /></span>
