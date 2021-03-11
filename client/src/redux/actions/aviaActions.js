@@ -9,7 +9,7 @@ import * as TYPES from '../types/types';
 // }
 
 const filterByTemp = (paramMinTemp, paramMaxTemp) => async (dispatch) => {
-  console.log(paramMinTemp, paramMaxTemp)
+  console.log('from aviaActions',paramMinTemp, paramMaxTemp)
   const response = await fetch('tours/avia', {
     // const response = await fetch('http://localhost:3001/tours', {
 
@@ -19,10 +19,9 @@ const filterByTemp = (paramMinTemp, paramMaxTemp) => async (dispatch) => {
     },
     body: JSON.stringify({minTemp: paramMinTemp, maxTemp: paramMaxTemp })
   }, { credentials: 'include' });
-  console.log('response', response)
   const result = await response.json();
   dispatch({
-    type: TYPES.SET_TOURS,
+    type: TYPES.SET_AVIA_FROM_BD,
     data: result,
   })
   }
@@ -46,7 +45,7 @@ const filterByTemp = (paramMinTemp, paramMaxTemp) => async (dispatch) => {
 // }
 
 const sortToursThunk = (criteriaParam) => async (dispatch) => {
-  const response = await fetch('/tours/sortation', {
+  const response = await fetch('/tours/sortationAvia', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -55,7 +54,7 @@ const sortToursThunk = (criteriaParam) => async (dispatch) => {
   }, { credentials: 'include' });
   const result = await response.json();
   dispatch({
-    type: TYPES.SET_SORTED_TOURS,
+    type: TYPES.SET_SORTED_AVIA,
     data: result,
   })
 }
@@ -77,52 +76,23 @@ const filterByPriceThunk = (minPriceParam, maxPriceParam) => async (dispatch) =>
   })
 }
 
-const filterByRateThunk = (minRateParam) => async (dispatch) => {
-  const response = await fetch('http://localhost:3001/tours/sortationrate', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ minRate: minRateParam }, 
-      { credentials: 'include' })
-  });
-  const result = await response.json();
-  dispatch ({
-    type: TYPES.SORTED_RATE_TOURS,
-    data: result
-  })
-}
 
-const filterByStarsThunk = (minStarsParam) => async (dispatch) => {
-  const response = await fetch('http://localhost:3001/tours/sortationstars', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ minStars: minStarsParam }, 
-      { credentials: 'include' })
-  });
-  const result = await response.json();
-  dispatch ({
-    type: TYPES.SORTED_STARS_TOURS,
-    data: result
-  })
-}
 
-const filterThunk = (minPriceParam, maxPriceParam, minRateParam, minStarsParam) => async (dispatch) => {
-  console.log('QQQQQQQQQQQQQQQQQQQQQQQQQQQQQ')
-  const response = await fetch('/tours/filter', {
+
+const filterThunk = (minPriceParam, maxPriceParam) => async (dispatch) => {
+  console.log('from filterThunk')
+  const response = await fetch('/tours/filterAvia', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ minPrice: minPriceParam, maxPrice: maxPriceParam, minRate: minRateParam, minStars: minStarsParam }), 
+    body: JSON.stringify({ minPrice: minPriceParam, maxPrice: maxPriceParam,}), 
   }, { credentials: 'include' });
   const result = await response.json();
   console.log(result)
 
   dispatch ({
-    type: TYPES.FILTER_TOURS,
+    type: TYPES.FILTER_AVIA_BY_PRICE,
     data: result
   })
 }
@@ -131,7 +101,5 @@ export {
   filterByTemp,
   sortToursThunk,
   filterByPriceThunk,
-  filterByRateThunk,
-  filterByStarsThunk,
   filterThunk,
 }

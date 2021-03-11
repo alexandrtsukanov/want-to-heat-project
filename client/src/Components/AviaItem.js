@@ -1,10 +1,11 @@
 import { React, useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addTourThunk, deleteTourThunk } from '../redux/actions/userAction'
+import aviaReducer from '../redux/reducers/aviaReducer';
 import { CHANGE_IS_ADDED } from '../redux/types/types'
 
 
-function AviaItem({avia}) {
+function AviaItem({ avia }) {
 
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
@@ -24,44 +25,29 @@ function AviaItem({avia}) {
 
   return (
     <>
-
-
-      {/* <div class="tour col-lg-4 col-md-6 animate__animated animate__fadeInRight"> */}
-      {/* <div class="icon-box" data-aos="zoom-in-left"> */}
-      <div class="tour-up">
-        <div>
-          <div class="title">{avia.country}</div>
-          <div class="title">{avia.city}</div>
-
-        </div>
-        <div>
-          <h4>{avia.price} руб.</h4>
-        </div>
-
+      <div style={{
+        backgroundImage: `url(${avia.photoUrl})`
+      }} className='tour'>
+        <div className="price">
+          {avia.price} руб.
       </div>
-
-      <img src={avia.photoUrl} alt='hotelImg' width='300px' height='240px' />
-
-      <div>
-        <span>
-          <h4>{avia.temperature} °С</h4>
-        </span>&ensp;&ensp;&ensp;
-<span>
-          <div>
-            <a href={avia.url}>Go to tour</a>
-
+        <div className='info'>
+          <div className='stars'>
+            <div>{avia.city}</div>
           </div>
-          <div>
-            {!avia.isAdded ?
-              <button onClick={() => addTourHandler(user._id, avia._id)} class="add-tour-button">Добавить в избранное</button>
-              :
-              <button onClick={() => deleteTourHandler(user._id, avia._id)} class="delete-tour-button" >Remove from my profile</button>
-            }
-            {/* </div> */}</div>
-        </span>
+          <div className='digrees'>
+            <div>{avia.temperature} °С</div>
+          </div>
+        </div>
+        <div className='link'>
+          <a className='orange' href={avia.url}>Перейти на тур</a>
+          {!avia.isAdded ?
+            <i onClick={() => addTourHandler(user._id, avia._id)} className="far fa-star addStar"></i>
+            :
+            <i onClick={() => deleteTourHandler(user._id, avia._id)} className="fas fa-star delStar" ></i>
+          }
+        </div>
       </div>
-
-
     </>
   )
 }

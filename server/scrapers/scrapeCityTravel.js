@@ -8,6 +8,8 @@ const Bluebird = require('bluebird');
 const addLonLat = require('../helpers/addLonLat');
 const addTemperture = require('../helpers/addTemperture');
 
+
+
 fetch.Promise = Bluebird;
 
 const scrapSityAvia = async () => {
@@ -107,10 +109,13 @@ const scrapSityAvia = async () => {
     return data;
   });
 
+  console.log('добавили температуру');
+
   const allAviaWithLonLat = await addLonLat(result);
   console.log('добавили координаты');
   const allAviaWithTemp = await addTemperture(allAviaWithLonLat);
-  console.log('добавили температуру');
+  console.log(allAviaWithTemp);
+
   // Всё сделано, закроем браузер
   await browser.close();
   // // process.exit();

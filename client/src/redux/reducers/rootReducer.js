@@ -1,13 +1,12 @@
 import {combineReducers} from 'redux';
 import userReducer from './userReducer';
 import tourReducer from './tourReducer';
-import priceReducer from './priceReducer';
+import aviaReducer from './aviaReducer';
 
 const rootReducer = combineReducers({
     user: userReducer,
     allTours: tourReducer,
-    priceTours: priceReducer,
-
+    avia: aviaReducer,
 })
 
 export default rootReducer
