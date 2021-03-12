@@ -5,7 +5,7 @@
   "main": "test.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./server/app.js",
+    "start": "cd server && npm i && node ./server/app.js",
     "postbuild": "cd client && yarn && yarn run build"
   },
   "repository": {
