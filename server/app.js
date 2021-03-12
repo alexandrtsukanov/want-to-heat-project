@@ -12,7 +12,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const seed = require('./db/seed');
 const User = require('./db/models/user');
-// const bot = require ('./bot');
+const bot = require('./bot');
 // Создаем приложение express.
 const app = express();
 // Импортируем созданный в отдельный файлах рутеры.
