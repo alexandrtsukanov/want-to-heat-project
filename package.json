@@ -4,7 +4,7 @@
   "description": "",
   "main": "test.js",
   "scripts": {
-    "start": "cd client && npm install && npm run build && cd ../server && npm install && npm start",
+    "start": "cd client && npm run build && cd ../server && npm install && node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
