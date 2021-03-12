@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/alexandrtsukanov/want-to-heat-project/issues"
   },
-  "homepage": "https://github.com/alexandrtsukanov/want-to-heat-project#readme"
+  "homepage": "https://github.com/alexandrtsukanov/want-to-heat-project#readme",
+  "engines": {
+    "node": "14.x"
+  }
 }
