@@ -29,7 +29,7 @@ const filterByTemp = (paramMinTemp, paramMaxTemp) => async (dispatch) => {
 
 // const filterByTemp = (paramMinTemp, paramMaxTemp) => (dispatch) => {
 //   fetch('/tours', {
-//     fetch('http://localhost:3001/tours', {
+//     fetch('/tours', {
 //     method: 'POST',
 //     headers: {
 //       'Content-Type': 'application/json'
