@@ -58,11 +58,11 @@ function Filter() {
 
   return (
     <div>
-      <h1>Поиск туров</h1>
+      <h1><strong>Поиск туров</strong></h1>
       <div className='flex-filter'>
         <form type='submit' onSubmit={handlerSubmit} className='filter'>
-          <span><input type='number' id="exampleInputEmail1" className="input"  min="0" max="50" step="1" name='minTemp' placeholder='Минимальная температура' /></span>
-          <span><input type='number' id="exampleInputPassword1" className="input" name='maxTemp' min="0" max="50" step="1" placeholder='Максимальная температура' /></span>
+          <span><input type='number' id="exampleInputEmail1" className="input w"  min="0" max="50" step="1" name='minTemp' placeholder='Минимальная температура' /></span>
+          <span><input type='number' id="exampleInputPassword1" className="input w" name='maxTemp' min="0" max="50" step="1" placeholder='Максимальная температура' /></span>
           <button type="submit" className="btn btn-primary button">Хочу в тепло!</button>
         </form>
       </div>

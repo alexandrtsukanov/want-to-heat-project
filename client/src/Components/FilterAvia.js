@@ -42,41 +42,38 @@ function FilterAvia() {
   }
 
   return (
-    <>
     <div>
-      <h1>Найти авиабилеты</h1>
-
-      <form type='submit' onSubmit={handlerSubmit}>
-        <span><input type='number' id="exampleInputEmail1" className="form-label form-control" name='minTemp' placeholder='Не ниже, °C' /></span>
-        <span><input type='number' id="exampleInputPassword1" className="form-label form-control" name='maxTemp' placeholder='Не выше, °C' /></span>
-        <button type="submit" class="btn btn-primary">Погнали в тепло!</button>
-      </form>
+      <h1><strong>Поиск авиабилетов</strong></h1>
+      <div className='flex-filter'>
+        <form type='submit' onSubmit={handlerSubmit} className='filter'>
+          <span><input type='number' id="exampleInputEmail1" className="input w" name='minTemp' placeholder='Минимальная температура' /></span>
+          <span><input type='number' id="exampleInputPassword1" className="input w" name='maxTemp' placeholder='Максимальная температура' /></span>
+          <button type="submit" class="btn btn-primary button">Хочу в тепло!</button>
+        </form>
+      </div>
       {showFilterForm && (
         <>
-          <div>
-            <form onSubmit={filterSubmit}>
+          <div className='flex-filter'>
+            <form onSubmit={filterSubmit} className='filter'>
               <div className="login-login animate__animated animate__fadeInUp">
-                <label htmlFor="exampleInputPassword1" className="form-label">Min price</label>
-                <input type="number" className="form-control" name="minPrice" id="exampleInputPassword1" placeholder='Min price' />
+                <input type="number" className="input" name="minPrice" id="exampleInputPassword1" placeholder='Минимальная цена' />
               </div>
               <div className="login-password animate__animated animate__fadeInUp">
-                <label htmlFor="exampleInputPassword1" className="form-label">Max price</label>
-                <input type="number" className="form-control" name="maxPrice" id="exampleInputPassword1" placeholder='Max price' />
+                <input type="number" className="input" name="maxPrice" id="exampleInputPassword1" placeholder='Максимальная цена' />
               </div>
-
-              <button type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Set</button>
+              <button type="submit" className="login-button animate__animated animate__fadeInUp scrollto btn btn-primary button">Отфильтровать</button>
             </form>
-            <button onClick={() => setShowSort(pre => !pre)} type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Sort avia</button>
+            <button onClick={() => setShowSort(pre => !pre)} type="submit" className="login-button animate__animated animate__fadeInUp scrollto btn btn-primary button">Дополнительная сортировка</button>
             {showSort && (
               <>
-                <div className="">
-                  <label htmlFor="sortation" className="form-label">Choose criteria</label>
-                  <select onChange={criteriaHandler} name="sortation" class="field">
-                    <option value="tempMinToMax">temperature, min to max</option>
-                    <option value="tempMaxToMin">temperature, max to min</option>
-                    <option defaultValue value="price">Price</option>
+                <div className="login-login animate__animated animate__fadeInUp sort">
+                  <label htmlFor="sortation" className="form-label">Отсортировать по</label>
+                  <select onChange={criteriaHandler} name="sortation" className="field input">
+                    <option value="tempMinToMax">температуре на возрастание</option>
+                    <option value="tempMaxToMin">температуре на убывание</option>
+                    <option defaultValue value="price">цене</option>
                   </select>
-                  <button onClick={() => dispatch(sortToursThunk(criteria))}>Sort</button>
+                  <button onClick={() => dispatch(sortToursThunk(criteria))} className="login-button animate__animated animate__fadeInUp scrollto btn btn-primary button">Сортировать</button>
                 </div>
               </>
             )}
@@ -89,10 +86,10 @@ function FilterAvia() {
               </div>
               <div class="row">
                 {!!avia && avia.map((tour) => (
-                      <AviaItem
-                        avia={tour}
-                        key={tour._id}
-                      />
+                  <AviaItem
+                    avia={tour}
+                    key={tour._id}
+                  />
                 ))}
               </div>
             </div>
@@ -102,17 +99,16 @@ function FilterAvia() {
       {!showFilterForm && (
         <div className='flex'>
           {!!avia && avia.map((tour) =>
-            (
-              <div key={tour._id}>
-                <AviaItem
-                  avia={tour}
-                />
-              </div>
-            ))}
+          (
+            <div key={tour._id}>
+              <AviaItem
+                avia={tour}
+              />
+            </div>
+          ))}
         </div>
       )}
     </div>
-    </>
   )
 }
 

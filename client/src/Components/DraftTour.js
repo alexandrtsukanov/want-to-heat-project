@@ -27,7 +27,7 @@ function DraftTour ({ tour }) {
   }
 
   return (
-    <div className="">
+    <div className="prof">
     <div className='tour' key={tour._id}>
     <div>
       <div><strong>Температура: </strong> {tour.temperature}</div>

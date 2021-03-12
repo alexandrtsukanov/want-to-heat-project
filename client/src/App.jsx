@@ -30,7 +30,7 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar />
+        {/* <Navbar /> */}
         <Switch>
           <Route exact path='/'>
           {Boolean(user) ? 
@@ -41,19 +41,23 @@ function App() {
             <About />
           </Route>
           <Route path='/logout'>
+          <Navbar />
             <Logout />
           </Route>
           <Route path='/avia'>
+          <Navbar />
             <FilterAvia />
           </Route>
           <Route path='/login'>
+          <Navbar />
             <Login />
           </Route>
           <Route path='/register'>
+          <Navbar />
             <Register />
           </Route>
-
           <Route path='/filter'>
+          <Navbar />
             <DraftFilter />
           </Route>
 
@@ -61,11 +65,12 @@ function App() {
             <Filter />
           </Route> */}
 
-
           <Route path='/profile'>
+          <Navbar />
             <Profile />
           </Route>
           <Route path='/team'>
+          <Navbar />
             <Team />
           </Route>
           <Redirect to='/' />
