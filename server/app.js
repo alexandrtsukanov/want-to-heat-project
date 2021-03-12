@@ -99,7 +99,7 @@ app.use('/', mainRouter);
 app.use('/user', userRouter);
 app.use('/tours', toursRouter);
 
-const root = path.join(__dirname, '../', 'frontend', 'build');
+const root = path.join(__dirname, '../', 'client', 'build');
 app.use(express.static(root));
 app.get('*', (req, res) => {
   res.sendFile('index.html', { root });
