@@ -31,7 +31,7 @@ function Login() {
       </form>
       <div className="row">
         <div className="col-md-3">
-          <a className="btn btn-outline-dark login-button animate__animated animate__fadeInUp scrollto button p" href="/google" role="button">
+          <a className="btn btn-outline-dark login-button animate__animated animate__fadeInUp scrollto button p" href="http://localhost:3001/google" role="button">
             <img width="20px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
         Войти с помощью Google
     </a>
