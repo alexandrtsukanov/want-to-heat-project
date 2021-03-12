@@ -19,7 +19,7 @@ function Navbar() {
               {Boolean(user) ?
                 <>
                   <li className='userImg'><img src={user.img} alt='' width="40px" className='userImg'></img></li>
-                  <li className='userLogin'>{user.login}</li>
+                  <li className='userLogin'><strong>{user.login}</strong></li>
                   <li><Link to="/filter">Туры</Link></li>
                   <li><Link to="/avia">Авиабилеты</Link></li>
                   <li><Link onClick={() => history.push(`/user/${user._id}`)} to="/profile">Личный кабинет</Link></li>

@@ -46,7 +46,7 @@ const loginUser = (login, password) => (dispatch) => {
 //==============google auth==============
 const loginUserByGoogle = () => (dispatch) => {
   console.log('google hi')
-  fetch('http://localhost:3001/google')
+  fetch('/google')
     .then(res => res.status === 200 ? res.json() : {})
     .then(data => {
       dispatch(signInUser(data));

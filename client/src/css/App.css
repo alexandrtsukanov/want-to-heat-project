@@ -310,18 +310,23 @@ body {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .w {
-  width: 300px;
+  width: 300px !important;
 }
+
+.p {
+  padding-top: 7px !important;
+  margin-top: 10px;
+}
+
 .button {
   max-width: fit-content;
-  align-self: unset;
   height: 40px;
   text-align: center;
   padding: 0px 10px;
   margin-left: 10px;
   border-radius: 8px;
-  background-color: orange;
-  border: orange;
+  background-color: orange !important;
+  border: orange !important;
   color: black;
   -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);

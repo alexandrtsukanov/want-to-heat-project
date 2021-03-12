@@ -12,6 +12,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const seed = require('./db/seed');
 const User = require('./db/models/user');
+// const bot = require ('./bot');
 // Создаем приложение express.
 const app = express();
 // Импортируем созданный в отдельный файлах рутеры.
@@ -98,6 +99,11 @@ app.use('/', mainRouter);
 app.use('/user', userRouter);
 app.use('/tours', toursRouter);
 
+// path.join(__dirname, '../', 'frontend', 'build');
+// app.use(express.static(root));
+// app.get('*', (req, res) => {
+//   res.sendFile('index.html', { root });
+// });
 // Запуск сервера и подключение к бд.
 app.listen(port, async () => {
   console.log(`Server online on port ${port}!`);

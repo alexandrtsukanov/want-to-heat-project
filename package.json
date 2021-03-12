@@ -1,0 +1,21 @@
+{
+  "name": "want-to-heat-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test.js",
+  "scripts": {
+    "start": "cd client && npm install && npm run build && cd ../server && npm install && npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexandrtsukanov/want-to-heat-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexandrtsukanov/want-to-heat-project/issues"
+  },
+  "homepage": "https://github.com/alexandrtsukanov/want-to-heat-project#readme"
+}

@@ -26,7 +26,7 @@ function Home () {
           <div>
 
           <span id="btn-get-started-left">
-          <Link to="/register" style={{width: '5.6cm', textAlign: 'center'}} className="btn-register-home btn-get-started animate__animated animate__fadeInUp scrollto">Зарегистрироваться</Link>
+          <Link to="/register" style={{width: '5.6cm', textAlign: 'center'}} className="btn-register-home btn-get-started animate__animated animate__fadeInUp scrollto">Регистрация</Link>
           </span>
           <span id="btn-get-started-right">
           <Link to="/login" className="btn-get-started animate__animated animate__fadeInUp scrollto">Войти</Link>

@@ -20,20 +20,20 @@ function Login() {
       <form onSubmit={handlerSubmit} id="login-form">
 
         <div className="login-login animate__animated animate__fadeInUp">
-          <label hrmlFor="exampleInputPassword1" className="form-label">Login</label>
+          <label hrmlFor="exampleInputPassword1" className="form-label">Ваш логин</label>
           <input type="text" className="form-control" name="login" id="exampleInputPassword1" placeholder='Login' />
         </div>
         <div className="login-password animate__animated animate__fadeInUp">
-          <label hrmlFor="exampleInputPassword1" className="form-label">Password</label>
+          <label hrmlFor="exampleInputPassword1" className="form-label">Пароль</label>
           <input type="password" className="form-control" name="password" id="exampleInputPassword1" placeholder='Password' />
         </div>
-        <button type="submit" className="login-button animate__animated animate__fadeInUp scrollto">Log In</button>
+        <button type="submit" className="login-button animate__animated animate__fadeInUp scrollto button">Войти</button>
       </form>
       <div className="row">
         <div className="col-md-3">
-          <a className="btn btn-outline-dark" href="http://localhost:3001/google" role="button">
+          <a className="btn btn-outline-dark login-button animate__animated animate__fadeInUp scrollto button p" href="http://localhost:3001/google" role="button">
             <img width="20px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
-        Login with Google
+        Войти с помощью Google
     </a>
         </div>
       </div>
