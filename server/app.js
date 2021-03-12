@@ -99,11 +99,11 @@ app.use('/', mainRouter);
 app.use('/user', userRouter);
 app.use('/tours', toursRouter);
 
-// path.join(__dirname, '../', 'frontend', 'build');
-// app.use(express.static(root));
-// app.get('*', (req, res) => {
-//   res.sendFile('index.html', { root });
-// });
+const root = path.join(__dirname, '../', 'frontend', 'build');
+app.use(express.static(root));
+app.get('*', (req, res) => {
+  res.sendFile('index.html', { root });
+});
 // Запуск сервера и подключение к бд.
 app.listen(port, async () => {
   console.log(`Server online on port ${port}!`);
