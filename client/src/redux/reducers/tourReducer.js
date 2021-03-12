@@ -1,4 +1,5 @@
 import * as TYPES from '../types/types';
+import group from '../../../src/group';
 
 function tourReducer(allTours = [], action) {
   switch (action.type) {
@@ -15,7 +16,7 @@ function tourReducer(allTours = [], action) {
     case TYPES.FILTER_TOURS:
       return action.data
     case TYPES.CHANGE_IS_ADDED:
-        return allTours.map(el => el._id === action.data ? {...el, isAdded: !el.isAdded} : el)    
+      return group(allTours.flat().map(el => el._id === action.data ? {...el, isAdded: !el.isAdded} : el))
     default:
       return allTours;
   }

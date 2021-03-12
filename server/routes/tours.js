@@ -41,7 +41,7 @@ router.post('/avia', authenticated,
       currentUser.searchAvia = avia;
       currentUser.sortAvia = avia;
       await currentUser.save();
-      return res.status(200).json(avia);
+      return res.status(200).json(avia.sort((a, b) => a.price - b.price));
     } catch (error) {
       console.log(error);
       return res.sendStatus(501);
@@ -112,13 +112,13 @@ router.post('/filter', async (req, res) => {
     currentUser.sortTours = filteredTours
     await currentUser.save()
     const toursGrouped = group(filteredTours)
-    return res.json(toursGrouped)
+    return res.json(toursGrouped.map(el => el.sort((a, b) => a.price - b.price)).sort((a, b) => a[0].price - b[0].price))
   } else {
     const filteredTours = tours.filter(el => el.price >= minPrice && el.price <= maxPrice && el.rating >= minRate && el.stars >= minStars)
     currentUser.sortTours = filteredTours
     await currentUser.save()
     const toursGrouped = group(filteredTours)
-    return res.json(toursGrouped)
+    return res.json(toursGrouped.map(el => el.sort((a, b) => a.price - b.price)).sort((a, b) => a[0].price - b[0].price))
   }
 })
 
@@ -132,12 +132,12 @@ router.post('/filterAvia', async (req, res) => {
     const filteredAvia = avia.filter(el => el.price >= minPrice);
     currentUser.sortAvia = filteredAvia
     await currentUser.save()
-    return res.json(filteredAvia);
+    return res.json(filteredAvia.sort((a, b) => a.price - b.price))
   } else {
     const filteredAvia = avia.filter(el => el.price >= minPrice && el.price <= maxPrice);
     currentUser.sortAvia = filteredAvia
     await currentUser.save()
-    return res.json(filteredAvia);
+    return res.json(filteredAvia.sort((a, b) => a.price - b.price));
   }
 })
 module.exports = router;

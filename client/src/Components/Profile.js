@@ -8,11 +8,11 @@ function Profile() {
 
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
-  const [usersTours, setUsersTours] = useState('')
+  console.log('===>>>', user)
 
   useEffect(() => {
-    {!Boolean(user) ? <Redirect exact to="/"/> :
-    dispatch(checkUserSession())}
+    user === null ? <Redirect exact to="/"/> :
+    dispatch(checkUserSession())
   }, [])
 
 
@@ -20,6 +20,7 @@ function Profile() {
     <>
     <h1>Личный кабинет</h1>
     <hr />
+    
     <div className='flex-prof'>
     {Boolean(user.usersTours.length) && user.usersTours.map((tour) =>
         (

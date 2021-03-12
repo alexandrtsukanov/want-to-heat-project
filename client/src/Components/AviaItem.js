@@ -1,6 +1,6 @@
 import { React, useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addTourThunk, deleteTourThunk } from '../redux/actions/userAction'
+import { addAviaThunk, deleteAviaThunk } from '../redux/actions/userAction'
 import aviaReducer from '../redux/reducers/aviaReducer';
 import { CHANGE_IS_ADDED } from '../redux/types/types'
 
@@ -11,17 +11,19 @@ function AviaItem({ avia }) {
   const user = useSelector(state => state.user);
   const [addShow, setAddShow] = useState(true);
 
-  const addTourHandler = (paramUser, paramTour) => {
-    dispatch(addTourThunk(paramUser, paramTour));
-    dispatch({
-      type: CHANGE_IS_ADDED,
-      data: paramTour
-    })
-  }
-  const deleteTourHandler = (paramUser, paramTour) => {
-    dispatch(deleteTourThunk(paramUser, paramTour));
-    setAddShow(pre => !pre)
-  }
+  // const addTourHandler = (paramUser, paramTour) => {
+  //   dispatch(addTourThunk(paramUser, paramTour));
+  //   dispatch({
+  //     type: CHANGE_IS_ADDED,
+  //     data: paramTour
+  //   })
+  // }
+  // const deleteTourHandler = (paramUser, paramTour) => {
+  //   dispatch(deleteTourThunk(paramUser, paramTour));
+  //   setAddShow(pre => !pre)
+  // }
+
+  console.log(avia.isAdded)
 
   return (
     <>
@@ -40,9 +42,9 @@ function AviaItem({ avia }) {
         <div className='link'>
           <a className='orange' href={avia.url}>Купить билет</a>
           {!avia.isAdded ?
-            <i onClick={() => addTourHandler(user._id, avia._id)} className="far fa-star addStar"></i>
+            <i onClick={() => dispatch(addAviaThunk(user._id, avia._id))} className="far fa-star addStar"></i>
             :
-            <i onClick={() => deleteTourHandler(user._id, avia._id)} className="fas fa-star delStar" ></i>
+            <i onClick={() => dispatch(deleteAviaThunk(user._id, avia._id))} className="fas fa-star delStar" ></i>
           }
         </div>
       </div>

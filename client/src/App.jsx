@@ -33,8 +33,11 @@ function App() {
         {/* <Navbar /> */}
         <Switch>
           <Route exact path='/'>
-          {Boolean(user) ? 
-            <DraftFilter /> :
+          {Boolean(user) ?
+            <>
+            <Navbar /> 
+            <DraftFilter /> 
+            </> :
             <Home />}
         </Route>
           <Route path='/about'>

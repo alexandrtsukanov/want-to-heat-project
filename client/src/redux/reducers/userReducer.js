@@ -16,6 +16,11 @@ function userReducer(user = {}, action) {
       return {...user, usersTours: [...user.usersTours, action.data ]}
     case TYPES.DELETE_TOUR:
       return {...user, usersTours: user.usersTours.filter(el => el._id !== action.data)}
+    case TYPES.ADD_AVIA:
+      return {...user, usersAvia: [...user.usersAvia, action.data ]}
+    case TYPES.DELETE_AVIA:
+      return {...user, usersAvia: user.usersAvia.filter(el => el._id !== action.data)}
+
     default:
       return user;
   }

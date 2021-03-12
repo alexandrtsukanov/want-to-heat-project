@@ -59,12 +59,6 @@ export function removeUser() {
     data: null
   }
 }
-export function removeTours() {
-  return {
-    type: TYPES.SET_TOURS,
-    data: []
-  }
-}
 
 const logoutUser = () => (dispatch) => {
   fetch('/logout', {credentials: 'include'})
@@ -132,6 +126,7 @@ const addTourThunk = (paramUser, paramTour) => async (dispatch) => {
 }
 
 const deleteTourThunk = (paramUser, paramTour) => async (dispatch) => {
+  console.log('response')
   const response = await fetch(`/user/${paramUser}/deletetour`, {
     method: 'DELETE',
     headers: {
@@ -141,7 +136,49 @@ const deleteTourThunk = (paramUser, paramTour) => async (dispatch) => {
   }, {credentials: 'include'});
   dispatch ({
     type: TYPES.DELETE_TOUR,
-    data: paramTour,
+    data: paramTour
+  })
+  dispatch ({
+    type: TYPES.CHANGE_IS_ADDED,
+    data: paramTour
+  })
+}
+
+const addAviaThunk = (paramUser, paramTour) => async (dispatch) => {
+  const response = await fetch(`/user/${paramUser}/addavia`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ _id: paramTour })
+  }, {credentials: 'include'});
+  const result = await response.json();
+  dispatch ({
+    type: TYPES.ADD_AVIA,
+    data: result
+  })
+  dispatch ({
+    type: TYPES.CHANGE_IS_ADDED_AVIA,
+    data: paramTour
+  })
+}
+
+const deleteAviaThunk = (paramUser, paramTour) => async (dispatch) => {
+  console.log('response')
+  const response = await fetch(`/user/${paramUser}/deleteavia`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ _id: paramTour })
+  }, {credentials: 'include'});
+  dispatch ({
+    type: TYPES.DELETE_AVIA,
+    data: paramTour
+  })
+  dispatch ({
+    type: TYPES.CHANGE_IS_ADDED_AVIA,
+    data: paramTour
   })
 }
 
@@ -154,4 +191,6 @@ export {
   addTourThunk,
   deleteTourThunk,
   loginUserByGoogle,
+  addAviaThunk,
+  deleteAviaThunk,
 }

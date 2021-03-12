@@ -1,6 +1,6 @@
 import { React, useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addTourThunk, deleteTourThunk } from '../redux/actions/userAction'
+// import { addTourThunk, deleteTourThunk } from '../redux/actions/userAction'
 import * as TYPES from '../redux/types/types';
 
 function DraftTour ({ tour }) {
@@ -11,14 +11,14 @@ function DraftTour ({ tour }) {
   const [addShow, setAddShow] = useState(true);
 
   const addTourHandler = (paramUser, paramTour) => {
-    dispatch(addTourThunk(paramUser, paramTour));
+    // dispatch(addTourThunk(paramUser, paramTour));
     dispatch({
       type: TYPES.CHANGE_IS_ADDED,
       data: paramTour
     })
   }
   const deleteTourHandler = (paramUser, paramTour) => {
-    dispatch(deleteTourThunk(paramUser, paramTour));
+    // dispatch(deleteTourThunk(paramUser, paramTour));
     setAddShow(pre => !pre)
     dispatch({
       type: TYPES.CHANGE_IS_ADDED,
@@ -44,9 +44,9 @@ function DraftTour ({ tour }) {
       <a href={tour.url}>Go to tour</a>
       <img src={tour.photoUrl} alt='hotelImg' width='320px' height='240px'/>
     </div>
-    {!tour.isAdded ?
-    <button onClick={() => dispatch(addTourThunk(user._id, tour._id))} class="add-tour-button" >Добавить в избранное</button> :
-    <button onClick={() => dispatch(deleteTourThunk(user._id, tour._id))} class="delete-tour-button" >Удалить тур</button> }
+    {/* {!tour.isAdded ? */}
+    {/* // <button onClick={() => dispatch(addTourThunk(user._id, tour._id))} class="add-tour-button" >Добавить в избранное</button> :
+    // <button onClick={() => dispatch(deleteTourThunk(user._id, tour._id))} class="delete-tour-button" >Удалить тур</button> } */}
     </div>
   </div>
   )
