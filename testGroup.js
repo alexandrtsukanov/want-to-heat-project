@@ -133,7 +133,7 @@ function group(arr) {
 // console.log('all tours =>', getRepeated(array))
 // console.log('all tours =>', forin(array))
 // console.log('all tours =>', addOne({country: 'China', city: 'Beijing', id: 5}, array))
-
+// 111
   // console.log('all tours =>', group(array))
   console.log('sort =>', group(array).map(el => el.sort((a, b) => a.id - b.id)).sort((a, b) => a[0].id - b[0].id))
   
