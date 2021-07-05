@@ -8,7 +8,6 @@ const { authenticated } = require('./middleware');
 router.get('/tours', authenticated, async (req, res) => {
   try {
     const currentUser = await User.findById(req.session.userID);
-    console.log('userTours', currentUser.usersTours);
     return res.json(currentUser.usersTours);
   } catch (error) {
     return res.sendStatus(501);
@@ -34,10 +33,8 @@ router.delete('/:id/deletetour', async (req, res) => {
   const { _id } = req.body;
   const currentUser = await User.findById(req.params.id);
   const tourToDelete = await Tour.findById(_id);
-  console.log(currentUser.usersTours.length)
   currentUser.usersTours.splice(currentUser.usersTours.indexOf(tourToDelete), 1);
   await currentUser.save();
-  console.log(currentUser.usersTours.length)
   res.sendStatus(200);
 });
 
@@ -56,14 +53,11 @@ router.post('/:id/addavia', authenticated, async (req, res) => {
 });
 
 router.delete('/:id/deleteavia', async (req, res) => {
-  console.log('+++++',req.body)
   const { _id } = req.body;
   const currentUser = await User.findById(req.params.id);
   const aviaToDelete = await Tour.findById(_id);
-  console.log(currentUser.usersAvia.length)
   currentUser.usersAvia.splice(currentUser.usersAvia.indexOf(aviaToDelete), 1);
   await currentUser.save();
-  console.log(currentUser.usersAvia.length)
   res.sendStatus(200);
 });
 
