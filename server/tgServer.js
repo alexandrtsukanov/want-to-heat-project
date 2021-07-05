@@ -6,7 +6,7 @@ const Tour = require('./db/models/tour');
 
 // const express = require('express');
 
-const TOKEN = '1553326843:AAGphi2ZEoRiC6RNGwc-NL_BD21JRDA48lM';
+const TOKEN = process.env.TOKEN;
 const { log } = console;
 const bot = new TelegramBot(TOKEN, {
   // polling - открываем постоянное соединение
