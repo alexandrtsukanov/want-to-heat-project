@@ -108,6 +108,7 @@ const scrapTravelata = async () => {
   // Всё сделано, закроем браузер
   await browser.close();
   // process.exit();
+  // console.log(allTurs);
   return allTurs;
 };
 // scrapTravelata();
