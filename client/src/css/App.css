@@ -403,4 +403,5 @@ height: 40px;
 
 #home {
   justify-content: flex-start !important;
+  padding-top: 10px !important;
 }
