@@ -18,7 +18,7 @@ function Home() {
   return (
 
     <section id="hero" class="home d-flex flex-column justify-content-end align-items-center">
-      <div id="heroCarousel" data-bs-interval="5000" class="container carousel carousel-fade" data-bs-ride="carousel">
+      <div id="heroCarousel" data-bs-interval="5000" class="container carousel carousel-fade" data-bs-ride="carousel" style={{ height: '90vh' }}>
         <div className="carousel-item active">
           <div className="carousel-container">
             <h2 style={{ fontSize: '30px' }} className="animate__animated animate__fadeInDown">Хочу в тепло!</h2>
