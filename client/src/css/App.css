@@ -402,5 +402,5 @@ height: 40px;
 }
 
 #home {
-  justify-content: flex-start;
+  justify-content: flex-start !important;
 }
