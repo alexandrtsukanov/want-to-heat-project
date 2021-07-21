@@ -400,3 +400,7 @@ height: 40px;
 .btn-register-home {
   width: 40cm
 }
+
+#home {
+  justify-content: flex-start;
+}
