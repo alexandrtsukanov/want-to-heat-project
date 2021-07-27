@@ -4,7 +4,8 @@
 "Хочу в тепло!" - это уникальный сервис, который позволяет найти и подобрать для Вас путёвки и авиабилеты, основываясь на температуре воздуха в желаемой Вами локации. С нашей помощью Вы сможете найти подходящий тур или авиабилет максимально быстро!
 <br><br/>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/jzqCPPcDv8A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<a href="https://www.youtube.com/embed/jzqCPPcDv8A" target="_blank">
+</a>
 
 Если вам очень хочется в тепло просто зайдите на <a href="https://teplo.herokuapp.com/" >https://teplo.herokuapp.com/</a>! Приложение подберёт для вас в первую очередь самые выгодные туры и авиабилеты.
 
@@ -13,11 +14,11 @@
 <img width="850" alt="home" src="./shots/home.png">
 <br><br/>
 <li>Регистрируемся или входим через Google аккаунт</li>
-<img width="850" alt="todos" src="./shots/registration.png">
+<img width="850" alt="registration" src="./shots/registration.png">
 <br><br/>
 <li>Вводим желаемый диапазон температуры или сразу все предложения, что найдем по умолчанию от 0 до самых теплых мест. Доступна дополнительная фильтрация и сортировка для удобного поиска. Аналогично можем выбрать и авиабилеты.</li>
-<img width="850" alt="home" src="./shots/tours.png">
-<img width="850" alt="home" src="./shots/toursFound.png.png">
+<img width="850" alt="tours" src="./shots/tours.png">
+<img width="850" alt="filter" src="./shots/toursFound.png">
 <br><br/>
 <li>Что бы сохранить выбраный тур или авиабилет просто кликнем по звездочке. В личном кабинете мы сможем найти всё что мы сохранили. А если что то захотим удалить из нашей подборки то снова кликнем на звездочку.</li>
 <img width="850" alt="home" src="./shots/profile.png">
