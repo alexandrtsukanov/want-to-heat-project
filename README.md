@@ -1,9 +1,13 @@
 # Хочу в тепло!
+
 <br><br/>
 "Хочу в тепло!" - это уникальный сервис, который позволяет найти и подобрать для Вас путёвки и авиабилеты, основываясь на температуре воздуха в желаемой Вами локации. С нашей помощью Вы сможете найти подходящий тур или авиабилет максимально быстро!
 <br><br/>
 
-Если вам очень хочется в тепло просто зайдите на <a href="https://teplo.herokuapp.com/" >https://teplo.herokuapp.com/</a>! Приложение подберёт для вас в первую очередь самые выгодные туры и авиабилеты. 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jzqCPPcDv8A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+Если вам очень хочется в тепло просто зайдите на <a href="https://teplo.herokuapp.com/" >https://teplo.herokuapp.com/</a>! Приложение подберёт для вас в первую очередь самые выгодные туры и авиабилеты.
+
 <ul>
 <li>Заходим на <a href="https://todos-and-notes.herokuapp.com">сайт<a/></li>
 <img width="850" alt="home" src="./shots/home.png">
@@ -21,11 +25,14 @@
 <br><br/>
 
 # Техгологии в проекте
+
 <br><br/>
 Back-end:
 Nodejs, Expressjs, Mongoose, MongoDB Atlas, Google oauth2.0, Cors, .env
+<br><br/>
 На сервере запущен Node Schedule скрипт, который раз в сутки запускает сбор информации с помощью библеотеки Puppeteer и записывает в базу данных. В процессе сбора, скрипт обращается к Yandex Geocode Maps API и Openweathermap API. Так же доступен телеграм бот.
 <br><br/>
+
 <p>
   <img alt="Nodejs" height="25" src="https://img.shields.io/badge/-Nodejs-43853d?style=flat-square&logo=Node.js&logoColor=white" />
   <img alt="Passport" height="25" src="https://img.shields.io/badge/-PassportJs-F7B93E?style=flat-square&logo=passport&logoColor=white" />
@@ -35,6 +42,7 @@ Nodejs, Expressjs, Mongoose, MongoDB Atlas, Google oauth2.0, Cors, .env
 <br><br/>
 Front-end:
 React, Redux, Redux Thunk, Redux devtools, CSS
+<br><br/>
 Верстка выполнена с помощью библеотеки Bootstrap.
 <br><br/>
 <p>
