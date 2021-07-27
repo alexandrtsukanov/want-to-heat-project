@@ -4,12 +4,7 @@
 "Хочу в тепло!" - это уникальный сервис, который позволяет найти и подобрать для Вас путёвки и авиабилеты, основываясь на температуре воздуха в желаемой Вами локации. С нашей помощью Вы сможете найти подходящий тур или авиабилет максимально быстро!
 <br><br/>
 
-<a href="https://www.youtube.com/embed/jzqCPPcDv8A" target="_blank">
-<div>
-    <img align="left" alt="WantToHeat | youtube" width="22px" src="https://raw.githubusercontent.com/peterthehan/peterthehan/master/assets/youtube.svg" />
-    <h3><a href="https://www.youtube.com/embed/jzqCPPcDv8A" target="_blank">Intro-video - Хочу в тепло! | Youtube</a></h3>
-  </div>
-</a>
+[<img src="https://img.youtube.com/vi/jzqCPPcDv8A/maxresdefault.jpg" width="50%">](https://www.youtube.com/embed/jzqCPPcDv8A)
 
 Если вам очень хочется в тепло просто зайдите на <a href="https://teplo.herokuapp.com/" >https://teplo.herokuapp.com/</a>! Приложение подберёт для вас в первую очередь самые выгодные туры и авиабилеты.
 
