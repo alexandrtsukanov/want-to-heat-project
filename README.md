@@ -5,6 +5,10 @@
 <br><br/>
 
 <a href="https://www.youtube.com/embed/jzqCPPcDv8A" target="_blank">
+<div>
+    <img align="left" alt="WantToHeat | youtube" width="22px" src="https://raw.githubusercontent.com/peterthehan/peterthehan/master/assets/youtube.svg" />
+    <h3><a href="https://www.youtube.com/embed/jzqCPPcDv8A" target="_blank">Intro-video - Хочу в тепло! | Youtube</a></h3>
+  </div>
 </a>
 
 Если вам очень хочется в тепло просто зайдите на <a href="https://teplo.herokuapp.com/" >https://teplo.herokuapp.com/</a>! Приложение подберёт для вас в первую очередь самые выгодные туры и авиабилеты.
