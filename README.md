@@ -4,7 +4,7 @@
 "Хочу в тепло!" - это уникальный сервис, который позволяет найти и подобрать для Вас путёвки и авиабилеты, основываясь на температуре воздуха в желаемой Вами локации. С нашей помощью Вы сможете найти подходящий тур или авиабилет максимально быстро!
 <br><br/>
 
-[<img src="https://img.youtube.com/vi/jzqCPPcDv8A/maxresdefault.jpg" width="50%">](https://www.youtube.com/embed/jzqCPPcDv8A)
+[<img src="https://img.youtube.com/vi/jzqCPPcDv8A/maxresdefault.jpg" width="100%">](https://www.youtube.com/embed/jzqCPPcDv8A)
 
 Если вам очень хочется в тепло просто зайдите на <a href="https://teplo.herokuapp.com/" >https://teplo.herokuapp.com/</a>! Приложение подберёт для вас в первую очередь самые выгодные туры и авиабилеты.
 
@@ -54,3 +54,33 @@ React, Redux, Redux Thunk, Redux devtools, CSS
 <img alt="Bootsstrap" height="25" src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white" />
 <br><br/>
 </p>
+
+# Команда проекта 
+
+<a href="https://github.com/alexandrtsukanov">
+  <div>
+   <img align="left" alt="Tsukanov" width="20" src="https://raw.githubusercontent.com/peterthehan/peterthehan/master/assets/github.svg" />
+   <h3><a href="https://github.com/alexandrtsukanov">Александр Цуканов</a></h3>
+  </div>
+</a>
+
+<a href="https://github.com/tingol88">
+  <div>
+   <img align="left" alt="Blinkov" width="20" src="https://raw.githubusercontent.com/peterthehan/peterthehan/master/assets/github.svg" />
+   <h3><a href="https://github.com/tingol88">Александр Блинков</a></h3>
+  </div>
+</a>
+
+<a href="https://github.com/DzyubaAnton">
+  <div>
+   <img align="left" alt="Dzyuba" width="20" src="https://raw.githubusercontent.com/peterthehan/peterthehan/master/assets/github.svg" />
+   <h3><a href="https://github.com/DzyubaAnton">Дзюба Антон</a></h3>
+  </div>
+</a>
+
+<a href="https://github.com/DanilaNagornyi">
+  <div>
+   <img align="left" alt="Danila Nagornyi" width="20" src="https://raw.githubusercontent.com/peterthehan/peterthehan/master/assets/github.svg" />
+   <h3><a href="https://github.com/DanilaNagornyi">Danila Nagornyi</a></h3>
+  </div>
+</a>
