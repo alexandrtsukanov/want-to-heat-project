@@ -23,7 +23,8 @@ async function giveTour(minTemp) {
   console.log('bestTourForUser =>', bestTourForUser[2])
   return bestTourForUser
 }
-const bot = new Telegraf('1678316149:AAEei9ZXs34r7Mw_hKF6x4BUcAwfSTe5o7I');
+const token = process.env.TELEGRAF_TOKEN
+const bot = new Telegraf(token);
 bot.start((ctx) => {
   console.log('START')
   ctx.reply(`Привет, ${ctx.from.first_name}! Напиши минимальную температуру воздуха, которую ты хочешь :)`)
