@@ -23,7 +23,7 @@ async function giveTour(minTemp) {
   console.log('bestTourForUser =>', bestTourForUser[2])
   return bestTourForUser
 }
-const token = process.env.TELEGRAF_TOKEN
+const token = process.env.TOKEN
 const bot = new Telegraf(token);
 bot.start((ctx) => {
   console.log('START')
